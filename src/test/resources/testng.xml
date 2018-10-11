@@ -1,0 +1,25 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Caseware: x-menu" verbose="1" >
+    <test name="Login tests" >
+        <classes>
+            <class name="com.corevalue.tests.xmenu.file.LoginTest" />
+        </classes>
+    </test>
+    <test name="menus: Help test">
+        <classes>
+            <class name="com.corevalue.tests.xmenu.help.HelpMenuTest"/>
+        </classes>
+    </test>
+
+    <test name="menus: Management test">
+        <groups>
+            <run>
+                <include name="management" />
+            </run>
+        </groups>
+        <packages>
+            <package name="com.corevalue.tests.xmenu.management" />
+        </packages>
+    </test>
+</suite>
