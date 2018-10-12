@@ -2,6 +2,7 @@ package com.corevalue.pages.impl;
 
 import com.corevalue.constants.TestConst;
 import com.corevalue.driver.Browser;
+import com.corevalue.pages.IAuthorizedLandingPage;
 import com.corevalue.pages.ILoginPage;
 import com.corevalue.constants.LoginPageConst;
 import org.openqa.selenium.By;
@@ -15,35 +16,35 @@ public class LoginPage implements ILoginPage, TestConst, LoginPageConst {
         if (instance == null) {
             instance = new LoginPage();
         }
+        Browser.get().getDriver().get(BASE_URL);
         return instance;
     }
 
     @Override
-    public void goTo() {
-        Browser.get().getDriver().get(BASE_URL);
-    }
-
-    @Override
-    public void login(String username, String password) {
+    public IAuthorizedLandingPage login(String username, String password) {
         setLogin(username);
-        Browser.get().delay(300);
+        Browser.get().delay(DELAY_INPUT);
         setPassword(password);
         submit();
+
+        return AuthorizedLandingPage.get();
     }
 
+    //region HELPER METHODS
     private void setLogin(String login) {
         Browser.get()
-                .waitElement(By.id(LOGIN_FIELD_ID), 10)
+                .waitElement(By.id(LOGIN_FIELD_ID))
                 .sendKeys(login);
     }
 
     private void setPassword(String password) {
         Browser.get()
-                .waitElement(By.id(PASSWORD_FIELD_ID), 10)
+                .waitElement(By.id(PASSWORD_FIELD_ID))
                 .sendKeys(password);
     }
 
     private void submit() {
         Browser.get().getDriver().findElement(By.id(SUBMIT_ID)).click();
     }
+    //endregion
 }

@@ -22,13 +22,19 @@ public class HelpMenu extends AbstractMenu implements MenuConst, HelpMenuConst {
         return instance;
     }
 
-    public WebElement showVersion() {
+    public String showVersion() {
         Browser.get().getDriver()
                 .switchTo().frame(6)
                 .findElement(By.id(SUBMENU_SELECTOR))
                 .click();
 
-        return HelpMenu.get().versionInfo();
+        return HelpMenu.get().versionInfo().getText();
+    }
+
+    public void confirmExit() {
+        Browser.get().getDriver()
+                .findElement(By.id(BUTTON_CLOSE_ID))
+                .click();
     }
 
     private WebElement versionInfo () {
@@ -37,13 +43,7 @@ public class HelpMenu extends AbstractMenu implements MenuConst, HelpMenuConst {
                 .switchTo().parentFrame();
 
         return Browser.get()
-                .waitFrame(2, 10000)
+                .waitFrame(2)
                 .findElement(By.cssSelector(VERSION_ELEMENT_SELECTOR));
-    }
-
-    public void confirmExit() {
-        Browser.get().getDriver()
-                .findElement(By.id(BUTTON_CLOSE_ID))
-                .click();
     }
 }

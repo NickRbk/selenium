@@ -6,8 +6,8 @@ import org.openqa.selenium.WebElement;
 
 public interface IBrowser {
     WebDriver getDriver();
-    WebElement waitElement(By locator, long timeout);
-    WebDriver waitFrame(int frame, long timeout);
+    WebElement waitElement(By locator);
+    WebDriver waitFrame(int frame);
     void delay(int timeout);
     void waitToClickDisabledButtonByID(String elementId);
 }

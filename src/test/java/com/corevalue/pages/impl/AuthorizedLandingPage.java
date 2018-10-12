@@ -7,7 +7,6 @@ import com.corevalue.menu.impl.FileMenu;
 import com.corevalue.menu.impl.HelpMenu;
 import com.corevalue.menu.impl.ManagementMenu;
 import com.corevalue.pages.IAuthorizedLandingPage;
-import com.corevalue.submenu.impl.FileLogoutSubmenu;
 import org.openqa.selenium.By;
 
 import static com.corevalue.constants.TagsConst.BUTTON;
@@ -25,29 +24,15 @@ public class AuthorizedLandingPage implements IAuthorizedLandingPage, Authorized
     }
 
     @Override
-    public void openFileMenu() {
+    public FileMenu openFileMenu() {
         Menus.getMenuPage(Menus.FILE, FileMenu.get()).goTo();
+        return FileMenu.get();
     }
 
     @Override
-    public void openPageWithCase() {
-        Browser.get().getDriver()
-                .switchTo().frame(0)
-                .findElement(By.id(BUTTON_SEARCH_ID)).click();
-
-        Browser.get().getDriver().switchTo().parentFrame();
-        Browser.get().waitFrame(2, 10);
-
-        Browser.get().waitToClickDisabledButtonByID(SUBMIT_ID);
-
-        Browser.get().getDriver().switchTo().parentFrame();
-
-        Browser.get().waitElement(By.tagName(BUTTON), 30).click();
-    }
-
-    @Override
-    public void openHelpMenu() {
+    public HelpMenu openHelpMenu() {
         Menus.getMenuPage(Menus.HELP, HelpMenu.get()).goTo();
+        return HelpMenu.get();
     }
 
     @Override
@@ -58,8 +43,20 @@ public class AuthorizedLandingPage implements IAuthorizedLandingPage, Authorized
 
     @Override
     public void logout(int submenuFrameIndex, int buttonIndex) {
-        openFileMenu();
-        FileMenu.get().openLogoutSubmenu(submenuFrameIndex);
-        FileLogoutSubmenu.get().confirmLogout(buttonIndex);
+        openFileMenu()
+                .openLogoutSubmenu(submenuFrameIndex)
+                .confirmLogout(buttonIndex);
+    }
+
+    @Override
+    public void openPageWithCase() {
+        Browser.get().getDriver()
+                .switchTo().frame(0)
+                .findElement(By.id(BUTTON_SEARCH_ID)).click();
+        Browser.get().getDriver().switchTo().parentFrame();
+        Browser.get().waitFrame(2);
+        Browser.get().waitToClickDisabledButtonByID(SUBMIT_ID);
+        Browser.get().getDriver().switchTo().parentFrame();
+        Browser.get().waitElement(By.tagName(BUTTON)).click();
     }
 }

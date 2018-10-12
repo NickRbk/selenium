@@ -7,7 +7,6 @@ import com.corevalue.menu.impl.HelpMenu;
 import com.corevalue.constants.LoginPageConst;
 import com.corevalue.pages.impl.AuthorizedLandingPage;
 import com.corevalue.pages.impl.LoginPage;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -24,10 +23,12 @@ public class HelpMenuTest implements LoginPageConst, TestConst, HelpMenuConst {
 
     @Test
     void openHelpMenuAndGetVersionTest() {
-        AuthorizedLandingPage.get().openHelpMenu();
-        WebElement helpInfo = HelpMenu.get().showVersion();
-        Assert.assertTrue(helpInfo.getText().contains(VERSION));
+        String version = AuthorizedLandingPage.get()
+                .openHelpMenu()
+                .showVersion();
+
         HelpMenu.get().confirmExit();
+        Assert.assertTrue(version.contains(VERSION));
     }
 
     @AfterClass

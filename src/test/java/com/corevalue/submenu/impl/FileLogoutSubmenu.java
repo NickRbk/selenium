@@ -19,7 +19,6 @@ public class FileLogoutSubmenu extends AbstractSubmenu {
         if (instance == null) {
             instance = new FileLogoutSubmenu();
         }
-
         return instance;
     }
 

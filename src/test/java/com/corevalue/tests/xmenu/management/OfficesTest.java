@@ -26,8 +26,8 @@ public class OfficesTest implements LoginPageConst, TestConst, AuthorizedLanding
                 .updateOfficeGeneralInfo(OFFICE_REASON_ADDRESS_UPDATED, expectedOffice)
                 .getUpdatedFields();
 
-        Assert.assertEquals(updatedOffice, expectedOffice);
         ManagementManageOfficesSubmenu.get().close(DIALOG_CLOSE_ID);
+        Assert.assertEquals(updatedOffice, expectedOffice);
     }
 
     private Office expectedOfficeAfterUpdate() {

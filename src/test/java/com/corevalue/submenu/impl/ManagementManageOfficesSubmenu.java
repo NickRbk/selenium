@@ -23,14 +23,14 @@ public class ManagementManageOfficesSubmenu extends AbstractSubmenu implements M
 
     public ManagementManageOfficesSubmenu searchOffices() {
         getContext();
-        Browser.get().waitFrame(2, 15);
+        Browser.get().waitFrame(2);
         findElementBy(By.id(SEARCH_BUTTON_ID)).click();
         return ManagementManageOfficesSubmenu.get();
     }
 
     public ManagementManageOfficesSubmenu updateOfficeGeneralInfo(String reason, Office office) {
         getContext();
-        Browser.get().waitFrame(3, 60);
+        Browser.get().waitFrame(3);
         setOfficeProps(office.getName(), office.getCode());
         updateAddressAndAcceptChanges(reason, office.getAddress1(), office.getAddress2(), office.getCity());
         return ManagementManageOfficesSubmenu.get();
@@ -42,7 +42,7 @@ public class ManagementManageOfficesSubmenu extends AbstractSubmenu implements M
         setAddressProps(addr1, addr2, city);
 
         Browser.get().getDriver().switchTo().parentFrame();
-        Browser.get().waitFrame(3, 60);
+        Browser.get().waitFrame(3);
         findElementBy(By.id(ACCEPT_ADDRESS_BUTTON_ID)).click();
     }
 
@@ -55,7 +55,7 @@ public class ManagementManageOfficesSubmenu extends AbstractSubmenu implements M
 
     public Office getUpdatedFields() {
         Browser.get().getDriver().switchTo().parentFrame();
-        Browser.get().waitFrame(2, 10);
+        Browser.get().waitFrame(2);
         int lastIndex = getCountOfOffices()-1;
         return Office.builder()
                 .name(findElementsBy(By.cssSelector(OFFICE_NAME_SELECTOR)).get(lastIndex).getText())
@@ -74,13 +74,13 @@ public class ManagementManageOfficesSubmenu extends AbstractSubmenu implements M
     }
 
     private int getCountOfOffices() {
-        Browser.get().waitFrame(0, 15);
+        Browser.get().waitFrame(0);
         return findElementsBy(By.cssSelector(LIST_SELECTOR)).size();
     }
 
     private void setReasonToUpdateAddress(String reason) {
         Browser.get().getDriver().switchTo().parentFrame();
-        Browser.get().waitFrame(4, 60);
+        Browser.get().waitFrame(4);
 
         findElementBy(By.id(OFFICE_REASON_ADDRESS_FIELD_ID)).sendKeys(reason);
         findElementBy(By.id(OK_BUTTON_ID)).click();
@@ -88,7 +88,7 @@ public class ManagementManageOfficesSubmenu extends AbstractSubmenu implements M
 
     private void setAddressProps(String addr1, String addr2, String city) {
         Browser.get().getDriver().switchTo().parentFrame();
-        Browser.get().waitFrame(4, 60);
+        Browser.get().waitFrame(4);
 
         findElementBy(By.id(OFFICE_ADDR1_FIELD_ID)).clear();
         findElementBy(By.id(OFFICE_ADDR1_FIELD_ID)).sendKeys(addr1);

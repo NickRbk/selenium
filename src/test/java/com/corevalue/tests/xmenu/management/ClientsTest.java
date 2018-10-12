@@ -4,8 +4,6 @@ import com.corevalue.constants.AuthorizedLandingPageConst;
 import com.corevalue.constants.LoginPageConst;
 import com.corevalue.constants.TestConst;
 import com.corevalue.constants.menu.ManagementMenuConst;
-import com.corevalue.driver.Browser;
-import com.corevalue.menu.impl.ManagementMenu;
 import com.corevalue.pages.impl.AuthorizedLandingPage;
 import com.corevalue.submenu.impl.ManagementManageClientsSubmenu;
 import org.testng.Assert;
@@ -32,14 +30,11 @@ public class ClientsTest implements LoginPageConst, TestConst, AuthorizedLanding
     }
 
     private String editClientAndGetNewCode(String clientCodeInitial, String clientNameInitial) {
-        AuthorizedLandingPage.get().openManagementMenu();
-        ManagementMenu.get().openManageClientsSubmenu(SUBMENU_FRAME_INDEX_WITH_CASE);
-        Browser.get().delay(WAIT_TIMEOUT);
-        ManagementManageClientsSubmenu.get().searchClientsByCode(CLIENT_CODE_SEARCH);
-
-        int clientsCount = ManagementManageClientsSubmenu.get().getCountOfTargetClients();
-        ManagementManageClientsSubmenu.get().updateClient(clientsCount, clientCodeInitial, clientNameInitial);
-
-        return ManagementManageClientsSubmenu.get().getUpdatedField(clientsCount, LIST_SELECTOR);
+        return AuthorizedLandingPage.get().openManagementMenu()
+                .openManageClientsSubmenu(SUBMENU_FRAME_INDEX_WITH_CASE)
+                .searchClientsByCode(CLIENT_CODE_SEARCH)
+                .selectLastClientToUpdate()
+                .updateClient(clientCodeInitial, clientNameInitial)
+                .getUpdatedField(ManagementManageClientsSubmenu.get().getCount(), LIST_SELECTOR);
     }
 }

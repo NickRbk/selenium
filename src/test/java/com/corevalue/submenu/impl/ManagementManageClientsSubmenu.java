@@ -4,11 +4,14 @@ import com.corevalue.constants.menu.ManagementMenuConst;
 import com.corevalue.driver.Browser;
 import com.corevalue.submenu.AbstractSubmenu;
 import com.corevalue.submenu.Submenus;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
+@Getter
 public class ManagementManageClientsSubmenu extends AbstractSubmenu implements ManagementMenuConst {
     private static ManagementManageClientsSubmenu instance;
+    private int count;
 
     private ManagementManageClientsSubmenu() {
         super(Submenus.MANAGEMENT_MANAGE_CLIENTS);
@@ -21,28 +24,35 @@ public class ManagementManageClientsSubmenu extends AbstractSubmenu implements M
         return instance;
     }
 
-    public void searchClientsByCode(String code) {
-        getContext();
-        Browser.get().waitFrame(2, 15);
-        findElementBy(By.id(CLIENTS_CODE_FIELD_ID)).sendKeys(code);
-        findElementBy(By.id(SEARCH_BUTTON_ID)).click();
-    }
-
-    public int getCountOfTargetClients() {
-        Browser.get().waitFrame(0, 15);
-        return findElementsBy(By.cssSelector(LIST_SELECTOR)).size();
-    }
-
-    public void updateClient(int userCount,String code, String name) {
-        findElementsBy(By.cssSelector(LIST_SELECTOR)).get(userCount-1).click();
-        findElementBy(By.id(UPDATE_BUTTON_ID)).click();
+    public ManagementManageClientsSubmenu updateClient(String code, String name) {
         setNewProps(code, name);
         findElementBy(By.id(CLIENTS_SUBMIT)).click();
+        return ManagementManageClientsSubmenu.get();
+    }
+
+    public ManagementManageClientsSubmenu searchClientsByCode(String code) {
+        getContext();
+        Browser.get().waitFrame(2);
+        findElementBy(By.id(CLIENTS_CODE_FIELD_ID)).sendKeys(code);
+        findElementBy(By.id(SEARCH_BUTTON_ID)).click();
+        count = getCountOfTargetClients();
+        return ManagementManageClientsSubmenu.get();
+    }
+
+    public ManagementManageClientsSubmenu selectLastClientToUpdate() {
+        findElementsBy(By.cssSelector(LIST_SELECTOR)).get(count-1).click();
+        findElementBy(By.id(UPDATE_BUTTON_ID)).click();
+        return ManagementManageClientsSubmenu.get();
+    }
+
+    private int getCountOfTargetClients() {
+        Browser.get().waitFrame(0);
+        return findElementsBy(By.cssSelector(LIST_SELECTOR)).size();
     }
 
     private void setNewProps(String code, String name) {
         getContext();
-        Browser.get().waitFrame(3, 40);
+        Browser.get().waitFrame(3);
         findElementBy(By.cssSelector(CLIENT_CODE_FIELD_ID)).clear();
         findElementBy(By.cssSelector(CLIENT_CODE_FIELD_ID)).sendKeys(code);
         findElementBy(By.cssSelector(CLIENT_NAME_FIELD_ID)).clear();

@@ -8,6 +8,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import static com.corevalue.constants.TestConst.DELAY_WAIT_BUTTON;
+import static com.corevalue.constants.TestConst.WAIT_TIMEOUT_SEC;
+
 public class Browser implements IBrowser {
 
     private static IBrowser instance;
@@ -31,21 +34,21 @@ public class Browser implements IBrowser {
     }
 
     @Override
-    public WebElement waitElement(By locator, long timeout) {
-        WebDriverWait wait = new WebDriverWait(driver, timeout);
+    public WebElement waitElement(By locator) {
+        WebDriverWait wait = new WebDriverWait(driver, WAIT_TIMEOUT_SEC);
         return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
     @Override
-    public WebDriver waitFrame(int frame, long timeout) {
-        WebDriverWait wait = new WebDriverWait(driver, timeout);
+    public WebDriver waitFrame(int frame) {
+        WebDriverWait wait = new WebDriverWait(driver, WAIT_TIMEOUT_SEC);
         return wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frame));
     }
 
     @Override
     public void waitToClickDisabledButtonByID(String elementId) {
         while (!Browser.get().getDriver().findElement(By.id(elementId)).isEnabled()) {
-            Browser.get().delay(1000);
+            Browser.get().delay(DELAY_WAIT_BUTTON);
         }
         Browser.get().getDriver().findElement(By.id(elementId)).click();
     }

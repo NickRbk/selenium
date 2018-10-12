@@ -20,7 +20,8 @@ public class FileMenu extends AbstractMenu implements FileMenuConst {
         return instance;
     }
 
-    public void openLogoutSubmenu(int submenuFrameIndex) {
+    public FileLogoutSubmenu openLogoutSubmenu(int submenuFrameIndex) {
         Submenus.getSubmenu(Submenus.FILE_LOGOUT, FileLogoutSubmenu.get()).goTo(submenuFrameIndex);
+        return FileLogoutSubmenu.get();
     }
 }

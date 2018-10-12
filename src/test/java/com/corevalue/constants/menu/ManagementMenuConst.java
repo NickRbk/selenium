@@ -92,8 +92,9 @@ public interface ManagementMenuConst extends MenuConst {
     String OFFICE_CITY_SELECTOR = ".cellBorderBR:nth-child(5)";
     //endregion
 
-    int WAIT_TIMEOUT = 5000;
-    int WAIT_TIMEOUT_DOUBLE = 10000;
+    int WAIT_TIMEOUT = 3000;
+    int WAIT_TIMEOUT_2 = 7000;
+
     String OK_BUTTON_ID = "Ok";
     String SEARCH_BUTTON_ID = "Search";
     String UPDATE_BUTTON_ID = "Edit";

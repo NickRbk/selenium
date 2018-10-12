@@ -22,14 +22,12 @@ public class LoginTest implements LoginPageConst, TestConst {
 
     @Test
     void failedLoginTest() {
-        LoginPage.get().goTo();
         LoginPage.get().login(INVALID_USERNAME,INVALID_PASSWORD);
         Assert.assertNotEquals(AUTHORIZED_PAGE_TITLE, Browser.get().getDriver().getTitle());
     }
 
     @Test(priority = 1)
     void successLoginTest() {
-        LoginPage.get().goTo();
         LoginPage.get().login(VALID_USERNAME,VALID_PASSWORD);
         Assert.assertEquals(AUTHORIZED_PAGE_TITLE, Browser.get().getDriver().getTitle());
     }

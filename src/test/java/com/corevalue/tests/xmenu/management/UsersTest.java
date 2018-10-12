@@ -4,8 +4,6 @@ import com.corevalue.constants.AuthorizedLandingPageConst;
 import com.corevalue.constants.LoginPageConst;
 import com.corevalue.constants.TestConst;
 import com.corevalue.constants.menu.ManagementMenuConst;
-import com.corevalue.driver.Browser;
-import com.corevalue.menu.impl.ManagementMenu;
 import com.corevalue.pages.impl.AuthorizedLandingPage;
 import com.corevalue.submenu.impl.ManagementManageUsersSubmenu;
 import org.testng.Assert;
@@ -31,15 +29,12 @@ public class UsersTest implements LoginPageConst, TestConst, AuthorizedLandingPa
         Assert.assertEquals(updatedUserName, USER_NAME_INITIAL);
     }
 
-    private String editUserAndGetNewName(String userNameInitial) {
-        AuthorizedLandingPage.get().openManagementMenu();
-        ManagementMenu.get().openManageUsersSubmenu(SUBMENU_FRAME_INDEX_WITH_CASE);
-        Browser.get().delay(WAIT_TIMEOUT);
-        ManagementManageUsersSubmenu.get().searchUsersByLogin(USER_NAME_INITIAL);
-
-        int usersCount = ManagementManageUsersSubmenu.get().getCountOfTargetUsers();
-        ManagementManageUsersSubmenu.get().updateUser(usersCount, userNameInitial);
-
-        return ManagementManageUsersSubmenu.get().getUpdatedField(usersCount, LIST_SELECTOR);
+    private String editUserAndGetNewName(String userName) {
+        return AuthorizedLandingPage.get().openManagementMenu()
+                .openManageUsersSubmenu(SUBMENU_FRAME_INDEX_WITH_CASE)
+                .searchUsersByLogin(USER_NAME_INITIAL)
+                .selectLastUserToUpdate()
+                .updateUser(userName)
+                .getUpdatedField(ManagementManageUsersSubmenu.get().getCount(), LIST_SELECTOR);
     }
 }
