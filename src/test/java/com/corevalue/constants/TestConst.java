@@ -6,5 +6,5 @@ public interface TestConst {
 
     int DELAY_INPUT = 200;
     int DELAY_WAIT_BUTTON = 50;
-    int WAIT_TIMEOUT_SEC = 20;
+    int WAIT_TIMEOUT_SEC = 60;
 }
