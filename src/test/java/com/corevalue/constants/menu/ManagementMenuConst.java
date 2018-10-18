@@ -71,7 +71,7 @@ public interface ManagementMenuConst extends MenuConst {
     //region submenu: OFFICES
     String OFFICE_CODE_FIELD_ID = "[id$=OFFICE_CODE]";
     String OFFICE_NAME_FIELD_ID = "[id$=OFFICE_NAME]";
-    String OFFICE_REASON_ADDRESS_FIELD_ID = "Reason";
+    String OFFICE_REASON_FIELD_ID = "Reason";
     String OFFICE_ADDR1_FIELD_ID = "line1";
     String OFFICE_ADDR2_FIELD_ID = "line2";
     String OFFICE_CITY_FIELD_ID = "city";
@@ -85,17 +85,42 @@ public interface ManagementMenuConst extends MenuConst {
     String OFFICE_CITY_UPDATED = "NYC";
     String UPDATE_ADDRESS_BUTTON_ID = "EditAddress";
 
+    String OFFICE_COVERED_STATES_ID = "3";
+    String OFFICE_COVERED_STATES_ADD_STATE_ID = "AddState";
+    String OFFICE_COVERED_STATES_EDIT_STATE_ID = "EditState";
+    String OFFICE_COVERED_STATES_REMOVE_STATE_ID = "DeleteState";
+
+    String OFFICE_COVERED_STATES_SELECT_ID = "cstate";
+    String OFFICE_COVERED_STATES_NAME = "District of Columbia";
+    String OFFICE_COVERED_STATES_NAME_UPDATED = "Colorado";
+
+    String OFFICE_PHONES_ID = "4";
+    String OFFICE_PHONE_ADD_ID = "AddPhone";
+    String OFFICE_PHONE_EDIT_ID = "EditPhone";
+    String OFFICE_PHONE_REMOVE_ID = "DeletePhone";
+    String OFFICE_PHONE_TYPE_SELECT_ID = "type";
+    String OFFICE_PHONE_FIELD_ID = "number";
+    String OFFICE_PHONE_TYPE_NAME = "E-mail";
+    String OFFICE_PHONE_NAME = "test2@test.com";
+    String OFFICE_PHONE_NAME_UPDATED = "test3@test.com";
+
     String OFFICE_NAME_SELECTOR = ".cellBorderBR:nth-child(1)";
     String OFFICE_CODE_SELECTOR = ".cellBorderBR:nth-child(2)";
     String OFFICE_ADDR1_SELECTOR = ".cellBorderBR:nth-child(3)";
     String OFFICE_ADDR2_SELECTOR = ".cellBorderBR:nth-child(4)";
     String OFFICE_CITY_SELECTOR = ".cellBorderBR:nth-child(5)";
+
+    String OFFICE_COVERED_STATE_NAME_SELECTOR = ".cellBorderB > p";
     //endregion
 
     int WAIT_TIMEOUT = 5000;
     int WAIT_TIMEOUT_2 = 7000;
 
+    String OFFICE_REASON_UPDATED = "update";
+    String OFFICE_REASON_REMOVE = "remove";
+
     String OK_BUTTON_ID = "Ok";
+    String FINISH_BUTTON_ID = "Finish";
     String SEARCH_BUTTON_ID = "Search";
     String UPDATE_BUTTON_ID = "Edit";
     String DIALOG_CANCEL_ID = "Cancel";

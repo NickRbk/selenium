@@ -1,6 +1,5 @@
 package com.corevalue.submenu.impl;
 
-import com.corevalue.driver.Browser;
 import com.corevalue.submenu.AbstractSubmenu;
 import com.corevalue.submenu.Submenus;
 import org.openqa.selenium.By;
@@ -23,10 +22,8 @@ public class FileLogoutSubmenu extends AbstractSubmenu {
     }
 
     public void confirmLogout(int buttonIndex) {
-        Browser.get().getDriver()
-                .switchTo().parentFrame()
-                .switchTo().parentFrame()
-                .findElements(By.tagName(BUTTON))
+        getContext();
+        findElementsBy(By.tagName(BUTTON))
                 .get(buttonIndex).click();
     }
 }

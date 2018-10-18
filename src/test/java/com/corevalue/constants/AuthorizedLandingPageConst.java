@@ -9,5 +9,5 @@ public interface AuthorizedLandingPageConst {
     int SUBMENU_FRAME_INDEX_WITH_CASE = 7;
 
     int BUTTON_LOGOUT_SUBMIT = 0;
-    int BUTTON_LOGOUT_SUBMIT_WITH_CASE = 3;
+    int BUTTON_LOGOUT_SUBMIT_WITH_CASE = 5;
 }

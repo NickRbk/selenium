@@ -30,6 +30,86 @@ public class OfficesTest implements LoginPageConst, TestConst, AuthorizedLanding
         Assert.assertEquals(updatedOffice, expectedOffice);
     }
 
+    @Test(groups = "management")
+    void addCoveredStates() {
+        ManagementManageOfficesSubmenu submenu = ManagementManageOfficesSubmenu.get();
+        AuthorizedLandingPage.get().openManagementMenu()
+                .openManageOfficesSubmenu(SUBMENU_FRAME_INDEX_WITH_CASE)
+                .searchOffices()
+                .selectLastOfficeToUpdate()
+                .addCoveredState(OFFICE_COVERED_STATES_NAME)
+                .close(DIALOG_CLOSE_ID);
+
+        Assert.assertEquals(submenu.getCountOfCoveredStatesUpdated(), submenu.getCountOfCoveredStates()+1);
+    }
+
+    @Test(groups = "management", dependsOnMethods = "addCoveredStates")
+    void updateCoveredStates() {
+        ManagementManageOfficesSubmenu submenu = ManagementManageOfficesSubmenu.get();
+        AuthorizedLandingPage.get().openManagementMenu()
+                .openManageOfficesSubmenu(SUBMENU_FRAME_INDEX_WITH_CASE)
+                .searchOffices()
+                .selectLastOfficeToUpdate()
+                .updateCoveredState(OFFICE_COVERED_STATES_NAME_UPDATED)
+                .close(DIALOG_CLOSE_ID);
+
+        Assert.assertNotEquals(submenu.getNameOfCoveredStatesUpdated(), submenu.getNameOfCoveredStates());
+        Assert.assertEquals(submenu.getNameOfCoveredStatesUpdated(), OFFICE_COVERED_STATES_NAME_UPDATED);
+    }
+
+    @Test(groups = "management", dependsOnMethods = {"updateCoveredStates", "removePhones"})
+    void removeCoveredStates() {
+        ManagementManageOfficesSubmenu submenu = ManagementManageOfficesSubmenu.get();
+        AuthorizedLandingPage.get().openManagementMenu()
+                .openManageOfficesSubmenu(SUBMENU_FRAME_INDEX_WITH_CASE)
+                .searchOffices()
+                .selectLastOfficeToUpdate()
+                .removeCoveredState()
+                .close(DIALOG_CLOSE_ID);
+
+        Assert.assertEquals(submenu.getCountOfCoveredStatesUpdated(), submenu.getCountOfCoveredStates()-1);
+    }
+
+    @Test(groups = "management", dependsOnMethods = "updateCoveredStates")
+    void addPhones() {
+        ManagementManageOfficesSubmenu submenu = ManagementManageOfficesSubmenu.get();
+        AuthorizedLandingPage.get().openManagementMenu()
+                .openManageOfficesSubmenu(SUBMENU_FRAME_INDEX_WITH_CASE)
+                .searchOffices()
+                .selectLastOfficeToUpdate()
+                .addPhone(OFFICE_PHONE_NAME)
+                .close(DIALOG_CLOSE_ID);
+
+        Assert.assertEquals(submenu.getCountOfPhonesUpdated(), submenu.getCountOfPhones()+1);
+    }
+
+    @Test(groups = "management", dependsOnMethods = "addPhones")
+    void updatePhones() {
+        ManagementManageOfficesSubmenu submenu = ManagementManageOfficesSubmenu.get();
+        AuthorizedLandingPage.get().openManagementMenu()
+                .openManageOfficesSubmenu(SUBMENU_FRAME_INDEX_WITH_CASE)
+                .searchOffices()
+                .selectLastOfficeToUpdate()
+                .updatePhones(OFFICE_PHONE_NAME_UPDATED)
+                .close(DIALOG_CLOSE_ID);
+
+        Assert.assertNotEquals(submenu.getNameOfPhoneUpdated(), submenu.getNameOfPhone());
+        Assert.assertEquals(submenu.getNameOfPhoneUpdated(), OFFICE_PHONE_NAME_UPDATED);
+    }
+
+    @Test(groups = "management", dependsOnMethods = "updatePhones")
+    void removePhones() {
+        ManagementManageOfficesSubmenu submenu = ManagementManageOfficesSubmenu.get();
+        AuthorizedLandingPage.get().openManagementMenu()
+                .openManageOfficesSubmenu(SUBMENU_FRAME_INDEX_WITH_CASE)
+                .searchOffices()
+                .selectLastOfficeToUpdate()
+                .removePhone()
+                .close(DIALOG_CLOSE_ID);
+
+        Assert.assertEquals(submenu.getCountOfPhonesUpdated(), submenu.getCountOfPhones()-1);
+    }
+
     private Office expectedOfficeAfterUpdate() {
         return Office.builder()
                 .name(OFFICE_NAME_UPDATED)
