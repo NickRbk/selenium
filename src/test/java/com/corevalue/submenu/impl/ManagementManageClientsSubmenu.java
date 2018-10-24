@@ -1,7 +1,7 @@
 package com.corevalue.submenu.impl;
 
 import com.corevalue.constants.menu.ManagementMenuConst;
-import com.corevalue.driver.Browser;
+import com.corevalue.driver.TestGroup;
 import com.corevalue.submenu.AbstractSubmenu;
 import com.corevalue.submenu.Submenus;
 import lombok.Getter;
@@ -24,40 +24,40 @@ public class ManagementManageClientsSubmenu extends AbstractSubmenu implements M
         return instance;
     }
 
-    public ManagementManageClientsSubmenu updateClient(String code, String name) {
-        setNewProps(code, name);
-        findElementBy(By.id(CLIENTS_SUBMIT)).click();
+    public ManagementManageClientsSubmenu updateClient(TestGroup group, String code, String name) {
+        setNewProps(group, code, name);
+        findElementBy(group, By.id(CLIENTS_SUBMIT)).click();
         return ManagementManageClientsSubmenu.get();
     }
 
-    public ManagementManageClientsSubmenu searchClientsByCode(String code) {
-        getContext();
-        Browser.get().waitFrame(2);
-        findElementBy(By.id(CLIENTS_CODE_FIELD_ID)).sendKeys(code);
-        findElementBy(By.id(SEARCH_BUTTON_ID)).click();
-        count = getCountOfTargetClients();
+    public ManagementManageClientsSubmenu searchClientsByCode(TestGroup group, String code) {
+        getContext(group);
+        browser(group).waitFrame(2);
+        findElementBy(group, By.id(CLIENTS_CODE_FIELD_ID)).sendKeys(code);
+        findElementBy(group, By.id(SEARCH_BUTTON_ID)).click();
+        count = getCountOfTargetClients(group);
         return ManagementManageClientsSubmenu.get();
     }
 
-    public ManagementManageClientsSubmenu selectLastClientToUpdate() {
-        findElementsBy(By.cssSelector(LIST_SELECTOR)).get(count-1).click();
-        findElementBy(By.id(UPDATE_BUTTON_ID)).click();
+    public ManagementManageClientsSubmenu selectLastClientToUpdate(TestGroup group) {
+        findElementsBy(group, By.cssSelector(LIST_SELECTOR)).get(count-1).click();
+        findElementBy(group, By.id(UPDATE_BUTTON_ID)).click();
         return ManagementManageClientsSubmenu.get();
     }
 
-    private int getCountOfTargetClients() {
-        Browser.get().waitFrame(0);
-        return findElementsBy(By.cssSelector(LIST_SELECTOR)).size();
+    private int getCountOfTargetClients(TestGroup group) {
+        browser(group).waitFrame(0);
+        return findElementsBy(group, By.cssSelector(LIST_SELECTOR)).size();
     }
 
-    private void setNewProps(String code, String name) {
-        getContext();
-        Browser.get().waitFrame(3);
-        findElementBy(By.cssSelector(CLIENT_CODE_FIELD_ID)).clear();
-        findElementBy(By.cssSelector(CLIENT_CODE_FIELD_ID)).sendKeys(code);
-        findElementBy(By.cssSelector(CLIENT_NAME_FIELD_ID)).clear();
-        findElementBy(By.cssSelector(CLIENT_NAME_FIELD_ID)).sendKeys(name);
-        Select lenderSystems = new Select(findElementBy(By.cssSelector(CLIENT_LENDER_SYSTEM_FIELD_SELECTOR)));
+    private void setNewProps(TestGroup group, String code, String name) {
+        getContext(group);
+        browser(group).waitFrame(3);
+        findElementBy(group, By.cssSelector(CLIENT_CODE_FIELD_ID)).clear();
+        findElementBy(group, By.cssSelector(CLIENT_CODE_FIELD_ID)).sendKeys(code);
+        findElementBy(group, By.cssSelector(CLIENT_NAME_FIELD_ID)).clear();
+        findElementBy(group, By.cssSelector(CLIENT_NAME_FIELD_ID)).sendKeys(name);
+        Select lenderSystems = new Select(findElementBy(group, By.cssSelector(CLIENT_LENDER_SYSTEM_FIELD_SELECTOR)));
         lenderSystems.selectByIndex(LENDER_SYSTEM_OTHER_INDEX);
     }
 }

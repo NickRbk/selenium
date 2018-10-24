@@ -1,6 +1,8 @@
 package com.corevalue.menu;
 
 import com.corevalue.driver.Browser;
+import com.corevalue.driver.BrowserMap;
+import com.corevalue.driver.TestGroup;
 import org.openqa.selenium.By;
 
 public abstract class AbstractMenu {
@@ -10,9 +12,13 @@ public abstract class AbstractMenu {
         this.menu = menu;
     }
 
-    public void goTo() {
-        Browser.get().getDriver()
+    public void goTo(TestGroup group) {
+        browser(group).getDriver()
                 .switchTo().frame(0)
                 .findElement(By.id(menu.getSelector())).click();
+    }
+
+    protected Browser browser(TestGroup group) {
+        return BrowserMap.get().getDrivers().get(group);
     }
 }

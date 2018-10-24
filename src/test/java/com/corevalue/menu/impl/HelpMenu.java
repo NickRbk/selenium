@@ -2,7 +2,7 @@ package com.corevalue.menu.impl;
 
 import com.corevalue.constants.menu.HelpMenuConst;
 import com.corevalue.constants.menu.MenuConst;
-import com.corevalue.driver.Browser;
+import com.corevalue.driver.TestGroup;
 import com.corevalue.menu.AbstractMenu;
 import com.corevalue.menu.Menus;
 import org.openqa.selenium.By;
@@ -23,7 +23,7 @@ public class HelpMenu extends AbstractMenu implements MenuConst, HelpMenuConst {
     }
 
     public String showVersion() {
-        Browser.get().getDriver()
+        browser(TestGroup.INIT).getDriver()
                 .switchTo().frame(6)
                 .findElement(By.id(SUBMENU_SELECTOR))
                 .click();
@@ -32,17 +32,17 @@ public class HelpMenu extends AbstractMenu implements MenuConst, HelpMenuConst {
     }
 
     public void confirmExit() {
-        Browser.get().getDriver()
+        browser(TestGroup.INIT).getDriver()
                 .findElement(By.id(BUTTON_CLOSE_ID))
                 .click();
     }
 
     private WebElement versionInfo () {
-        Browser.get().getDriver()
+        browser(TestGroup.INIT).getDriver()
                 .switchTo().parentFrame()
                 .switchTo().parentFrame();
 
-        return Browser.get()
+        return browser(TestGroup.INIT)
                 .waitFrame(2)
                 .findElement(By.cssSelector(VERSION_ELEMENT_SELECTOR));
     }

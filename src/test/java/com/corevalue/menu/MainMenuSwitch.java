@@ -1,11 +1,13 @@
 package com.corevalue.menu;
 
-import com.corevalue.driver.Browser;
+import com.corevalue.driver.BrowserMap;
+import com.corevalue.driver.TestGroup;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 class MainMenuSwitch {
 
@@ -20,8 +22,8 @@ class MainMenuSwitch {
         return instance;
     }
 
-    Map<Menus, Function<AbstractMenu, AbstractMenu>> getMenuSwitch() {
-        Map<Menus, Function<AbstractMenu, AbstractMenu>> menus = new HashMap<>();
+    Map<Menus, BiFunction<TestGroup, AbstractMenu, AbstractMenu>> getMenuSwitch() {
+        Map<Menus, BiFunction<TestGroup, AbstractMenu, AbstractMenu>> menus = new HashMap<>();
 
         menus.put(Menus.FILE, this::getMenu);
         menus.put(Menus.WIZARDS, this::getMenu);
@@ -37,8 +39,9 @@ class MainMenuSwitch {
         return menus;
     }
 
-    private AbstractMenu getMenu(AbstractMenu menu) {
-        PageFactory.initElements(Browser.get().getDriver(), menu);
+    private AbstractMenu getMenu(TestGroup group, AbstractMenu menu) {
+        WebDriver driver = BrowserMap.get().getDrivers().get(group).getDriver();
+        PageFactory.initElements(driver, menu);
         return menu;
     }
 }

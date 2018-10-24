@@ -2,6 +2,7 @@ package com.corevalue.menu.impl;
 
 import com.corevalue.constants.menu.ManagementMenuConst;
 import com.corevalue.constants.menu.MenuConst;
+import com.corevalue.driver.TestGroup;
 import com.corevalue.menu.AbstractMenu;
 import com.corevalue.menu.Menus;
 import com.corevalue.submenu.Submenus;
@@ -24,27 +25,27 @@ public class ManagementMenu extends AbstractMenu implements MenuConst, Managemen
         return instance;
     }
 
-    public ManagementManageGroupsSubmenu openManageGroupsSubmenu(int submenuFrameIndex) {
-        Submenus.getSubmenu(Submenus.MANAGEMENT_MANAGE_GROUPS, ManagementManageGroupsSubmenu.get())
-                .goTo(submenuFrameIndex);
+    public ManagementManageGroupsSubmenu openManageGroupsSubmenu(TestGroup group, int submenuFrameIndex) {
+        Submenus.getSubmenu(Submenus.MANAGEMENT_MANAGE_GROUPS, group, ManagementManageGroupsSubmenu.get())
+                .goTo(group, submenuFrameIndex);
         return ManagementManageGroupsSubmenu.get();
     }
 
-    public ManagementManageUsersSubmenu openManageUsersSubmenu(int submenuFrameIndex) {
-        Submenus.getSubmenu(Submenus.MANAGEMENT_MANAGE_USERS, ManagementManageUsersSubmenu.get())
-                .goTo(submenuFrameIndex);
+    public ManagementManageUsersSubmenu openManageUsersSubmenu(TestGroup group, int submenuFrameIndex) {
+        Submenus.getSubmenu(Submenus.MANAGEMENT_MANAGE_USERS, group, ManagementManageUsersSubmenu.get())
+                .goTo(group, submenuFrameIndex);
         return ManagementManageUsersSubmenu.get();
     }
 
-    public ManagementManageClientsSubmenu openManageClientsSubmenu(int submenuFrameIndex) {
-        Submenus.getSubmenu(Submenus.MANAGEMENT_MANAGE_CLIENTS, ManagementManageClientsSubmenu.get())
-                .goTo(submenuFrameIndex);
+    public ManagementManageClientsSubmenu openManageClientsSubmenu(TestGroup group, int submenuFrameIndex) {
+        Submenus.getSubmenu(Submenus.MANAGEMENT_MANAGE_CLIENTS, group, ManagementManageClientsSubmenu.get())
+                .goTo(group, submenuFrameIndex);
         return ManagementManageClientsSubmenu.get();
     }
 
-    public ManagementManageOfficesSubmenu openManageOfficesSubmenu(int submenuFrameIndex) {
-        Submenus.getSubmenu(Submenus.MANAGEMENT_MANAGE_OFFICES, ManagementManageOfficesSubmenu.get())
-                .goTo(submenuFrameIndex);
+    public ManagementManageOfficesSubmenu openManageOfficesSubmenu(TestGroup group, int submenuFrameIndex) {
+        Submenus.getSubmenu(Submenus.MANAGEMENT_MANAGE_OFFICES, group, ManagementManageOfficesSubmenu.get())
+                .goTo(group, submenuFrameIndex);
         return ManagementManageOfficesSubmenu.get();
     }
 }

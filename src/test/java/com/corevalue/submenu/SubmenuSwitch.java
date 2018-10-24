@@ -1,11 +1,13 @@
 package com.corevalue.submenu;
 
-import com.corevalue.driver.Browser;
+import com.corevalue.driver.BrowserMap;
+import com.corevalue.driver.TestGroup;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 public class SubmenuSwitch {
 
@@ -20,8 +22,8 @@ public class SubmenuSwitch {
         return instance;
     }
 
-    Map<Submenus, Function<AbstractSubmenu, AbstractSubmenu>> getSubmenuSwitch() {
-        Map<Submenus, Function<AbstractSubmenu, AbstractSubmenu>> submenus = new HashMap<>();
+    Map<Submenus, BiFunction<TestGroup, AbstractSubmenu, AbstractSubmenu>> getSubmenuSwitch() {
+        Map<Submenus, BiFunction<TestGroup, AbstractSubmenu, AbstractSubmenu>> submenus = new HashMap<>();
 
         submenus.put(Submenus.FILE_LOGOUT, this::getSubmenu);
         submenus.put(Submenus.MANAGEMENT_MANAGE_GROUPS, this::getSubmenu);
@@ -32,8 +34,9 @@ public class SubmenuSwitch {
         return submenus;
     }
 
-    private AbstractSubmenu getSubmenu(AbstractSubmenu submenu) {
-        PageFactory.initElements(Browser.get().getDriver(), submenu);
+    private AbstractSubmenu getSubmenu(TestGroup group, AbstractSubmenu submenu) {
+        WebDriver driver = BrowserMap.get().getDrivers().get(group).getDriver();
+        PageFactory.initElements(driver, submenu);
         return submenu;
     }
 }

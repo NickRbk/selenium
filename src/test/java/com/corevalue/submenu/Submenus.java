@@ -2,6 +2,7 @@ package com.corevalue.submenu;
 
 import com.corevalue.constants.menu.FileMenuConst;
 import com.corevalue.constants.menu.ManagementMenuConst;
+import com.corevalue.driver.TestGroup;
 import lombok.Getter;
 
 @Getter
@@ -18,9 +19,9 @@ public enum Submenus implements FileMenuConst, ManagementMenuConst {
         this.selector = selector;
     }
 
-    public static AbstractSubmenu getSubmenu(Submenus key, AbstractSubmenu submenu) {
+    public static AbstractSubmenu getSubmenu(Submenus key, TestGroup group, AbstractSubmenu submenu) {
         return SubmenuSwitch.get().getSubmenuSwitch()
                 .get(key)
-                .apply(submenu);
+                .apply(group, submenu);
     }
 }

@@ -1,7 +1,7 @@
 package com.corevalue.submenu.impl;
 
 import com.corevalue.constants.menu.ManagementMenuConst;
-import com.corevalue.driver.Browser;
+import com.corevalue.driver.TestGroup;
 import com.corevalue.submenu.AbstractSubmenu;
 import com.corevalue.submenu.Submenus;
 import com.corevalue.submenu.impl.obj.Office;
@@ -34,272 +34,272 @@ public class ManagementManageOfficesSubmenu extends AbstractSubmenu implements M
         return instance;
     }
 
-    public ManagementManageOfficesSubmenu searchOffices() {
-        localContext(2);
-        findElementBy(By.id(SEARCH_BUTTON_ID)).click();
+    public ManagementManageOfficesSubmenu searchOffices(TestGroup group) {
+        localContext(group, 2);
+        findElementBy(group, By.id(SEARCH_BUTTON_ID)).click();
         return ManagementManageOfficesSubmenu.get();
     }
 
-    public ManagementManageOfficesSubmenu selectLastOfficeToUpdate() {
-        int officeCount = getCountOfOffices();
-        findElementsBy(By.cssSelector(LIST_SELECTOR)).get(officeCount-1).click();
-        findElementBy(By.id(UPDATE_BUTTON_ID)).click();
+    public ManagementManageOfficesSubmenu selectLastOfficeToUpdate(TestGroup group) {
+        int officeCount = getCountOfOffices(group);
+        findElementsBy(group, By.cssSelector(LIST_SELECTOR)).get(officeCount-1).click();
+        findElementBy(group, By.id(UPDATE_BUTTON_ID)).click();
         return ManagementManageOfficesSubmenu.get();
     }
 
-    public ManagementManageOfficesSubmenu updateOfficeGeneralInfo(String reason, Office office) {
-        localContext(3);
-        setOfficeProps(office.getName(), office.getCode());
-        updateAddressAndAcceptChanges(reason, office.getAddress1(), office.getAddress2(), office.getCity());
+    public ManagementManageOfficesSubmenu updateOfficeGeneralInfo(TestGroup group, String reason, Office office) {
+        localContext(group, 3);
+        setOfficeProps(group, office.getName(), office.getCode());
+        updateAddressAndAcceptChanges(group, reason, office.getAddress1(), office.getAddress2(), office.getCity());
         return ManagementManageOfficesSubmenu.get();
     }
 
     //region HELPER METHODS: general info
-    private void setOfficeProps(String name, String code) {
-        findElementBy(By.cssSelector(OFFICE_NAME_FIELD_ID)).clear();
-        findElementBy(By.cssSelector(OFFICE_NAME_FIELD_ID)).sendKeys(name);
-        findElementBy(By.cssSelector(OFFICE_CODE_FIELD_ID)).clear();
-        findElementBy(By.cssSelector(OFFICE_CODE_FIELD_ID)).sendKeys(code);
+    private void setOfficeProps(TestGroup group, String name, String code) {
+        findElementBy(group, By.cssSelector(OFFICE_NAME_FIELD_ID)).clear();
+        findElementBy(group, By.cssSelector(OFFICE_NAME_FIELD_ID)).sendKeys(name);
+        findElementBy(group, By.cssSelector(OFFICE_CODE_FIELD_ID)).clear();
+        findElementBy(group, By.cssSelector(OFFICE_CODE_FIELD_ID)).sendKeys(code);
     }
 
-    private int getCountOfOffices() {
-        Browser.get().waitFrame(0);
-        return findElementsBy(By.cssSelector(LIST_SELECTOR)).size();
+    private int getCountOfOffices(TestGroup group) {
+        browser(group).waitFrame(0);
+        return findElementsBy(group, By.cssSelector(LIST_SELECTOR)).size();
     }
 
-    private void updateAddressAndAcceptChanges(String reason, String addr1, String addr2, String city) {
-        findElementBy(By.id(UPDATE_ADDRESS_BUTTON_ID)).click();
-        setReasonToUpdate(reason);
-        setAddressProps(addr1, addr2, city);
+    private void updateAddressAndAcceptChanges(TestGroup group, String reason, String addr1, String addr2, String city) {
+        findElementBy(group, By.id(UPDATE_ADDRESS_BUTTON_ID)).click();
+        setReasonToUpdate(group, reason);
+        setAddressProps(group, addr1, addr2, city);
 
-        Browser.get().getDriver().switchTo().parentFrame();
-        Browser.get().waitFrame(3);
-        findElementBy(By.id(ACCEPT_ADDRESS_BUTTON_ID)).click();
+        browser(group).getDriver().switchTo().parentFrame();
+        browser(group).waitFrame(3);
+        findElementBy(group, By.id(ACCEPT_ADDRESS_BUTTON_ID)).click();
     }
 
-    private void setAddressProps(String addr1, String addr2, String city) {
-        Browser.get().getDriver().switchTo().parentFrame();
-        Browser.get().waitFrame(4);
+    private void setAddressProps(TestGroup group, String addr1, String addr2, String city) {
+        browser(group).getDriver().switchTo().parentFrame();
+        browser(group).waitFrame(4);
 
-        findElementBy(By.id(OFFICE_ADDR1_FIELD_ID)).clear();
-        findElementBy(By.id(OFFICE_ADDR1_FIELD_ID)).sendKeys(addr1);
-        findElementBy(By.id(OFFICE_ADDR2_FIELD_ID)).clear();
-        findElementBy(By.id(OFFICE_ADDR2_FIELD_ID)).sendKeys(addr2);
-        findElementBy(By.id(OFFICE_CITY_FIELD_ID)).clear();
-        findElementBy(By.id(OFFICE_CITY_FIELD_ID)).sendKeys(city);
-        findElementBy(By.id(OK_BUTTON_ID)).click();
+        findElementBy(group, By.id(OFFICE_ADDR1_FIELD_ID)).clear();
+        findElementBy(group, By.id(OFFICE_ADDR1_FIELD_ID)).sendKeys(addr1);
+        findElementBy(group, By.id(OFFICE_ADDR2_FIELD_ID)).clear();
+        findElementBy(group, By.id(OFFICE_ADDR2_FIELD_ID)).sendKeys(addr2);
+        findElementBy(group, By.id(OFFICE_CITY_FIELD_ID)).clear();
+        findElementBy(group, By.id(OFFICE_CITY_FIELD_ID)).sendKeys(city);
+        findElementBy(group, By.id(OK_BUTTON_ID)).click();
     }
     //endregion
 
-    public ManagementManageOfficesSubmenu addCoveredState(String state) {
-        localContext(3);
-        findElementBy(By.id(OFFICE_COVERED_STATES_ID)).click();
-        setCoveredStates(state);
+    public ManagementManageOfficesSubmenu addCoveredState(TestGroup group, String state) {
+        localContext(group, 3);
+        findElementBy(group, By.id(OFFICE_COVERED_STATES_ID)).click();
+        setCoveredStates(group, state);
 
-        back();
+        back(group);
         return ManagementManageOfficesSubmenu.get();
     }
 
     //region HELPER METHODS: add covered states
-    private void setCoveredStates(String state) {
-        countOfCoveredStates = findElementsBy(By.cssSelector(LIST_SELECTOR)).size();
+    private void setCoveredStates(TestGroup group, String state) {
+        countOfCoveredStates = findElementsBy(group, By.cssSelector(LIST_SELECTOR)).size();
 
-        findElementBy(By.id(OFFICE_COVERED_STATES_ADD_STATE_ID)).click();
-        setReasonToUpdate(OFFICE_REASON_UPDATED);
+        findElementBy(group, By.id(OFFICE_COVERED_STATES_ADD_STATE_ID)).click();
+        setReasonToUpdate(group, OFFICE_REASON_UPDATED);
 
-        setCoveredStatesProps(state);
+        setCoveredStatesProps(group, state);
 
-        Browser.get().getDriver().switchTo().parentFrame();
-        countOfCoveredStatesUpdated = Browser.get().waitFrame(3).findElements(By.cssSelector(LIST_SELECTOR)).size();
+        browser(group).getDriver().switchTo().parentFrame();
+        countOfCoveredStatesUpdated = browser(group).waitFrame(3).findElements(By.cssSelector(LIST_SELECTOR)).size();
 
-        findElementBy(By.id(FINISH_BUTTON_ID)).click();
+        findElementBy(group, By.id(FINISH_BUTTON_ID)).click();
     }
     //endregion
 
-    public ManagementManageOfficesSubmenu removeCoveredState() {
-        localContext(3);
-        findElementBy(By.id(OFFICE_COVERED_STATES_ID)).click();
+    public ManagementManageOfficesSubmenu removeCoveredState(TestGroup group) {
+        localContext(group, 3);
+        findElementBy(group, By.id(OFFICE_COVERED_STATES_ID)).click();
 
-        removeCoveredStateService();
+        removeCoveredStateService(group);
 
-        back();
+        back(group);
         return ManagementManageOfficesSubmenu.get();
     }
 
     //region HELPER METHODS: remove covered states
-    private void removeCoveredStateService() {
-        countOfCoveredStates = findElementsBy(By.cssSelector(LIST_SELECTOR)).size();
+    private void removeCoveredStateService(TestGroup group) {
+        countOfCoveredStates = findElementsBy(group, By.cssSelector(LIST_SELECTOR)).size();
 
-        findElementsBy(By.cssSelector(LIST_SELECTOR)).get(countOfCoveredStates - 2).click();
-        findElementBy(By.id(OFFICE_COVERED_STATES_REMOVE_STATE_ID)).click();
-        setReasonToUpdate(OFFICE_REASON_REMOVE);
+        findElementsBy(group, By.cssSelector(LIST_SELECTOR)).get(countOfCoveredStates - 2).click();
+        findElementBy(group, By.id(OFFICE_COVERED_STATES_REMOVE_STATE_ID)).click();
+        setReasonToUpdate(group, OFFICE_REASON_REMOVE);
 
-        countOfCoveredStatesUpdated = Browser.get().waitFrame(3).findElements(By.cssSelector(LIST_SELECTOR)).size();
+        countOfCoveredStatesUpdated = browser(group).waitFrame(3).findElements(By.cssSelector(LIST_SELECTOR)).size();
 
-        findElementBy(By.id(FINISH_BUTTON_ID)).click();
+        findElementBy(group, By.id(FINISH_BUTTON_ID)).click();
     }
     //endregion
 
-    public ManagementManageOfficesSubmenu updateCoveredState(String state) {
-        localContext(3);
-        findElementBy(By.id(OFFICE_COVERED_STATES_ID)).click();
+    public ManagementManageOfficesSubmenu updateCoveredState(TestGroup group, String state) {
+        localContext(group, 3);
+        findElementBy(group, By.id(OFFICE_COVERED_STATES_ID)).click();
 
-        updateCoveredStateService(state);
+        updateCoveredStateService(group, state);
 
-        back();
+        back(group);
         return ManagementManageOfficesSubmenu.get();
     }
 
     //region HELPER METHODS: update covered states
-    private void updateCoveredStateService(String state) {
-        nameOfCoveredStates = findElementsBy(By.cssSelector(OFFICE_COVERED_STATE_NAME_SELECTOR)).get(1).getText();
+    private void updateCoveredStateService(TestGroup group, String state) {
+        nameOfCoveredStates = findElementsBy(group, By.cssSelector(OFFICE_COVERED_STATE_NAME_SELECTOR)).get(1).getText();
 
-        findElementsBy(By.cssSelector(LIST_SELECTOR)).get(countOfCoveredStatesUpdated - 2).click();
-        findElementBy(By.id(OFFICE_COVERED_STATES_EDIT_STATE_ID)).click();
-        setReasonToUpdate(OFFICE_REASON_UPDATED);
+        findElementsBy(group, By.cssSelector(LIST_SELECTOR)).get(countOfCoveredStatesUpdated - 2).click();
+        findElementBy(group, By.id(OFFICE_COVERED_STATES_EDIT_STATE_ID)).click();
+        setReasonToUpdate(group, OFFICE_REASON_UPDATED);
 
-        setCoveredStatesProps(state);
+        setCoveredStatesProps(group, state);
 
-        Browser.get().getDriver().switchTo().parentFrame();
-        Browser.get().waitFrame(3);
-        nameOfCoveredStatesUpdated = findElementsBy(By.cssSelector(OFFICE_COVERED_STATE_NAME_SELECTOR)).get(1).getText();
+        browser(group).getDriver().switchTo().parentFrame();
+        browser(group).waitFrame(3);
+        nameOfCoveredStatesUpdated = findElementsBy(group, By.cssSelector(OFFICE_COVERED_STATE_NAME_SELECTOR)).get(1).getText();
 
-        findElementBy(By.id(FINISH_BUTTON_ID)).click();
+        findElementBy(group, By.id(FINISH_BUTTON_ID)).click();
     }
     //endregion
 
-    public ManagementManageOfficesSubmenu addPhone(String email) {
-        localContext(3);
-        findElementBy(By.id(OFFICE_PHONES_ID)).click();
-        setPhone(email);
+    public ManagementManageOfficesSubmenu addPhone(TestGroup group, String email) {
+        localContext(group, 3);
+        findElementBy(group, By.id(OFFICE_PHONES_ID)).click();
+        setPhone(group, email);
 
-        back();
+        back(group);
         return ManagementManageOfficesSubmenu.get();
     }
 
     //region HELPER METHODS: add phone
-    private void setPhone(String email) {
-        countOfPhones = findElementsBy(By.cssSelector(LIST_SELECTOR)).size();
+    private void setPhone(TestGroup group, String email) {
+        countOfPhones = findElementsBy(group, By.cssSelector(LIST_SELECTOR)).size();
 
-        findElementBy(By.id(OFFICE_PHONE_ADD_ID)).click();
-        setReasonToUpdate(OFFICE_REASON_UPDATED);
+        findElementBy(group, By.id(OFFICE_PHONE_ADD_ID)).click();
+        setReasonToUpdate(group, OFFICE_REASON_UPDATED);
 
-        setPhoneProps(email);
+        setPhoneProps(group, email);
 
-        Browser.get().getDriver().switchTo().parentFrame();
-        countOfPhonesUpdated = Browser.get().waitFrame(3).findElements(By.cssSelector(LIST_SELECTOR)).size();
+        browser(group).getDriver().switchTo().parentFrame();
+        countOfPhonesUpdated = browser(group).waitFrame(3).findElements(By.cssSelector(LIST_SELECTOR)).size();
 
-        findElementBy(By.id(FINISH_BUTTON_ID)).click();
+        findElementBy(group, By.id(FINISH_BUTTON_ID)).click();
     }
 
-    private void setPhoneProps(String email) {
-        Browser.get().getDriver().switchTo().parentFrame();
-        Browser.get().waitFrame(4);
+    private void setPhoneProps(TestGroup group, String email) {
+        browser(group).getDriver().switchTo().parentFrame();
+        browser(group).waitFrame(4);
 
-        Select phoneType = new Select(findElementBy(By.id(OFFICE_PHONE_TYPE_SELECT_ID)));
+        Select phoneType = new Select(findElementBy(group, By.id(OFFICE_PHONE_TYPE_SELECT_ID)));
         phoneType.selectByVisibleText(OFFICE_PHONE_TYPE_NAME);
 
-        findElementBy(By.id(OFFICE_PHONE_FIELD_ID)).clear();
-        findElementBy(By.id(OFFICE_PHONE_FIELD_ID)).sendKeys(email);
+        findElementBy(group, By.id(OFFICE_PHONE_FIELD_ID)).clear();
+        findElementBy(group, By.id(OFFICE_PHONE_FIELD_ID)).sendKeys(email);
 
-        findElementBy(By.id(OK_BUTTON_ID)).click();
+        findElementBy(group, By.id(OK_BUTTON_ID)).click();
     }
     //endregion
 
-    public ManagementManageOfficesSubmenu updatePhones(String email) {
-        localContext(3);
-        findElementBy(By.id(OFFICE_PHONES_ID)).click();
+    public ManagementManageOfficesSubmenu updatePhones(TestGroup group, String email) {
+        localContext(group, 3);
+        findElementBy(group, By.id(OFFICE_PHONES_ID)).click();
 
-        updatePhoneService(email);
+        updatePhoneService(group, email);
 
-        back();
+        back(group);
         return ManagementManageOfficesSubmenu.get();
     }
 
     //region HELPER METHODS: update phone
-    private void updatePhoneService(String email) {
-        nameOfPhone = findElementsBy(By.cssSelector(OFFICE_COVERED_STATE_NAME_SELECTOR)).get(countOfPhones).getText();
-        findElementsBy(By.cssSelector(LIST_SELECTOR)).get(countOfPhones).click();
-        findElementBy(By.id(OFFICE_PHONE_EDIT_ID)).click();
-        setReasonToUpdate(OFFICE_REASON_UPDATED);
+    private void updatePhoneService(TestGroup group, String email) {
+        nameOfPhone = findElementsBy(group, By.cssSelector(OFFICE_COVERED_STATE_NAME_SELECTOR)).get(countOfPhones).getText();
+        findElementsBy(group, By.cssSelector(LIST_SELECTOR)).get(countOfPhones).click();
+        findElementBy(group, By.id(OFFICE_PHONE_EDIT_ID)).click();
+        setReasonToUpdate(group, OFFICE_REASON_UPDATED);
 
-        setPhoneProps(email);
+        setPhoneProps(group, email);
 
-        Browser.get().getDriver().switchTo().parentFrame();
-        Browser.get().waitFrame(3);
-        nameOfPhoneUpdated = findElementsBy(By.cssSelector(OFFICE_COVERED_STATE_NAME_SELECTOR)).get(countOfPhones).getText();
+        browser(group).getDriver().switchTo().parentFrame();
+        browser(group).waitFrame(3);
+        nameOfPhoneUpdated = findElementsBy(group, By.cssSelector(OFFICE_COVERED_STATE_NAME_SELECTOR)).get(countOfPhones).getText();
 
-        findElementBy(By.id(FINISH_BUTTON_ID)).click();
+        findElementBy(group, By.id(FINISH_BUTTON_ID)).click();
     }
     //endregion
 
-    public ManagementManageOfficesSubmenu removePhone() {
-        localContext(3);
-        findElementBy(By.id(OFFICE_PHONES_ID)).click();
-        removePhoneService();
+    public ManagementManageOfficesSubmenu removePhone(TestGroup group) {
+        localContext(group, 3);
+        findElementBy(group, By.id(OFFICE_PHONES_ID)).click();
+        removePhoneService(group);
 
-        back();
+        back(group);
         return ManagementManageOfficesSubmenu.get();
     }
 
     //region HELPER METHODS: remove covered states
-    private void removePhoneService() {
-        countOfPhones = findElementsBy(By.cssSelector(LIST_SELECTOR)).size();
+    private void removePhoneService(TestGroup group) {
+        countOfPhones = findElementsBy(group, By.cssSelector(LIST_SELECTOR)).size();
 
-        findElementsBy(By.cssSelector(LIST_SELECTOR)).get(countOfPhones-1).click();
-        findElementBy(By.id(OFFICE_PHONE_REMOVE_ID)).click();
+        findElementsBy(group, By.cssSelector(LIST_SELECTOR)).get(countOfPhones-1).click();
+        findElementBy(group, By.id(OFFICE_PHONE_REMOVE_ID)).click();
 
-        Browser.get().getDriver().switchTo().parentFrame();
-        findElementsBy(By.tagName(BUTTON)).get(3).click();
+        browser(group).getDriver().switchTo().parentFrame();
+        findElementsBy(group, By.tagName(BUTTON)).get(3).click();
 //        findElementsBy(By.tagName(BUTTON)).get(1).click();
-        setReasonToUpdate(OFFICE_REASON_REMOVE);
+        setReasonToUpdate(group, OFFICE_REASON_REMOVE);
 
-        countOfPhonesUpdated = Browser.get().waitFrame(3).findElements(By.cssSelector(LIST_SELECTOR)).size();
+        countOfPhonesUpdated = browser(group).waitFrame(3).findElements(By.cssSelector(LIST_SELECTOR)).size();
 
-        findElementBy(By.id(FINISH_BUTTON_ID)).click();
+        findElementBy(group, By.id(FINISH_BUTTON_ID)).click();
     }
     //endregion
 
     //region COMMON METHODS
-    public Office getUpdatedFields() {
-        Browser.get().getDriver().switchTo().parentFrame();
-        Browser.get().waitFrame(2);
-        int lastIndex = getCountOfOffices()-1;
+    public Office getUpdatedFields(TestGroup group) {
+        browser(group).getDriver().switchTo().parentFrame();
+        browser(group).waitFrame(2);
+        int lastIndex = getCountOfOffices(group)-1;
         return Office.builder()
-                .name(findElementsBy(By.cssSelector(OFFICE_NAME_SELECTOR)).get(lastIndex).getText())
-                .code(findElementsBy(By.cssSelector(OFFICE_CODE_SELECTOR)).get(lastIndex).getText())
-                .address1(findElementsBy(By.cssSelector(OFFICE_ADDR1_SELECTOR)).get(lastIndex).getText())
-                .address2(findElementsBy(By.cssSelector(OFFICE_ADDR2_SELECTOR)).get(lastIndex).getText())
-                .city(findElementsBy(By.cssSelector(OFFICE_CITY_SELECTOR)).get(lastIndex).getText())
+                .name(findElementsBy(group, By.cssSelector(OFFICE_NAME_SELECTOR)).get(lastIndex).getText())
+                .code(findElementsBy(group, By.cssSelector(OFFICE_CODE_SELECTOR)).get(lastIndex).getText())
+                .address1(findElementsBy(group, By.cssSelector(OFFICE_ADDR1_SELECTOR)).get(lastIndex).getText())
+                .address2(findElementsBy(group, By.cssSelector(OFFICE_ADDR2_SELECTOR)).get(lastIndex).getText())
+                .city(findElementsBy(group, By.cssSelector(OFFICE_CITY_SELECTOR)).get(lastIndex).getText())
                 .build();
     }
 
-    private void setReasonToUpdate(String reason) {
-        Browser.get().getDriver().switchTo().parentFrame();
-        Browser.get().waitFrame(4);
+    private void setReasonToUpdate(TestGroup group, String reason) {
+        browser(group).getDriver().switchTo().parentFrame();
+        browser(group).waitFrame(4);
 
-        findElementBy(By.id(OFFICE_REASON_FIELD_ID)).sendKeys(reason);
-        findElementBy(By.id(OK_BUTTON_ID)).click();
+        findElementBy(group, By.id(OFFICE_REASON_FIELD_ID)).sendKeys(reason);
+        findElementBy(group, By.id(OK_BUTTON_ID)).click();
     }
 
-    private void setCoveredStatesProps(String state) {
-        Browser.get().getDriver().switchTo().parentFrame();
-        Browser.get().waitFrame(4);
+    private void setCoveredStatesProps(TestGroup group, String state) {
+        browser(group).getDriver().switchTo().parentFrame();
+        browser(group).waitFrame(4);
 
-        Select lenderSystems = new Select(findElementBy(By.id(OFFICE_COVERED_STATES_SELECT_ID)));
+        Select lenderSystems = new Select(findElementBy(group, By.id(OFFICE_COVERED_STATES_SELECT_ID)));
         lenderSystems.selectByVisibleText(state);
-        findElementBy(By.id(OK_BUTTON_ID)).click();
+        findElementBy(group, By.id(OK_BUTTON_ID)).click();
     }
 
-    private void localContext(int frame) {
-        getContext();
-        Browser.get().waitFrame(frame);
+    private void localContext(TestGroup group, int frame) {
+        getContext(group);
+        browser(group).waitFrame(frame);
     }
 
-    private void back() {
-        Browser.get().getDriver().switchTo().parentFrame();
-        Browser.get().waitFrame(2);
-        Browser.get().waitFrame(0);
+    private void back(TestGroup group) {
+        browser(group).getDriver().switchTo().parentFrame();
+        browser(group).waitFrame(2);
+        browser(group).waitFrame(0);
     }
     //endregion
 }

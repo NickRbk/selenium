@@ -1,10 +1,12 @@
 package com.corevalue.tests.xmenu.file;
 
 import com.corevalue.constants.TestConst;
-import com.corevalue.driver.Browser;
+import com.corevalue.driver.BrowserMap;
+import com.corevalue.driver.TestGroup;
 import com.corevalue.pages.impl.AuthorizedLandingPage;
 import com.corevalue.pages.impl.LoginPage;
 import com.corevalue.constants.LoginPageConst;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
@@ -17,29 +19,34 @@ import static com.corevalue.constants.AuthorizedLandingPageConst.SUBMENU_FRAME_I
 public class LoginTest implements LoginPageConst, TestConst {
     @BeforeClass
     static void init() {
-        Browser.get().getDriver().get(BASE_URL);
+        driver().get(BASE_URL);
     }
 
     @Test
     void failedLoginTest() {
-        LoginPage.get().login(INVALID_USERNAME,INVALID_PASSWORD);
-        Assert.assertNotEquals(AUTHORIZED_PAGE_TITLE, Browser.get().getDriver().getTitle());
+        LoginPage.get(TestGroup.INIT).login(TestGroup.INIT, INVALID_USERNAME,INVALID_PASSWORD);
+        Assert.assertNotEquals(AUTHORIZED_PAGE_TITLE, driver().getTitle());
     }
 
     @Test(priority = 1)
     void successLoginTest() {
-        LoginPage.get().login(VALID_USERNAME,VALID_PASSWORD);
-        Assert.assertEquals(AUTHORIZED_PAGE_TITLE, Browser.get().getDriver().getTitle());
+        LoginPage.get(TestGroup.INIT).login(TestGroup.INIT, VALID_USERNAME,VALID_PASSWORD);
+        Assert.assertEquals(AUTHORIZED_PAGE_TITLE, driver().getTitle());
     }
 
     @Test(dependsOnMethods = "successLoginTest")
     void logoutTest() {
-        AuthorizedLandingPage.get().logout(SUBMENU_FRAME_INDEX, BUTTON_LOGOUT_SUBMIT);
-        Assert.assertEquals(LOGIN_PAGE_TITLE, Browser.get().getDriver().getTitle());
+        AuthorizedLandingPage.get().logout(TestGroup.INIT, SUBMENU_FRAME_INDEX, BUTTON_LOGOUT_SUBMIT);
+        Assert.assertEquals(LOGIN_PAGE_TITLE, driver().getTitle());
     }
 
     @AfterSuite
     static void closeDriver() {
-        Browser.get().getDriver().close();
+        driver().close();
+        BrowserMap.get().getDrivers().get(TestGroup.MANAGEMENT).getDriver().close();
+    }
+
+    private static WebDriver driver() {
+        return BrowserMap.get().getDrivers().get(TestGroup.INIT).getDriver();
     }
 }

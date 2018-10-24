@@ -1,6 +1,7 @@
 package com.corevalue.menu.impl;
 
 import com.corevalue.constants.menu.FileMenuConst;
+import com.corevalue.driver.TestGroup;
 import com.corevalue.menu.AbstractMenu;
 import com.corevalue.menu.Menus;
 import com.corevalue.submenu.Submenus;
@@ -20,8 +21,8 @@ public class FileMenu extends AbstractMenu implements FileMenuConst {
         return instance;
     }
 
-    public FileLogoutSubmenu openLogoutSubmenu(int submenuFrameIndex) {
-        Submenus.getSubmenu(Submenus.FILE_LOGOUT, FileLogoutSubmenu.get()).goTo(submenuFrameIndex);
+    public FileLogoutSubmenu openLogoutSubmenu(TestGroup group, int submenuFrameIndex) {
+        Submenus.getSubmenu(Submenus.FILE_LOGOUT, group, FileLogoutSubmenu.get()).goTo(group, submenuFrameIndex);
         return FileLogoutSubmenu.get();
     }
 }

@@ -1,6 +1,7 @@
 package com.corevalue.menu;
 
 import com.corevalue.constants.menu.MainXMenuConst;
+import com.corevalue.driver.TestGroup;
 import lombok.Getter;
 
 @Getter
@@ -22,9 +23,9 @@ public enum Menus implements MainXMenuConst {
         this.selector = selector;
     }
 
-    public static AbstractMenu getMenuPage(Menus key, AbstractMenu menu) {
+    public static AbstractMenu getMenuPage(Menus key, TestGroup group, AbstractMenu menu) {
         return MainMenuSwitch.get().getMenuSwitch()
                 .get(key)
-                .apply(menu);
+                .apply(group, menu);
     }
 }

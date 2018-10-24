@@ -1,5 +1,7 @@
 package com.corevalue.pages;
 
+import com.corevalue.driver.TestGroup;
+
 public interface ILoginPage {
-    IAuthorizedLandingPage login(String username, String password);
+    IAuthorizedLandingPage login(TestGroup group, String username, String password);
 }

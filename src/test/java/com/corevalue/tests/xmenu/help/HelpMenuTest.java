@@ -2,11 +2,13 @@ package com.corevalue.tests.xmenu.help;
 
 import com.corevalue.constants.TestConst;
 import com.corevalue.constants.menu.HelpMenuConst;
-import com.corevalue.driver.Browser;
+import com.corevalue.driver.BrowserMap;
+import com.corevalue.driver.TestGroup;
 import com.corevalue.menu.impl.HelpMenu;
 import com.corevalue.constants.LoginPageConst;
 import com.corevalue.pages.impl.AuthorizedLandingPage;
 import com.corevalue.pages.impl.LoginPage;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -17,14 +19,14 @@ public class HelpMenuTest implements LoginPageConst, TestConst, HelpMenuConst {
 
     @BeforeClass
     static void init() {
-        Browser.get().getDriver().get(BASE_URL);
-        LoginPage.get().login(VALID_USERNAME,VALID_PASSWORD);
+        driver().get(BASE_URL);
+        LoginPage.get(TestGroup.INIT).login(TestGroup.INIT, VALID_USERNAME,VALID_PASSWORD);
     }
 
     @Test
     void openHelpMenuAndGetVersionTest() {
         String version = AuthorizedLandingPage.get()
-                .openHelpMenu()
+                .openHelpMenu(TestGroup.INIT)
                 .showVersion();
 
         HelpMenu.get().confirmExit();
@@ -33,6 +35,10 @@ public class HelpMenuTest implements LoginPageConst, TestConst, HelpMenuConst {
 
     @AfterClass
     static void close() {
-        AuthorizedLandingPage.get().logout(SUBMENU_FRAME_INDEX, BUTTON_LOGOUT_SUBMIT);
+        AuthorizedLandingPage.get().logout(TestGroup.INIT, SUBMENU_FRAME_INDEX, BUTTON_LOGOUT_SUBMIT);
+    }
+
+    private static WebDriver driver() {
+        return BrowserMap.get().getDrivers().get(TestGroup.INIT).getDriver();
     }
 }

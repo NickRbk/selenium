@@ -2,6 +2,8 @@ package com.corevalue.pages.impl;
 
 import com.corevalue.constants.AuthorizedLandingPageConst;
 import com.corevalue.driver.Browser;
+import com.corevalue.driver.BrowserMap;
+import com.corevalue.driver.TestGroup;
 import com.corevalue.menu.Menus;
 import com.corevalue.menu.impl.FileMenu;
 import com.corevalue.menu.impl.HelpMenu;
@@ -24,39 +26,43 @@ public class AuthorizedLandingPage implements IAuthorizedLandingPage, Authorized
     }
 
     @Override
-    public FileMenu openFileMenu() {
-        Menus.getMenuPage(Menus.FILE, FileMenu.get()).goTo();
+    public FileMenu openFileMenu(TestGroup group) {
+        Menus.getMenuPage(Menus.FILE, group, FileMenu.get()).goTo(group);
         return FileMenu.get();
     }
 
     @Override
-    public HelpMenu openHelpMenu() {
-        Menus.getMenuPage(Menus.HELP, HelpMenu.get()).goTo();
+    public HelpMenu openHelpMenu(TestGroup group) {
+        Menus.getMenuPage(Menus.HELP, group, HelpMenu.get()).goTo(group);
         return HelpMenu.get();
     }
 
     @Override
-    public ManagementMenu openManagementMenu() {
-        Menus.getMenuPage(Menus.MANAGEMENT, ManagementMenu.get()).goTo();
+    public ManagementMenu openManagementMenu(TestGroup group) {
+        Menus.getMenuPage(Menus.MANAGEMENT, group, ManagementMenu.get()).goTo(group);
         return ManagementMenu.get();
     }
 
     @Override
-    public void logout(int submenuFrameIndex, int buttonIndex) {
-        openFileMenu()
-                .openLogoutSubmenu(submenuFrameIndex)
-                .confirmLogout(buttonIndex);
+    public void logout(TestGroup group, int submenuFrameIndex, int buttonIndex) {
+        openFileMenu(group)
+                .openLogoutSubmenu(group, submenuFrameIndex)
+                .confirmLogout(group, buttonIndex);
     }
 
     @Override
-    public void openPageWithCase() {
-        Browser.get().getDriver()
+    public void openPageWithCase(TestGroup group) {
+        browser(group).getDriver()
                 .switchTo().frame(0)
                 .findElement(By.id(BUTTON_SEARCH_ID)).click();
-        Browser.get().getDriver().switchTo().parentFrame();
-        Browser.get().waitFrame(2);
-        Browser.get().waitToClickDisabledButtonByID(SUBMIT_ID);
-        Browser.get().getDriver().switchTo().parentFrame();
-        Browser.get().waitElement(By.tagName(BUTTON)).click();
+        browser(group).getDriver().switchTo().parentFrame();
+        browser(group).waitFrame(2);
+        browser(group).waitToClickDisabledButtonByID(SUBMIT_ID);
+        browser(group).getDriver().switchTo().parentFrame();
+        browser(group).waitElement(By.tagName(BUTTON)).click();
+    }
+
+    private static Browser browser(TestGroup group) {
+        return BrowserMap.get().getDrivers().get(group);
     }
 }

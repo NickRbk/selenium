@@ -1,7 +1,7 @@
 package com.corevalue.submenu.impl;
 
 import com.corevalue.constants.menu.ManagementMenuConst;
-import com.corevalue.driver.Browser;
+import com.corevalue.driver.TestGroup;
 import com.corevalue.submenu.AbstractSubmenu;
 import com.corevalue.submenu.Submenus;
 import lombok.Getter;
@@ -28,79 +28,79 @@ public class ManagementManageGroupsSubmenu extends AbstractSubmenu implements Ma
         return instance;
     }
 
-    public ManagementManageGroupsSubmenu searchGroups() {
-        countInitial = getCountOfGroupsInitial();
+    public ManagementManageGroupsSubmenu searchGroups(TestGroup group) {
+        countInitial = getCountOfGroupsInitial(group);
         return ManagementManageGroupsSubmenu.get();
     }
 
-    public ManagementManageGroupsSubmenu addGroup(String name, String description) {
-        getContext();
-        Browser.get().waitFrame(2).switchTo().frame(0);
-        findElementBy(By.id(GROUP_ADD_BUTTON_ID)).click();
-        getContext();
-        Browser.get().waitFrame(3);
-        setNewProps(name, description);
-        confirmGroupAdd();
+    public ManagementManageGroupsSubmenu addGroup(TestGroup group, String name, String description) {
+        getContext(group);
+        browser(group).waitFrame(2).switchTo().frame(0);
+        findElementBy(group, By.id(GROUP_ADD_BUTTON_ID)).click();
+        getContext(group);
+        browser(group).waitFrame(3);
+        setNewProps(group, name, description);
+        confirmGroupAdd(group);
         return ManagementManageGroupsSubmenu.get();
     }
 
-    public ManagementManageGroupsSubmenu updateGroup(String name, String description) {
-        findElementsBy(By.cssSelector(GROUPS_SELECTOR)).get(countInitial-1).click();
-        getContext();
-        Browser.get().waitFrame(2).switchTo().frame(0);
-        findElementBy(By.id(GROUP_UPDATE_BUTTON_ID)).click();
-        getContext();
-        Browser.get().waitFrame(3);
-        setNewProps(name, description);
-        confirmGroupUpdate();
+    public ManagementManageGroupsSubmenu updateGroup(TestGroup group, String name, String description) {
+        findElementsBy(group, By.cssSelector(GROUPS_SELECTOR)).get(countInitial-1).click();
+        getContext(group);
+        browser(group).waitFrame(2).switchTo().frame(0);
+        findElementBy(group, By.id(GROUP_UPDATE_BUTTON_ID)).click();
+        getContext(group);
+        browser(group).waitFrame(3);
+        setNewProps(group, name, description);
+        confirmGroupUpdate(group);
 
         return ManagementManageGroupsSubmenu.get();
     }
 
-    public ManagementManageGroupsSubmenu removeGroup() {
-        findElementsBy(By.cssSelector(GROUPS_SELECTOR)).get(countInitial-1).click();
-        findElementBy(By.id(GROUP_REMOVE_BUTTON_ID)).click();
-        confirmGroupRemove();
+    public ManagementManageGroupsSubmenu removeGroup(TestGroup group) {
+        findElementsBy(group, By.cssSelector(GROUPS_SELECTOR)).get(countInitial-1).click();
+        findElementBy(group, By.id(GROUP_REMOVE_BUTTON_ID)).click();
+        confirmGroupRemove(group);
         return ManagementManageGroupsSubmenu.get();
     }
 
     //region HELPER METHODS
-    private void setNewProps(String name, String description) {
-        findElementBy(By.id(GROUP_NAME_FIELD_ID)).clear();
-        findElementBy(By.id(GROUP_NAME_FIELD_ID)).sendKeys(name);
-        Browser.get().delay(DELAY_INPUT);
-        findElementBy(By.id(GROUP_DESCRIPTION_FIELD_ID)).clear();
-        findElementBy(By.id(GROUP_DESCRIPTION_FIELD_ID)).sendKeys(description);
+    private void setNewProps(TestGroup group, String name, String description) {
+        findElementBy(group, By.id(GROUP_NAME_FIELD_ID)).clear();
+        findElementBy(group, By.id(GROUP_NAME_FIELD_ID)).sendKeys(name);
+        browser(group).delay(DELAY_INPUT);
+        findElementBy(group, By.id(GROUP_DESCRIPTION_FIELD_ID)).clear();
+        findElementBy(group, By.id(GROUP_DESCRIPTION_FIELD_ID)).sendKeys(description);
     }
 
-    private void confirmGroupAdd() {
-        findElementBy(By.id(GROUP_SUBMIT)).click();
-        Browser.get().delay(WAIT_TIMEOUT);
-        Browser.get().getDriver().switchTo().parentFrame();
-        countUpdated = getCountOfGroupsUpdated();
+    private void confirmGroupAdd(TestGroup group) {
+        findElementBy(group, By.id(GROUP_SUBMIT)).click();
+        browser(group).delay(WAIT_TIMEOUT);
+        browser(group).getDriver().switchTo().parentFrame();
+        countUpdated = getCountOfGroupsUpdated(group);
     }
 
-    private void confirmGroupUpdate() {
-        findElementBy(By.id(GROUP_SUBMIT)).click();
-        Browser.get().delay(WAIT_TIMEOUT);
+    private void confirmGroupUpdate(TestGroup group) {
+        findElementBy(group, By.id(GROUP_SUBMIT)).click();
+        browser(group).delay(WAIT_TIMEOUT);
     }
 
-    private void confirmGroupRemove() {
-        getContext();
-        findElementsBy(By.tagName(BUTTON)).get(1).click();
-        Browser.get().delay(WAIT_TIMEOUT);
-        countUpdated = getCountOfGroupsUpdated();
+    private void confirmGroupRemove(TestGroup group) {
+        getContext(group);
+        findElementsBy(group, By.tagName(BUTTON)).get(1).click();
+        browser(group).delay(WAIT_TIMEOUT);
+        countUpdated = getCountOfGroupsUpdated(group);
     }
 
-    private int getCountOfGroupsInitial() {
-        getContext();
-        Browser.get().waitFrame(2).switchTo().frame(0);
-        return findElementsBy(By.cssSelector(GROUPS_SELECTOR)).size();
+    private int getCountOfGroupsInitial(TestGroup group) {
+        getContext(group);
+        browser(group).waitFrame(2).switchTo().frame(0);
+        return findElementsBy(group, By.cssSelector(GROUPS_SELECTOR)).size();
     }
 
-    private int getCountOfGroupsUpdated() {
-        Browser.get().getDriver().switchTo().frame(2).switchTo().frame(0);
-        return findElementsBy(By.cssSelector(GROUPS_SELECTOR)).size();
+    private int getCountOfGroupsUpdated(TestGroup group) {
+        browser(group).getDriver().switchTo().frame(2).switchTo().frame(0);
+        return findElementsBy(group, By.cssSelector(GROUPS_SELECTOR)).size();
     }
     //endregion
 }
