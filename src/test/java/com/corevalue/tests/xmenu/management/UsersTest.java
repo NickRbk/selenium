@@ -11,6 +11,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class UsersTest implements LoginPageConst, TestConst, AuthorizedLandingPageConst, ManagementMenuConst {
+    private final static TestGroup testGroup = TestGroup.MANAGEMENT;
 
     // ---------------------------------------------------------------------------------
     // Test for ADD USER missed, because there is no functionality for further deletion
@@ -19,23 +20,23 @@ public class UsersTest implements LoginPageConst, TestConst, AuthorizedLandingPa
     @Test(groups = "management")
     void updateUser() {
         String updatedUserName = editUserAndGetNewName(USER_NAME_UPDATED);
-        ManagementManageUsersSubmenu.get().close(TestGroup.MANAGEMENT, DIALOG_CANCEL_ID);
+        ManagementManageUsersSubmenu.get().close(testGroup, DIALOG_CANCEL_ID);
         Assert.assertEquals(updatedUserName, USER_NAME_UPDATED);
     }
 
     @Test(groups = "management", dependsOnMethods = "updateUser")
     void rollBackUser() {
         String updatedUserName = editUserAndGetNewName(USER_NAME_INITIAL);
-        ManagementManageUsersSubmenu.get().close(TestGroup.MANAGEMENT, DIALOG_CANCEL_ID);
+        ManagementManageUsersSubmenu.get().close(testGroup, DIALOG_CANCEL_ID);
         Assert.assertEquals(updatedUserName, USER_NAME_INITIAL);
     }
 
     private String editUserAndGetNewName(String userName) {
-        return AuthorizedLandingPage.get().openManagementMenu(TestGroup.MANAGEMENT)
-                .openManageUsersSubmenu(TestGroup.MANAGEMENT, SUBMENU_FRAME_INDEX_WITH_CASE)
-                .searchUsersByLogin(TestGroup.MANAGEMENT, USER_NAME_INITIAL)
-                .selectLastUserToUpdate(TestGroup.MANAGEMENT)
-                .updateUser(TestGroup.MANAGEMENT, userName)
-                .getUpdatedField(TestGroup.MANAGEMENT, ManagementManageUsersSubmenu.get().getCount(), LIST_SELECTOR);
+        return AuthorizedLandingPage.get().openManagementMenu(testGroup)
+                .openManageUsersSubmenu(testGroup, SUBMENU_FRAME_INDEX_WITH_CASE)
+                .searchUsersByLogin(testGroup, USER_NAME_INITIAL)
+                .selectLastUserToUpdate(testGroup)
+                .updateUser(testGroup, userName)
+                .getUpdatedField(testGroup, ManagementManageUsersSubmenu.get().getCount(), LIST_SELECTOR);
     }
 }

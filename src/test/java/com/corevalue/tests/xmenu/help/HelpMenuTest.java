@@ -16,17 +16,18 @@ import static com.corevalue.constants.AuthorizedLandingPageConst.BUTTON_LOGOUT_S
 import static com.corevalue.constants.AuthorizedLandingPageConst.SUBMENU_FRAME_INDEX;
 
 public class HelpMenuTest implements LoginPageConst, TestConst, HelpMenuConst {
+    private final static TestGroup testGroup = TestGroup.INIT;
 
     @BeforeClass
     static void init() {
         driver().get(BASE_URL);
-        LoginPage.get(TestGroup.INIT).login(TestGroup.INIT, VALID_USERNAME,VALID_PASSWORD);
+        LoginPage.get(testGroup).login(testGroup, VALID_USERNAME,VALID_PASSWORD);
     }
 
     @Test
     void openHelpMenuAndGetVersionTest() {
         String version = AuthorizedLandingPage.get()
-                .openHelpMenu(TestGroup.INIT)
+                .openHelpMenu(testGroup)
                 .showVersion();
 
         HelpMenu.get().confirmExit();
@@ -35,10 +36,10 @@ public class HelpMenuTest implements LoginPageConst, TestConst, HelpMenuConst {
 
     @AfterClass
     static void close() {
-        AuthorizedLandingPage.get().logout(TestGroup.INIT, SUBMENU_FRAME_INDEX, BUTTON_LOGOUT_SUBMIT);
+        AuthorizedLandingPage.get().logout(testGroup, SUBMENU_FRAME_INDEX, BUTTON_LOGOUT_SUBMIT);
     }
 
     private static WebDriver driver() {
-        return BrowserMap.get().getDrivers().get(TestGroup.INIT).getDriver();
+        return BrowserMap.get().getDrivers().get(testGroup).getDriver();
     }
 }

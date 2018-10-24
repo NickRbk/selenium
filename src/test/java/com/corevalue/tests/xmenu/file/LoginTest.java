@@ -17,6 +17,8 @@ import static com.corevalue.constants.AuthorizedLandingPageConst.BUTTON_LOGOUT_S
 import static com.corevalue.constants.AuthorizedLandingPageConst.SUBMENU_FRAME_INDEX;
 
 public class LoginTest implements LoginPageConst, TestConst {
+    private final static TestGroup testGroup = TestGroup.INIT;
+
     @BeforeClass
     static void init() {
         driver().get(BASE_URL);
@@ -24,19 +26,19 @@ public class LoginTest implements LoginPageConst, TestConst {
 
     @Test
     void failedLoginTest() {
-        LoginPage.get(TestGroup.INIT).login(TestGroup.INIT, INVALID_USERNAME,INVALID_PASSWORD);
+        LoginPage.get(testGroup).login(testGroup, INVALID_USERNAME,INVALID_PASSWORD);
         Assert.assertNotEquals(AUTHORIZED_PAGE_TITLE, driver().getTitle());
     }
 
     @Test(priority = 1)
     void successLoginTest() {
-        LoginPage.get(TestGroup.INIT).login(TestGroup.INIT, VALID_USERNAME,VALID_PASSWORD);
+        LoginPage.get(testGroup).login(testGroup, VALID_USERNAME,VALID_PASSWORD);
         Assert.assertEquals(AUTHORIZED_PAGE_TITLE, driver().getTitle());
     }
 
     @Test(dependsOnMethods = "successLoginTest")
     void logoutTest() {
-        AuthorizedLandingPage.get().logout(TestGroup.INIT, SUBMENU_FRAME_INDEX, BUTTON_LOGOUT_SUBMIT);
+        AuthorizedLandingPage.get().logout(testGroup, SUBMENU_FRAME_INDEX, BUTTON_LOGOUT_SUBMIT);
         Assert.assertEquals(LOGIN_PAGE_TITLE, driver().getTitle());
     }
 
@@ -47,6 +49,6 @@ public class LoginTest implements LoginPageConst, TestConst {
     }
 
     private static WebDriver driver() {
-        return BrowserMap.get().getDrivers().get(TestGroup.INIT).getDriver();
+        return BrowserMap.get().getDrivers().get(testGroup).getDriver();
     }
 }

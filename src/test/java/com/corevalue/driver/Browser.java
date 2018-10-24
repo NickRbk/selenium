@@ -1,6 +1,5 @@
 package com.corevalue.driver;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,7 +13,7 @@ public class Browser implements IBrowser {
 
     private WebDriver driver;
 
-    public Browser(WebDriver driver) {
+    Browser(WebDriver driver) {
         this.driver = driver;
     }
 

@@ -36,7 +36,6 @@ public class BrowserMap {
             WebDriver driver = new ChromeDriver();
             map.put(el, new Browser(driver));
         }
-        System.out.println("MAP ================> " + map.size());
         return map;
     }
 }
