@@ -1,8 +1,8 @@
 package com.corevalue.pages.impl;
 
 import com.corevalue.constants.TestConst;
-import com.corevalue.driver.Browser;
 import com.corevalue.driver.BrowserMap;
+import com.corevalue.driver.IBrowser;
 import com.corevalue.driver.TestGroup;
 import com.corevalue.pages.IAuthorizedLandingPage;
 import com.corevalue.pages.ILoginPage;
@@ -49,7 +49,7 @@ public class LoginPage implements ILoginPage, TestConst, LoginPageConst {
         browser(group).getDriver().findElement(By.id(SUBMIT_ID)).click();
     }
 
-    private static Browser browser(TestGroup group) {
+    private static IBrowser browser(TestGroup group) {
         return BrowserMap.get().getDrivers().get(group);
     }
     //endregion

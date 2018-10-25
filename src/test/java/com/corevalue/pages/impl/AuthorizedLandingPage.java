@@ -1,8 +1,8 @@
 package com.corevalue.pages.impl;
 
 import com.corevalue.constants.AuthorizedLandingPageConst;
-import com.corevalue.driver.Browser;
 import com.corevalue.driver.BrowserMap;
+import com.corevalue.driver.IBrowser;
 import com.corevalue.driver.TestGroup;
 import com.corevalue.menu.Menus;
 import com.corevalue.menu.impl.FileMenu;
@@ -62,7 +62,7 @@ public class AuthorizedLandingPage implements IAuthorizedLandingPage, Authorized
         browser(group).waitElement(By.tagName(BUTTON)).click();
     }
 
-    private static Browser browser(TestGroup group) {
+    private static IBrowser browser(TestGroup group) {
         return BrowserMap.get().getDrivers().get(group);
     }
 }

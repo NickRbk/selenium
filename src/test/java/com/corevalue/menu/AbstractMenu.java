@@ -1,7 +1,7 @@
 package com.corevalue.menu;
 
-import com.corevalue.driver.Browser;
 import com.corevalue.driver.BrowserMap;
+import com.corevalue.driver.IBrowser;
 import com.corevalue.driver.TestGroup;
 import org.openqa.selenium.By;
 
@@ -18,7 +18,7 @@ public abstract class AbstractMenu {
                 .findElement(By.id(menu.getSelector())).click();
     }
 
-    protected Browser browser(TestGroup group) {
+    protected IBrowser browser(TestGroup group) {
         return BrowserMap.get().getDrivers().get(group);
     }
 }

@@ -2,8 +2,11 @@ package com.corevalue.submenu;
 
 import com.corevalue.constants.menu.FileMenuConst;
 import com.corevalue.constants.menu.ManagementMenuConst;
+import com.corevalue.driver.BrowserMap;
 import com.corevalue.driver.TestGroup;
 import lombok.Getter;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 
 @Getter
 public enum Submenus implements FileMenuConst, ManagementMenuConst {
@@ -20,8 +23,8 @@ public enum Submenus implements FileMenuConst, ManagementMenuConst {
     }
 
     public static AbstractSubmenu getSubmenu(Submenus key, TestGroup group, AbstractSubmenu submenu) {
-        return SubmenuSwitch.get().getSubmenuSwitch()
-                .get(key)
-                .apply(group, submenu);
+        WebDriver driver = BrowserMap.get().getDrivers().get(group).getDriver();
+        PageFactory.initElements(driver, submenu);
+        return submenu;
     }
 }

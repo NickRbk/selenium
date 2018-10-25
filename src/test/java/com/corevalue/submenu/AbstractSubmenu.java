@@ -1,8 +1,8 @@
 package com.corevalue.submenu;
 
 import com.corevalue.constants.menu.MenuConst;
-import com.corevalue.driver.Browser;
 import com.corevalue.driver.BrowserMap;
+import com.corevalue.driver.IBrowser;
 import com.corevalue.driver.TestGroup;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -51,7 +51,7 @@ public abstract class AbstractSubmenu implements MenuConst {
         return browser(group).getDriver().findElements(selector);
     }
 
-    protected Browser browser(TestGroup group) {
+    protected IBrowser browser(TestGroup group) {
         return BrowserMap.get().getDrivers().get(group);
     }
 }

@@ -1,8 +1,11 @@
 package com.corevalue.menu;
 
 import com.corevalue.constants.menu.MainXMenuConst;
+import com.corevalue.driver.BrowserMap;
 import com.corevalue.driver.TestGroup;
 import lombok.Getter;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 
 @Getter
 public enum Menus implements MainXMenuConst {
@@ -24,8 +27,8 @@ public enum Menus implements MainXMenuConst {
     }
 
     public static AbstractMenu getMenuPage(Menus key, TestGroup group, AbstractMenu menu) {
-        return MainMenuSwitch.get().getMenuSwitch()
-                .get(key)
-                .apply(group, menu);
+        WebDriver driver = BrowserMap.get().getDrivers().get(group).getDriver();
+        PageFactory.initElements(driver, menu);
+        return menu;
     }
 }
