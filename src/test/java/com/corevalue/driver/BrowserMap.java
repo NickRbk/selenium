@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class BrowserMap {
     private static BrowserMap instance;
-    private final Map<TestGroup, Browser> driverInstanceMap;
+    private final Map<TestGroup, IBrowser> driverInstanceMap;
 
     static {
         WebDriverManager.chromedriver().setup();
@@ -26,12 +26,12 @@ public class BrowserMap {
         return instance;
     }
 
-    public Map<TestGroup, Browser> getDrivers() {
+    public Map<TestGroup, IBrowser> getDrivers() {
         return  driverInstanceMap;
     }
 
-    private Map<TestGroup, Browser> generateDriverInstanceMap() {
-        Map<TestGroup, Browser> map = new HashMap<>();
+    private Map<TestGroup, IBrowser> generateDriverInstanceMap() {
+        Map<TestGroup, IBrowser> map = new HashMap<>();
         for (TestGroup el : TestGroup.values()) {
             WebDriver driver = new ChromeDriver();
             map.put(el, new Browser(driver));
