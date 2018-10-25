@@ -50,7 +50,7 @@ public class LoginPage implements ILoginPage, TestConst, LoginPageConst {
     }
 
     private static IBrowser browser(TestGroup group) {
-        return BrowserMap.get().getDrivers().get(group);
+        return BrowserMap.INSTANCE.getDrivers().get(group);
     }
     //endregion
 }

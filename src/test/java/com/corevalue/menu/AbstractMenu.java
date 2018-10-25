@@ -19,6 +19,6 @@ public abstract class AbstractMenu {
     }
 
     protected IBrowser browser(TestGroup group) {
-        return BrowserMap.get().getDrivers().get(group);
+        return BrowserMap.INSTANCE.getDrivers().get(group);
     }
 }

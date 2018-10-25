@@ -52,6 +52,6 @@ public abstract class AbstractSubmenu implements MenuConst {
     }
 
     protected IBrowser browser(TestGroup group) {
-        return BrowserMap.get().getDrivers().get(group);
+        return BrowserMap.INSTANCE.getDrivers().get(group);
     }
 }

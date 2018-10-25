@@ -1,31 +1,23 @@
 package com.corevalue.driver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class BrowserMap {
-    private static BrowserMap instance;
-    private final Map<TestGroup, IBrowser> driverInstanceMap;
+@Getter
+public enum BrowserMap {
+    INSTANCE;
 
-    private BrowserMap() {
+    BrowserMap() {
         WebDriverManager.chromedriver().setup();
-        driverInstanceMap = generateDriverInstanceMap();
+        drivers = generateDriverInstanceMap();
     }
 
-    public static synchronized BrowserMap get() {
-        if (instance == null) {
-            instance = new BrowserMap();
-        }
-        return instance;
-    }
-
-    public Map<TestGroup, IBrowser> getDrivers() {
-        return  driverInstanceMap;
-    }
+    private final Map<TestGroup, IBrowser> drivers;
 
     private Map<TestGroup, IBrowser> generateDriverInstanceMap() {
         Map<TestGroup, IBrowser> map = new HashMap<>();

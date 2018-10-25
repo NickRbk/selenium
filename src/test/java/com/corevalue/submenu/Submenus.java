@@ -22,8 +22,8 @@ public enum Submenus implements FileMenuConst, ManagementMenuConst {
         this.selector = selector;
     }
 
-    public static AbstractSubmenu getSubmenu(Submenus key, TestGroup group, AbstractSubmenu submenu) {
-        WebDriver driver = BrowserMap.get().getDrivers().get(group).getDriver();
+    public static AbstractSubmenu getSubmenu(TestGroup group, AbstractSubmenu submenu) {
+        WebDriver driver = BrowserMap.INSTANCE.getDrivers().get(group).getDriver();
         PageFactory.initElements(driver, submenu);
         return submenu;
     }

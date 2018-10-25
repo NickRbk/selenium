@@ -26,8 +26,8 @@ public enum Menus implements MainXMenuConst {
         this.selector = selector;
     }
 
-    public static AbstractMenu getMenuPage(Menus key, TestGroup group, AbstractMenu menu) {
-        WebDriver driver = BrowserMap.get().getDrivers().get(group).getDriver();
+    public static AbstractMenu getMenuPage(TestGroup group, AbstractMenu menu) {
+        WebDriver driver = BrowserMap.INSTANCE.getDrivers().get(group).getDriver();
         PageFactory.initElements(driver, menu);
         return menu;
     }

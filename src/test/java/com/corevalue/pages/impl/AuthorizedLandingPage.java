@@ -27,19 +27,19 @@ public class AuthorizedLandingPage implements IAuthorizedLandingPage, Authorized
 
     @Override
     public FileMenu openFileMenu(TestGroup group) {
-        Menus.getMenuPage(Menus.FILE, group, FileMenu.get()).goTo(group);
+        Menus.getMenuPage(group, FileMenu.get()).goTo(group);
         return FileMenu.get();
     }
 
     @Override
     public HelpMenu openHelpMenu(TestGroup group) {
-        Menus.getMenuPage(Menus.HELP, group, HelpMenu.get()).goTo(group);
+        Menus.getMenuPage(group, HelpMenu.get()).goTo(group);
         return HelpMenu.get();
     }
 
     @Override
     public ManagementMenu openManagementMenu(TestGroup group) {
-        Menus.getMenuPage(Menus.MANAGEMENT, group, ManagementMenu.get()).goTo(group);
+        Menus.getMenuPage(group, ManagementMenu.get()).goTo(group);
         return ManagementMenu.get();
     }
 
@@ -63,6 +63,6 @@ public class AuthorizedLandingPage implements IAuthorizedLandingPage, Authorized
     }
 
     private static IBrowser browser(TestGroup group) {
-        return BrowserMap.get().getDrivers().get(group);
+        return BrowserMap.INSTANCE.getDrivers().get(group);
     }
 }

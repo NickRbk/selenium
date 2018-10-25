@@ -40,6 +40,6 @@ public class ManagementTestSetting implements LoginPageConst, TestConst, Authori
     }
 
     private static WebDriver driver() {
-        return BrowserMap.get().getDrivers().get(testGroup).getDriver();
+        return BrowserMap.INSTANCE.getDrivers().get(testGroup).getDriver();
     }
 }

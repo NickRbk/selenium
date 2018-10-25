@@ -26,25 +26,25 @@ public class ManagementMenu extends AbstractMenu implements MenuConst, Managemen
     }
 
     public ManagementManageGroupsSubmenu openManageGroupsSubmenu(TestGroup group, int submenuFrameIndex) {
-        Submenus.getSubmenu(Submenus.MANAGEMENT_MANAGE_GROUPS, group, ManagementManageGroupsSubmenu.get())
+        Submenus.getSubmenu(group, ManagementManageGroupsSubmenu.get())
                 .goTo(group, submenuFrameIndex);
         return ManagementManageGroupsSubmenu.get();
     }
 
     public ManagementManageUsersSubmenu openManageUsersSubmenu(TestGroup group, int submenuFrameIndex) {
-        Submenus.getSubmenu(Submenus.MANAGEMENT_MANAGE_USERS, group, ManagementManageUsersSubmenu.get())
+        Submenus.getSubmenu(group, ManagementManageUsersSubmenu.get())
                 .goTo(group, submenuFrameIndex);
         return ManagementManageUsersSubmenu.get();
     }
 
     public ManagementManageClientsSubmenu openManageClientsSubmenu(TestGroup group, int submenuFrameIndex) {
-        Submenus.getSubmenu(Submenus.MANAGEMENT_MANAGE_CLIENTS, group, ManagementManageClientsSubmenu.get())
+        Submenus.getSubmenu(group, ManagementManageClientsSubmenu.get())
                 .goTo(group, submenuFrameIndex);
         return ManagementManageClientsSubmenu.get();
     }
 
     public ManagementManageOfficesSubmenu openManageOfficesSubmenu(TestGroup group, int submenuFrameIndex) {
-        Submenus.getSubmenu(Submenus.MANAGEMENT_MANAGE_OFFICES, group, ManagementManageOfficesSubmenu.get())
+        Submenus.getSubmenu(group, ManagementManageOfficesSubmenu.get())
                 .goTo(group, submenuFrameIndex);
         return ManagementManageOfficesSubmenu.get();
     }

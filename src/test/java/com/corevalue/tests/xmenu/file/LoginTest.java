@@ -45,10 +45,10 @@ public class LoginTest implements LoginPageConst, TestConst {
     @AfterSuite
     static void closeDriver() {
         driver().close();
-        BrowserMap.get().getDrivers().get(TestGroup.MANAGEMENT).getDriver().close();
+        BrowserMap.INSTANCE.getDrivers().get(TestGroup.MANAGEMENT).getDriver().close();
     }
 
     private static WebDriver driver() {
-        return BrowserMap.get().getDrivers().get(testGroup).getDriver();
+        return BrowserMap.INSTANCE.getDrivers().get(testGroup).getDriver();
     }
 }
