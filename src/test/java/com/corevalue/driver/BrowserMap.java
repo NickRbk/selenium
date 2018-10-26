@@ -24,7 +24,6 @@ public enum BrowserMap {
             WebDriver driver = new ChromeDriver();
             map.put(el, new Browser(driver));
         }
-
         return map;
     }
 }

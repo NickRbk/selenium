@@ -1,4 +1,4 @@
-package com.corevalue.constants.menu;
+package com.corevalue.constant.menu;
 
 public interface MainXMenuConst extends MenuConst {
 

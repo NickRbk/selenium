@@ -1,17 +1,23 @@
-package com.corevalue.tests.xmenu.management;
+package com.corevalue.test.xmenu.management;
 
-import com.corevalue.constants.AuthorizedLandingPageConst;
-import com.corevalue.constants.LoginPageConst;
-import com.corevalue.constants.TestConst;
-import com.corevalue.constants.menu.ManagementMenuConst;
+import com.corevalue.constant.AuthorizedLandingPageConst;
+import com.corevalue.constant.LoginPageConst;
+import com.corevalue.constant.TestConst;
+import com.corevalue.constant.menu.ManagementMenuConst;
 import com.corevalue.driver.TestGroup;
-import com.corevalue.pages.impl.AuthorizedLandingPage;
+import com.corevalue.page.impl.AuthorizedLandingPage;
 import com.corevalue.submenu.impl.ManagementManageClientsSubmenu;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class ClientsTest implements LoginPageConst, TestConst, AuthorizedLandingPageConst, ManagementMenuConst {
-    private final static TestGroup testGroup = TestGroup.MANAGEMENT;
+    private final TestGroup testGroup;
+
+    @Parameters("testGroup")
+    public ClientsTest(String param) {
+        this.testGroup = TestGroup.valueOf(param);
+    }
 
     // -----------------------------------------------------------------------------------
     // Test for ADD CLIENT missed, because there is no functionality for further deletion

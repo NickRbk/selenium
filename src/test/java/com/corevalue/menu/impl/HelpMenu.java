@@ -1,7 +1,7 @@
 package com.corevalue.menu.impl;
 
-import com.corevalue.constants.menu.HelpMenuConst;
-import com.corevalue.constants.menu.MenuConst;
+import com.corevalue.constant.menu.HelpMenuConst;
+import com.corevalue.constant.menu.MenuConst;
 import com.corevalue.driver.TestGroup;
 import com.corevalue.menu.AbstractMenu;
 import com.corevalue.menu.Menus;
@@ -15,26 +15,26 @@ public enum HelpMenu implements AbstractMenu, MenuConst, HelpMenuConst {
 
     private Menus menu;
 
-    public String showVersion() {
-        browser(TestGroup.INITIAL).getDriver()
+    public String showVersion(TestGroup testGroup) {
+        browser(testGroup).getDriver()
                 .switchTo().frame(6)
                 .findElement(By.id(SUBMENU_SELECTOR))
                 .click();
-        return this.versionInfo().getText();
+        return versionInfo(testGroup).getText();
     }
 
-    public void confirmExit() {
-        browser(TestGroup.INITIAL).getDriver()
+    public void confirmExit(TestGroup testGroup) {
+        browser(testGroup).getDriver()
                 .findElement(By.id(BUTTON_CLOSE_ID))
                 .click();
     }
 
-    private WebElement versionInfo () {
-        browser(TestGroup.INITIAL).getDriver()
+    private WebElement versionInfo (TestGroup testGroup) {
+        browser(testGroup).getDriver()
                 .switchTo().parentFrame()
                 .switchTo().parentFrame();
 
-        return browser(TestGroup.INITIAL)
+        return browser(testGroup)
                 .waitFrame(2)
                 .findElement(By.cssSelector(VERSION_ELEMENT_SELECTOR));
     }

@@ -1,12 +1,12 @@
-package com.corevalue.pages.impl;
+package com.corevalue.page.impl;
 
-import com.corevalue.constants.TestConst;
+import com.corevalue.constant.TestConst;
 import com.corevalue.driver.BrowserMap;
 import com.corevalue.driver.IBrowser;
 import com.corevalue.driver.TestGroup;
-import com.corevalue.pages.IAuthorizedLandingPage;
-import com.corevalue.pages.ILoginPage;
-import com.corevalue.constants.LoginPageConst;
+import com.corevalue.page.IAuthorizedLandingPage;
+import com.corevalue.page.ILoginPage;
+import com.corevalue.constant.LoginPageConst;
 import org.openqa.selenium.By;
 
 public enum LoginPage implements ILoginPage, TestConst, LoginPageConst {

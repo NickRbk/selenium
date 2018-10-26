@@ -1,6 +1,6 @@
 package com.corevalue.submenu;
 
-import com.corevalue.constants.menu.MenuConst;
+import com.corevalue.constant.menu.MenuConst;
 import com.corevalue.driver.BrowserMap;
 import com.corevalue.driver.IBrowser;
 import com.corevalue.driver.TestGroup;
@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static com.corevalue.constants.menu.ManagementMenuConst.WAIT_TIMEOUT_2;
+import static com.corevalue.constant.menu.ManagementMenuConst.WAIT_TIMEOUT_2;
 
 public interface AbstractSubmenu extends MenuConst {
 

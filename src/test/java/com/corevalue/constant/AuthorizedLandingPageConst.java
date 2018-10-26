@@ -1,4 +1,4 @@
-package com.corevalue.constants;
+package com.corevalue.constant;
 
 public interface AuthorizedLandingPageConst {
     String AUTHORIZED_PAGE_TITLE = "CaseWare";

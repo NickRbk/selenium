@@ -1,6 +1,6 @@
 package com.corevalue.menu;
 
-import com.corevalue.constants.menu.MainXMenuConst;
+import com.corevalue.constant.menu.MainXMenuConst;
 import com.corevalue.driver.BrowserMap;
 import com.corevalue.driver.TestGroup;
 import lombok.AllArgsConstructor;

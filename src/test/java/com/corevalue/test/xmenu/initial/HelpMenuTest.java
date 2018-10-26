@@ -1,22 +1,27 @@
-package com.corevalue.tests.xmenu.initial;
+package com.corevalue.test.xmenu.initial;
 
-import com.corevalue.constants.TestConst;
-import com.corevalue.constants.menu.HelpMenuConst;
+import com.corevalue.constant.TestConst;
+import com.corevalue.constant.menu.HelpMenuConst;
 import com.corevalue.driver.BrowserMap;
 import com.corevalue.driver.TestGroup;
 import com.corevalue.menu.impl.HelpMenu;
-import com.corevalue.constants.LoginPageConst;
-import com.corevalue.pages.impl.AuthorizedLandingPage;
-import com.corevalue.pages.impl.LoginPage;
+import com.corevalue.constant.LoginPageConst;
+import com.corevalue.page.impl.AuthorizedLandingPage;
+import com.corevalue.page.impl.LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-import static com.corevalue.constants.AuthorizedLandingPageConst.BUTTON_LOGOUT_SUBMIT;
-import static com.corevalue.constants.AuthorizedLandingPageConst.SUBMENU_FRAME_INDEX;
+import static com.corevalue.constant.AuthorizedLandingPageConst.BUTTON_LOGOUT_SUBMIT;
+import static com.corevalue.constant.AuthorizedLandingPageConst.SUBMENU_FRAME_INDEX;
 
 public class HelpMenuTest implements LoginPageConst, TestConst, HelpMenuConst {
-    private final static TestGroup testGroup = TestGroup.INITIAL;
+    private static TestGroup testGroup;
+
+    @Parameters("testGroup")
+    public HelpMenuTest(String param) {
+        testGroup = TestGroup.valueOf(param);
+    }
 
     @BeforeClass
     static void init() {
@@ -24,13 +29,13 @@ public class HelpMenuTest implements LoginPageConst, TestConst, HelpMenuConst {
         LoginPage.INSTANCE.login(testGroup, VALID_USERNAME,VALID_PASSWORD);
     }
 
-    @Test(groups = "initial")
+    @Test
     void openHelpMenuAndGetVersionTest() {
         String version = AuthorizedLandingPage.INSTANCE
                 .openHelpMenu(testGroup)
-                .showVersion();
+                .showVersion(testGroup);
 
-        HelpMenu.INSTANCE.confirmExit();
+        HelpMenu.INSTANCE.confirmExit(testGroup);
         Assert.assertTrue(version.contains(VERSION));
     }
 

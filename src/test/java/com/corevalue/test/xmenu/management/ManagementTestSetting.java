@@ -1,20 +1,25 @@
-package com.corevalue.tests.xmenu.management;
+package com.corevalue.test.xmenu.management;
 
-import com.corevalue.constants.AuthorizedLandingPageConst;
-import com.corevalue.constants.LoginPageConst;
-import com.corevalue.constants.TestConst;
-import com.corevalue.constants.menu.ManagementMenuConst;
+import com.corevalue.constant.AuthorizedLandingPageConst;
+import com.corevalue.constant.LoginPageConst;
+import com.corevalue.constant.TestConst;
+import com.corevalue.constant.menu.ManagementMenuConst;
 import com.corevalue.driver.BrowserMap;
 import com.corevalue.driver.TestGroup;
-import com.corevalue.pages.impl.AuthorizedLandingPage;
-import com.corevalue.pages.impl.LoginPage;
+import com.corevalue.page.impl.AuthorizedLandingPage;
+import com.corevalue.page.impl.LoginPage;
 import com.corevalue.submenu.impl.ManagementManageGroupsSubmenu;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
 public class ManagementTestSetting implements LoginPageConst, TestConst, AuthorizedLandingPageConst, ManagementMenuConst {
-    private final static TestGroup testGroup = TestGroup.MANAGEMENT;
+    private static TestGroup testGroup;
+
+    @Parameters("testGroup")
+    public ManagementTestSetting(String param) {
+        testGroup = TestGroup.valueOf(param);
+    }
 
     @BeforeGroups(groups = "management")
     static void init() {
@@ -37,6 +42,7 @@ public class ManagementTestSetting implements LoginPageConst, TestConst, Authori
     @AfterGroups(groups = "management")
     static void close() {
         AuthorizedLandingPage.INSTANCE.logout(testGroup, SUBMENU_FRAME_INDEX_WITH_CASE, BUTTON_LOGOUT_SUBMIT_WITH_CASE);
+        BrowserMap.INSTANCE.getDrivers().get(testGroup).getDriver().close();
     }
 
     private static WebDriver driver() {

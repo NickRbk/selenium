@@ -1,6 +1,6 @@
 package com.corevalue.submenu.impl;
 
-import com.corevalue.constants.menu.ManagementMenuConst;
+import com.corevalue.constant.menu.ManagementMenuConst;
 import com.corevalue.driver.TestGroup;
 import com.corevalue.submenu.AbstractSubmenu;
 import com.corevalue.submenu.Submenus;

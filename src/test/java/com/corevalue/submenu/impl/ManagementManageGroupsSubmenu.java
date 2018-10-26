@@ -1,14 +1,14 @@
 package com.corevalue.submenu.impl;
 
-import com.corevalue.constants.menu.ManagementMenuConst;
+import com.corevalue.constant.menu.ManagementMenuConst;
 import com.corevalue.driver.TestGroup;
 import com.corevalue.submenu.AbstractSubmenu;
 import com.corevalue.submenu.Submenus;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
-import static com.corevalue.constants.TagsConst.BUTTON;
-import static com.corevalue.constants.TestConst.DELAY_INPUT;
+import static com.corevalue.constant.TagsConst.BUTTON;
+import static com.corevalue.constant.TestConst.DELAY_INPUT;
 
 public enum ManagementManageGroupsSubmenu implements AbstractSubmenu, ManagementMenuConst {
     INSTANCE(Submenus.MANAGEMENT_MANAGE_GROUPS);

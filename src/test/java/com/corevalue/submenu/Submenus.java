@@ -1,7 +1,7 @@
 package com.corevalue.submenu;
 
-import com.corevalue.constants.menu.FileMenuConst;
-import com.corevalue.constants.menu.ManagementMenuConst;
+import com.corevalue.constant.menu.FileMenuConst;
+import com.corevalue.constant.menu.ManagementMenuConst;
 import com.corevalue.driver.BrowserMap;
 import com.corevalue.driver.TestGroup;
 import lombok.Getter;

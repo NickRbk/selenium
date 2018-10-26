@@ -1,4 +1,4 @@
-package com.corevalue.constants.menu;
+package com.corevalue.constant.menu;
 
 public interface MenuConst {
     String BASE_PREFIX = "flatmenuitem-m1-";

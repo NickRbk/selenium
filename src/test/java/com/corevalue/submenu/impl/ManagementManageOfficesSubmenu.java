@@ -1,6 +1,6 @@
 package com.corevalue.submenu.impl;
 
-import com.corevalue.constants.menu.ManagementMenuConst;
+import com.corevalue.constant.menu.ManagementMenuConst;
 import com.corevalue.driver.TestGroup;
 import com.corevalue.submenu.AbstractSubmenu;
 import com.corevalue.submenu.Submenus;
@@ -9,7 +9,7 @@ import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
-import static com.corevalue.constants.TagsConst.BUTTON;
+import static com.corevalue.constant.TagsConst.BUTTON;
 
 @Getter
 public enum ManagementManageOfficesSubmenu implements AbstractSubmenu, ManagementMenuConst {

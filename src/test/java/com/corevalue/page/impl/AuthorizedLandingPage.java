@@ -1,6 +1,6 @@
-package com.corevalue.pages.impl;
+package com.corevalue.page.impl;
 
-import com.corevalue.constants.AuthorizedLandingPageConst;
+import com.corevalue.constant.AuthorizedLandingPageConst;
 import com.corevalue.driver.BrowserMap;
 import com.corevalue.driver.IBrowser;
 import com.corevalue.driver.TestGroup;
@@ -8,10 +8,10 @@ import com.corevalue.menu.Menus;
 import com.corevalue.menu.impl.FileMenu;
 import com.corevalue.menu.impl.HelpMenu;
 import com.corevalue.menu.impl.ManagementMenu;
-import com.corevalue.pages.IAuthorizedLandingPage;
+import com.corevalue.page.IAuthorizedLandingPage;
 import org.openqa.selenium.By;
 
-import static com.corevalue.constants.TagsConst.BUTTON;
+import static com.corevalue.constant.TagsConst.BUTTON;
 
 public enum AuthorizedLandingPage implements IAuthorizedLandingPage, AuthorizedLandingPageConst {
     INSTANCE;

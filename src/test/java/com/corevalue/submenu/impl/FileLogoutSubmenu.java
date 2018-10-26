@@ -6,7 +6,7 @@ import com.corevalue.submenu.Submenus;
 import lombok.AllArgsConstructor;
 import org.openqa.selenium.By;
 
-import static com.corevalue.constants.TagsConst.BUTTON;
+import static com.corevalue.constant.TagsConst.BUTTON;
 
 @AllArgsConstructor
 public enum FileLogoutSubmenu implements AbstractSubmenu {

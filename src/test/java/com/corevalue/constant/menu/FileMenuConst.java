@@ -1,4 +1,4 @@
-package com.corevalue.constants.menu;
+package com.corevalue.constant.menu;
 
 public interface FileMenuConst extends MenuConst {
     String SUBMENU_SEARCH_CASE_FILES_ID = SUBMENU_BASE_PREFIX + "i11";
