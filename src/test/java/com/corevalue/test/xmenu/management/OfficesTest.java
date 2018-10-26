@@ -1,18 +1,24 @@
-package com.corevalue.tests.xmenu.management;
+package com.corevalue.test.xmenu.management;
 
-import com.corevalue.constants.AuthorizedLandingPageConst;
-import com.corevalue.constants.LoginPageConst;
-import com.corevalue.constants.TestConst;
-import com.corevalue.constants.menu.ManagementMenuConst;
+import com.corevalue.constant.AuthorizedLandingPageConst;
+import com.corevalue.constant.LoginPageConst;
+import com.corevalue.constant.TestConst;
+import com.corevalue.constant.menu.ManagementMenuConst;
 import com.corevalue.driver.TestGroup;
-import com.corevalue.pages.impl.AuthorizedLandingPage;
+import com.corevalue.page.impl.AuthorizedLandingPage;
 import com.corevalue.submenu.impl.ManagementManageOfficesSubmenu;
 import com.corevalue.submenu.impl.obj.Office;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class OfficesTest implements LoginPageConst, TestConst, AuthorizedLandingPageConst, ManagementMenuConst {
-    private final static TestGroup testGroup = TestGroup.MANAGEMENT;
+    private final TestGroup testGroup;
+
+    @Parameters("testGroup")
+    public OfficesTest(String param) {
+        this.testGroup = TestGroup.valueOf(param);
+    }
 
     // ---------------------------------------------------------------------------------
     // Test for ADD OFFICE missed, because there is no functionality for further deletion
@@ -21,21 +27,21 @@ public class OfficesTest implements LoginPageConst, TestConst, AuthorizedLanding
     @Test(groups = "management")
     void updateOffice() {
         Office expectedOffice = expectedOfficeAfterUpdate();
-        Office updatedOffice = AuthorizedLandingPage.get().openManagementMenu(testGroup)
+        Office updatedOffice = AuthorizedLandingPage.INSTANCE.openManagementMenu(testGroup)
                 .openManageOfficesSubmenu(testGroup, SUBMENU_FRAME_INDEX_WITH_CASE)
                 .searchOffices(testGroup)
                 .selectLastOfficeToUpdate(testGroup)
                 .updateOfficeGeneralInfo(testGroup, OFFICE_REASON_ADDRESS_UPDATED, expectedOffice)
                 .getUpdatedFields(testGroup);
 
-        ManagementManageOfficesSubmenu.get().close(testGroup, DIALOG_CLOSE_ID);
+        ManagementManageOfficesSubmenu.INSTANCE.close(testGroup, DIALOG_CLOSE_ID);
         Assert.assertEquals(updatedOffice, expectedOffice);
     }
 
     @Test(groups = "management")
     void addCoveredStates() {
-        ManagementManageOfficesSubmenu submenu = ManagementManageOfficesSubmenu.get();
-        AuthorizedLandingPage.get().openManagementMenu(testGroup)
+        ManagementManageOfficesSubmenu submenu = ManagementManageOfficesSubmenu.INSTANCE;
+        AuthorizedLandingPage.INSTANCE.openManagementMenu(testGroup)
                 .openManageOfficesSubmenu(testGroup, SUBMENU_FRAME_INDEX_WITH_CASE)
                 .searchOffices(testGroup)
                 .selectLastOfficeToUpdate(testGroup)
@@ -47,8 +53,8 @@ public class OfficesTest implements LoginPageConst, TestConst, AuthorizedLanding
 
     @Test(groups = "management", dependsOnMethods = "addCoveredStates")
     void updateCoveredStates() {
-        ManagementManageOfficesSubmenu submenu = ManagementManageOfficesSubmenu.get();
-        AuthorizedLandingPage.get().openManagementMenu(testGroup)
+        ManagementManageOfficesSubmenu submenu = ManagementManageOfficesSubmenu.INSTANCE;
+        AuthorizedLandingPage.INSTANCE.openManagementMenu(testGroup)
                 .openManageOfficesSubmenu(testGroup, SUBMENU_FRAME_INDEX_WITH_CASE)
                 .searchOffices(testGroup)
                 .selectLastOfficeToUpdate(testGroup)
@@ -61,8 +67,8 @@ public class OfficesTest implements LoginPageConst, TestConst, AuthorizedLanding
 
     @Test(groups = "management", dependsOnMethods = {"updateCoveredStates", "removePhones"})
     void removeCoveredStates() {
-        ManagementManageOfficesSubmenu submenu = ManagementManageOfficesSubmenu.get();
-        AuthorizedLandingPage.get().openManagementMenu(testGroup)
+        ManagementManageOfficesSubmenu submenu = ManagementManageOfficesSubmenu.INSTANCE;
+        AuthorizedLandingPage.INSTANCE.openManagementMenu(testGroup)
                 .openManageOfficesSubmenu(testGroup, SUBMENU_FRAME_INDEX_WITH_CASE)
                 .searchOffices(testGroup)
                 .selectLastOfficeToUpdate(testGroup)
@@ -74,8 +80,8 @@ public class OfficesTest implements LoginPageConst, TestConst, AuthorizedLanding
 
     @Test(groups = "management", dependsOnMethods = "updateCoveredStates")
     void addPhones() {
-        ManagementManageOfficesSubmenu submenu = ManagementManageOfficesSubmenu.get();
-        AuthorizedLandingPage.get().openManagementMenu(testGroup)
+        ManagementManageOfficesSubmenu submenu = ManagementManageOfficesSubmenu.INSTANCE;
+        AuthorizedLandingPage.INSTANCE.openManagementMenu(testGroup)
                 .openManageOfficesSubmenu(testGroup, SUBMENU_FRAME_INDEX_WITH_CASE)
                 .searchOffices(testGroup)
                 .selectLastOfficeToUpdate(testGroup)
@@ -87,8 +93,8 @@ public class OfficesTest implements LoginPageConst, TestConst, AuthorizedLanding
 
     @Test(groups = "management", dependsOnMethods = "addPhones")
     void updatePhones() {
-        ManagementManageOfficesSubmenu submenu = ManagementManageOfficesSubmenu.get();
-        AuthorizedLandingPage.get().openManagementMenu(testGroup)
+        ManagementManageOfficesSubmenu submenu = ManagementManageOfficesSubmenu.INSTANCE;
+        AuthorizedLandingPage.INSTANCE.openManagementMenu(testGroup)
                 .openManageOfficesSubmenu(testGroup, SUBMENU_FRAME_INDEX_WITH_CASE)
                 .searchOffices(testGroup)
                 .selectLastOfficeToUpdate(testGroup)
@@ -101,8 +107,8 @@ public class OfficesTest implements LoginPageConst, TestConst, AuthorizedLanding
 
     @Test(groups = "management", dependsOnMethods = "updatePhones")
     void removePhones() {
-        ManagementManageOfficesSubmenu submenu = ManagementManageOfficesSubmenu.get();
-        AuthorizedLandingPage.get().openManagementMenu(testGroup)
+        ManagementManageOfficesSubmenu submenu = ManagementManageOfficesSubmenu.INSTANCE;
+        AuthorizedLandingPage.INSTANCE.openManagementMenu(testGroup)
                 .openManageOfficesSubmenu(testGroup, SUBMENU_FRAME_INDEX_WITH_CASE)
                 .searchOffices(testGroup)
                 .selectLastOfficeToUpdate(testGroup)

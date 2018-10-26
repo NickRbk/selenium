@@ -1,36 +1,36 @@
 package com.corevalue.submenu.impl;
 
-import com.corevalue.constants.menu.ManagementMenuConst;
+import com.corevalue.constant.menu.ManagementMenuConst;
 import com.corevalue.driver.TestGroup;
 import com.corevalue.submenu.AbstractSubmenu;
 import com.corevalue.submenu.Submenus;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
-import static com.corevalue.constants.TagsConst.BUTTON;
-import static com.corevalue.constants.TestConst.DELAY_INPUT;
+import static com.corevalue.constant.TagsConst.BUTTON;
+import static com.corevalue.constant.TestConst.DELAY_INPUT;
 
-@Getter
-public class ManagementManageGroupsSubmenu extends AbstractSubmenu implements ManagementMenuConst {
-    private int countInitial;
-    private int countUpdated;
+public enum ManagementManageGroupsSubmenu implements AbstractSubmenu, ManagementMenuConst {
+    INSTANCE(Submenus.MANAGEMENT_MANAGE_GROUPS);
 
-    private static ManagementManageGroupsSubmenu instance;
-
-    private ManagementManageGroupsSubmenu() {
-        super(Submenus.MANAGEMENT_MANAGE_GROUPS);
+    ManagementManageGroupsSubmenu(Submenus submenu) {
+        this.submenu = submenu;
     }
 
-    public static ManagementManageGroupsSubmenu get() {
-        if (instance == null) {
-            instance = new ManagementManageGroupsSubmenu();
-        }
-        return instance;
+    private Submenus submenu;
+    @Getter private int countInitial;
+    @Getter private int countUpdated;
+
+    @Override
+    public void goTo(TestGroup group, int submenuFrameIndex) {
+        browser(group).getDriver()
+                .switchTo().frame(submenuFrameIndex);
+        findElementBy(group, By.id(submenu.getSelector())).click();
     }
 
     public ManagementManageGroupsSubmenu searchGroups(TestGroup group) {
         countInitial = getCountOfGroupsInitial(group);
-        return ManagementManageGroupsSubmenu.get();
+        return this;
     }
 
     public ManagementManageGroupsSubmenu addGroup(TestGroup group, String name, String description) {
@@ -41,7 +41,7 @@ public class ManagementManageGroupsSubmenu extends AbstractSubmenu implements Ma
         browser(group).waitFrame(3);
         setNewProps(group, name, description);
         confirmGroupAdd(group);
-        return ManagementManageGroupsSubmenu.get();
+        return this;
     }
 
     public ManagementManageGroupsSubmenu updateGroup(TestGroup group, String name, String description) {
@@ -54,14 +54,14 @@ public class ManagementManageGroupsSubmenu extends AbstractSubmenu implements Ma
         setNewProps(group, name, description);
         confirmGroupUpdate(group);
 
-        return ManagementManageGroupsSubmenu.get();
+        return this;
     }
 
     public ManagementManageGroupsSubmenu removeGroup(TestGroup group) {
         findElementsBy(group, By.cssSelector(GROUPS_SELECTOR)).get(countInitial-1).click();
         findElementBy(group, By.id(GROUP_REMOVE_BUTTON_ID)).click();
         confirmGroupRemove(group);
-        return ManagementManageGroupsSubmenu.get();
+        return this;
     }
 
     //region HELPER METHODS

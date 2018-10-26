@@ -1,4 +1,4 @@
-package com.corevalue.pages;
+package com.corevalue.page;
 
 import com.corevalue.driver.TestGroup;
 

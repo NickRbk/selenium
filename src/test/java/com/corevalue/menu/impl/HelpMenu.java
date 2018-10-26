@@ -1,49 +1,48 @@
 package com.corevalue.menu.impl;
 
-import com.corevalue.constants.menu.HelpMenuConst;
-import com.corevalue.constants.menu.MenuConst;
+import com.corevalue.constant.menu.HelpMenuConst;
+import com.corevalue.constant.menu.MenuConst;
 import com.corevalue.driver.TestGroup;
 import com.corevalue.menu.AbstractMenu;
 import com.corevalue.menu.Menus;
+import lombok.AllArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class HelpMenu extends AbstractMenu implements MenuConst, HelpMenuConst {
-    private static HelpMenu instance;
+@AllArgsConstructor
+public enum HelpMenu implements AbstractMenu, MenuConst, HelpMenuConst {
+    INSTANCE(Menus.HELP);
 
-    private HelpMenu() {
-        super(Menus.HELP);
-    }
+    private Menus menu;
 
-    public static HelpMenu get() {
-        if (instance == null) {
-            instance = new HelpMenu();
-        }
-        return instance;
-    }
-
-    public String showVersion() {
-        browser(TestGroup.INIT).getDriver()
+    public String showVersion(TestGroup testGroup) {
+        browser(testGroup).getDriver()
                 .switchTo().frame(6)
                 .findElement(By.id(SUBMENU_SELECTOR))
                 .click();
-
-        return HelpMenu.get().versionInfo().getText();
+        return versionInfo(testGroup).getText();
     }
 
-    public void confirmExit() {
-        browser(TestGroup.INIT).getDriver()
+    public void confirmExit(TestGroup testGroup) {
+        browser(testGroup).getDriver()
                 .findElement(By.id(BUTTON_CLOSE_ID))
                 .click();
     }
 
-    private WebElement versionInfo () {
-        browser(TestGroup.INIT).getDriver()
+    private WebElement versionInfo (TestGroup testGroup) {
+        browser(testGroup).getDriver()
                 .switchTo().parentFrame()
                 .switchTo().parentFrame();
 
-        return browser(TestGroup.INIT)
+        return browser(testGroup)
                 .waitFrame(2)
                 .findElement(By.cssSelector(VERSION_ELEMENT_SELECTOR));
+    }
+
+    @Override
+    public void goTo(TestGroup group) {
+        browser(group).getDriver()
+                .switchTo().frame(0)
+                .findElement(By.id(menu.getSelector())).click();
     }
 }

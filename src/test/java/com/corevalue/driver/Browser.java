@@ -6,8 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static com.corevalue.constants.TestConst.DELAY_WAIT_BUTTON;
-import static com.corevalue.constants.TestConst.WAIT_TIMEOUT_SEC;
+import static com.corevalue.constant.TestConst.DELAY_WAIT_BUTTON;
+import static com.corevalue.constant.TestConst.WAIT_TIMEOUT_SEC;
 
 public class Browser implements IBrowser {
 

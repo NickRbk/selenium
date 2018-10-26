@@ -1,4 +1,4 @@
-package com.corevalue.constants;
+package com.corevalue.constant;
 
 public interface LoginPageConst {
     String LOGIN_PAGE_TITLE = "Login to System";

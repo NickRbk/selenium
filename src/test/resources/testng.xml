@@ -1,21 +1,24 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Caseware: x-menu" verbose="1" parallel="tests" thread-count="2">
-    <test name="Init tests" >
+    <test name="init: authorization and version info" >
+        <parameter name="testGroup" value="INITIAL" />
         <classes>
-            <class name="com.corevalue.tests.xmenu.file.LoginTest" />
-            <class name="com.corevalue.tests.xmenu.help.HelpMenuTest"/>
+            <class name="com.corevalue.test.xmenu.initial.InitialTestSetting" />
+            <class name="com.corevalue.test.xmenu.initial.LoginTest" />
+            <class name="com.corevalue.test.xmenu.initial.HelpMenuTest"/>
         </classes>
     </test>
 
     <test name="menus: Management test">
+        <parameter name="testGroup" value="MANAGEMENT" />
         <groups>
             <run>
                 <include name="management" />
             </run>
         </groups>
         <packages>
-            <package name="com.corevalue.tests.xmenu.management" />
+            <package name="com.corevalue.test.xmenu.management" />
         </packages>
     </test>
 </suite>

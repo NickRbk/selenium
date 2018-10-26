@@ -1,13 +1,14 @@
 package com.corevalue.menu;
 
-import com.corevalue.constants.menu.MainXMenuConst;
+import com.corevalue.constant.menu.MainXMenuConst;
 import com.corevalue.driver.BrowserMap;
 import com.corevalue.driver.TestGroup;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-@Getter
+@AllArgsConstructor
 public enum Menus implements MainXMenuConst {
     FILE(MENU_FILE_ID),
     WIZARDS(MENU_WIZARDS_ID),
@@ -20,14 +21,10 @@ public enum Menus implements MainXMenuConst {
     BILLING(MENU_BILLING_ID),
     HELP(MENU_HELP_ID);
 
-    private String selector;
+    @Getter private String selector;
 
-    Menus(String selector) {
-        this.selector = selector;
-    }
-
-    public static AbstractMenu getMenuPage(Menus key, TestGroup group, AbstractMenu menu) {
-        WebDriver driver = BrowserMap.get().getDrivers().get(group).getDriver();
+    public static AbstractMenu getMenuPage(TestGroup group, AbstractMenu menu) {
+        WebDriver driver = BrowserMap.INSTANCE.getDrivers().get(group).getDriver();
         PageFactory.initElements(driver, menu);
         return menu;
     }

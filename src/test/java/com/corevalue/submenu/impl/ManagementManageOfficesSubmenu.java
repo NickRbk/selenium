@@ -1,6 +1,6 @@
 package com.corevalue.submenu.impl;
 
-import com.corevalue.constants.menu.ManagementMenuConst;
+import com.corevalue.constant.menu.ManagementMenuConst;
 import com.corevalue.driver.TestGroup;
 import com.corevalue.submenu.AbstractSubmenu;
 import com.corevalue.submenu.Submenus;
@@ -9,11 +9,17 @@ import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
-import static com.corevalue.constants.TagsConst.BUTTON;
+import static com.corevalue.constant.TagsConst.BUTTON;
 
 @Getter
-public class ManagementManageOfficesSubmenu extends AbstractSubmenu implements ManagementMenuConst {
-    private static ManagementManageOfficesSubmenu instance;
+public enum ManagementManageOfficesSubmenu implements AbstractSubmenu, ManagementMenuConst {
+    INSTANCE(Submenus.MANAGEMENT_MANAGE_OFFICES);
+
+    ManagementManageOfficesSubmenu(Submenus submenu) {
+        this.submenu = submenu;
+    }
+
+    private Submenus submenu;
     private int countOfCoveredStates;
     private int countOfCoveredStatesUpdated;
     private int countOfPhones;
@@ -23,35 +29,31 @@ public class ManagementManageOfficesSubmenu extends AbstractSubmenu implements M
     private String nameOfPhone;
     private String nameOfPhoneUpdated;
 
-    private ManagementManageOfficesSubmenu() {
-        super(Submenus.MANAGEMENT_MANAGE_OFFICES);
-    }
-
-    public static ManagementManageOfficesSubmenu get() {
-        if (instance == null) {
-            instance = new ManagementManageOfficesSubmenu();
-        }
-        return instance;
+    @Override
+    public void goTo(TestGroup group, int submenuFrameIndex) {
+        browser(group).getDriver()
+                .switchTo().frame(submenuFrameIndex);
+        findElementBy(group, By.id(submenu.getSelector())).click();
     }
 
     public ManagementManageOfficesSubmenu searchOffices(TestGroup group) {
         localContext(group, 2);
         findElementBy(group, By.id(SEARCH_BUTTON_ID)).click();
-        return ManagementManageOfficesSubmenu.get();
+        return this;
     }
 
     public ManagementManageOfficesSubmenu selectLastOfficeToUpdate(TestGroup group) {
         int officeCount = getCountOfOffices(group);
         findElementsBy(group, By.cssSelector(LIST_SELECTOR)).get(officeCount-1).click();
         findElementBy(group, By.id(UPDATE_BUTTON_ID)).click();
-        return ManagementManageOfficesSubmenu.get();
+        return this;
     }
 
     public ManagementManageOfficesSubmenu updateOfficeGeneralInfo(TestGroup group, String reason, Office office) {
         localContext(group, 3);
         setOfficeProps(group, office.getName(), office.getCode());
         updateAddressAndAcceptChanges(group, reason, office.getAddress1(), office.getAddress2(), office.getCity());
-        return ManagementManageOfficesSubmenu.get();
+        return this;
     }
 
     //region HELPER METHODS: general info
@@ -97,7 +99,7 @@ public class ManagementManageOfficesSubmenu extends AbstractSubmenu implements M
         setCoveredStates(group, state);
 
         back(group);
-        return ManagementManageOfficesSubmenu.get();
+        return this;
     }
 
     //region HELPER METHODS: add covered states
@@ -123,7 +125,7 @@ public class ManagementManageOfficesSubmenu extends AbstractSubmenu implements M
         removeCoveredStateService(group);
 
         back(group);
-        return ManagementManageOfficesSubmenu.get();
+        return this;
     }
 
     //region HELPER METHODS: remove covered states
@@ -147,7 +149,7 @@ public class ManagementManageOfficesSubmenu extends AbstractSubmenu implements M
         updateCoveredStateService(group, state);
 
         back(group);
-        return ManagementManageOfficesSubmenu.get();
+        return this;
     }
 
     //region HELPER METHODS: update covered states
@@ -174,7 +176,7 @@ public class ManagementManageOfficesSubmenu extends AbstractSubmenu implements M
         setPhone(group, email);
 
         back(group);
-        return ManagementManageOfficesSubmenu.get();
+        return this;
     }
 
     //region HELPER METHODS: add phone
@@ -213,7 +215,7 @@ public class ManagementManageOfficesSubmenu extends AbstractSubmenu implements M
         updatePhoneService(group, email);
 
         back(group);
-        return ManagementManageOfficesSubmenu.get();
+        return this;
     }
 
     //region HELPER METHODS: update phone
@@ -239,7 +241,7 @@ public class ManagementManageOfficesSubmenu extends AbstractSubmenu implements M
         removePhoneService(group);
 
         back(group);
-        return ManagementManageOfficesSubmenu.get();
+        return this;
     }
 
     //region HELPER METHODS: remove covered states

@@ -1,19 +1,21 @@
 package com.corevalue.menu.impl;
 
+import com.corevalue.driver.TestGroup;
 import com.corevalue.menu.AbstractMenu;
 import com.corevalue.menu.Menus;
+import lombok.AllArgsConstructor;
+import org.openqa.selenium.By;
 
-public class TagGroupsMenu extends AbstractMenu {
-    private static TagGroupsMenu instance;
+@AllArgsConstructor
+public enum  TagGroupsMenu implements AbstractMenu {
+    INSTANCE(Menus.TAG_GROUPS);
 
-    private TagGroupsMenu() {
-        super(Menus.TAG_GROUPS);
-    }
+    private Menus menu;
 
-    public static TagGroupsMenu get() {
-        if (instance == null) {
-            instance = new TagGroupsMenu();
-        }
-        return instance;
+    @Override
+    public void goTo(TestGroup group) {
+        browser(group).getDriver()
+                .switchTo().frame(0)
+                .findElement(By.id(menu.getSelector())).click();
     }
 }
