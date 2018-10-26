@@ -1,4 +1,4 @@
-package com.corevalue.tests.xmenu.help;
+package com.corevalue.tests.xmenu.initial;
 
 import com.corevalue.constants.TestConst;
 import com.corevalue.constants.menu.HelpMenuConst;
@@ -16,7 +16,7 @@ import static com.corevalue.constants.AuthorizedLandingPageConst.BUTTON_LOGOUT_S
 import static com.corevalue.constants.AuthorizedLandingPageConst.SUBMENU_FRAME_INDEX;
 
 public class HelpMenuTest implements LoginPageConst, TestConst, HelpMenuConst {
-    private final static TestGroup testGroup = TestGroup.INIT;
+    private final static TestGroup testGroup = TestGroup.INITIAL;
 
     @BeforeClass
     static void init() {
@@ -24,7 +24,7 @@ public class HelpMenuTest implements LoginPageConst, TestConst, HelpMenuConst {
         LoginPage.INSTANCE.login(testGroup, VALID_USERNAME,VALID_PASSWORD);
     }
 
-    @Test
+    @Test(groups = "initial")
     void openHelpMenuAndGetVersionTest() {
         String version = AuthorizedLandingPage.INSTANCE
                 .openHelpMenu(testGroup)

@@ -16,7 +16,7 @@ public enum HelpMenu implements AbstractMenu, MenuConst, HelpMenuConst {
     private Menus menu;
 
     public String showVersion() {
-        browser(TestGroup.INIT).getDriver()
+        browser(TestGroup.INITIAL).getDriver()
                 .switchTo().frame(6)
                 .findElement(By.id(SUBMENU_SELECTOR))
                 .click();
@@ -24,17 +24,17 @@ public enum HelpMenu implements AbstractMenu, MenuConst, HelpMenuConst {
     }
 
     public void confirmExit() {
-        browser(TestGroup.INIT).getDriver()
+        browser(TestGroup.INITIAL).getDriver()
                 .findElement(By.id(BUTTON_CLOSE_ID))
                 .click();
     }
 
     private WebElement versionInfo () {
-        browser(TestGroup.INIT).getDriver()
+        browser(TestGroup.INITIAL).getDriver()
                 .switchTo().parentFrame()
                 .switchTo().parentFrame();
 
-        return browser(TestGroup.INIT)
+        return browser(TestGroup.INITIAL)
                 .waitFrame(2)
                 .findElement(By.cssSelector(VERSION_ELEMENT_SELECTOR));
     }

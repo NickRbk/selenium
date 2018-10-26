@@ -1,11 +1,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Caseware: x-menu" verbose="1" parallel="tests" thread-count="2">
-    <test name="Init tests" >
-        <classes>
-            <class name="com.corevalue.tests.xmenu.file.LoginTest" />
-            <class name="com.corevalue.tests.xmenu.help.HelpMenuTest"/>
-        </classes>
+    <test name="Init tests: authorization" >
+        <groups>
+            <run>
+                <include name="initial" />
+            </run>
+        </groups>
+        <packages>
+            <package name="com.corevalue.tests.xmenu.initial" />
+        </packages>
     </test>
 
     <test name="menus: Management test">

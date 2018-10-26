@@ -1,4 +1,4 @@
-package com.corevalue.tests.xmenu.file;
+package com.corevalue.tests.xmenu.initial;
 
 import com.corevalue.constants.TestConst;
 import com.corevalue.driver.BrowserMap;
@@ -8,7 +8,6 @@ import com.corevalue.pages.impl.LoginPage;
 import com.corevalue.constants.LoginPageConst;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -17,35 +16,29 @@ import static com.corevalue.constants.AuthorizedLandingPageConst.BUTTON_LOGOUT_S
 import static com.corevalue.constants.AuthorizedLandingPageConst.SUBMENU_FRAME_INDEX;
 
 public class LoginTest implements LoginPageConst, TestConst {
-    private final static TestGroup testGroup = TestGroup.INIT;
+    private final static TestGroup testGroup = TestGroup.INITIAL;
 
     @BeforeClass
     static void init() {
         driver().get(BASE_URL);
     }
 
-    @Test
+    @Test(groups = "initial")
     void failedLoginTest() {
         LoginPage.INSTANCE.login(testGroup, INVALID_USERNAME,INVALID_PASSWORD);
         Assert.assertNotEquals(AUTHORIZED_PAGE_TITLE, driver().getTitle());
     }
 
-    @Test(priority = 1)
+    @Test(groups = "initial", dependsOnMethods = "failedLoginTest")
     void successLoginTest() {
         LoginPage.INSTANCE.login(testGroup, VALID_USERNAME,VALID_PASSWORD);
         Assert.assertEquals(AUTHORIZED_PAGE_TITLE, driver().getTitle());
     }
 
-    @Test(dependsOnMethods = "successLoginTest")
+    @Test(groups = "initial", dependsOnMethods = "successLoginTest")
     void logoutTest() {
         AuthorizedLandingPage.INSTANCE.logout(testGroup, SUBMENU_FRAME_INDEX, BUTTON_LOGOUT_SUBMIT);
         Assert.assertEquals(LOGIN_PAGE_TITLE, driver().getTitle());
-    }
-
-    @AfterSuite
-    static void closeDriver() {
-        driver().close();
-        BrowserMap.INSTANCE.getDrivers().get(TestGroup.MANAGEMENT).getDriver().close();
     }
 
     private static WebDriver driver() {
