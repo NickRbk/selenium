@@ -9,7 +9,7 @@ public interface FileMenuConst extends MenuConst {
     String SUBMENU_SEARCH_FOR_ACTION_BY_CONTACT_ID = SUBMENU_BASE_PREFIX + "i131";
     String SUBMENU_NEW_ACTION_ID = SUBMENU_BASE_PREFIX + "i14";
     String SUBMENU_NEW_ACTION_FROM_REFERRAL_ID = SUBMENU_BASE_PREFIX + "i14CT";
-    String SUBMENU_CHANGE_ACTION_TEMPLATE_ID = SUBMENU_BASE_PREFIX + "i16C"; // changed ID om main.jsp, because it duplicate logout
+    String SUBMENU_CHANGE_ACTION_TEMPLATE_ID = SUBMENU_BASE_PREFIX + "i16C"; // changed ID on main.jsp, because it duplicate logout
     String SUBMENU_CALENDAR_ID = SUBMENU_BASE_PREFIX + "i17i";
     String SUBMENU_CONFLICTS_CHECKING_ID = SUBMENU_BASE_PREFIX + "i18";
     String SUBMENU_CALCULATE_DATE_ID = SUBMENU_BASE_PREFIX + "i17";

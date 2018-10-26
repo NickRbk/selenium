@@ -10,42 +10,43 @@ import com.corevalue.submenu.impl.ManagementManageClientsSubmenu;
 import com.corevalue.submenu.impl.ManagementManageGroupsSubmenu;
 import com.corevalue.submenu.impl.ManagementManageOfficesSubmenu;
 import com.corevalue.submenu.impl.ManagementManageUsersSubmenu;
+import lombok.AllArgsConstructor;
+import org.openqa.selenium.By;
 
-public class ManagementMenu extends AbstractMenu implements MenuConst, ManagementMenuConst {
-    private static ManagementMenu instance;
+@AllArgsConstructor
+public enum  ManagementMenu implements AbstractMenu, MenuConst, ManagementMenuConst {
+    INSTANCE(Menus.MANAGEMENT);
 
-    private ManagementMenu() {
-        super(Menus.MANAGEMENT);
-    }
-
-    public static ManagementMenu get() {
-        if (instance == null) {
-            instance = new ManagementMenu();
-        }
-        return instance;
-    }
+    private Menus menu;
 
     public ManagementManageGroupsSubmenu openManageGroupsSubmenu(TestGroup group, int submenuFrameIndex) {
-        Submenus.getSubmenu(group, ManagementManageGroupsSubmenu.get())
+        Submenus.getSubmenu(group, ManagementManageGroupsSubmenu.INSTANCE)
                 .goTo(group, submenuFrameIndex);
-        return ManagementManageGroupsSubmenu.get();
+        return ManagementManageGroupsSubmenu.INSTANCE;
     }
 
     public ManagementManageUsersSubmenu openManageUsersSubmenu(TestGroup group, int submenuFrameIndex) {
-        Submenus.getSubmenu(group, ManagementManageUsersSubmenu.get())
+        Submenus.getSubmenu(group, ManagementManageUsersSubmenu.INSTANCE)
                 .goTo(group, submenuFrameIndex);
-        return ManagementManageUsersSubmenu.get();
+        return ManagementManageUsersSubmenu.INSTANCE;
     }
 
     public ManagementManageClientsSubmenu openManageClientsSubmenu(TestGroup group, int submenuFrameIndex) {
-        Submenus.getSubmenu(group, ManagementManageClientsSubmenu.get())
+        Submenus.getSubmenu(group, ManagementManageClientsSubmenu.INSTANCE)
                 .goTo(group, submenuFrameIndex);
-        return ManagementManageClientsSubmenu.get();
+        return ManagementManageClientsSubmenu.INSTANCE;
     }
 
     public ManagementManageOfficesSubmenu openManageOfficesSubmenu(TestGroup group, int submenuFrameIndex) {
-        Submenus.getSubmenu(group, ManagementManageOfficesSubmenu.get())
+        Submenus.getSubmenu(group, ManagementManageOfficesSubmenu.INSTANCE)
                 .goTo(group, submenuFrameIndex);
-        return ManagementManageOfficesSubmenu.get();
+        return ManagementManageOfficesSubmenu.INSTANCE;
+    }
+
+    @Override
+    public void goTo(TestGroup group) {
+        browser(group).getDriver()
+                .switchTo().frame(0)
+                .findElement(By.id(menu.getSelector())).click();
     }
 }

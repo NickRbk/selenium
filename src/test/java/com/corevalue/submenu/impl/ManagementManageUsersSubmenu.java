@@ -7,26 +7,27 @@ import com.corevalue.submenu.Submenus;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
-@Getter
-public class ManagementManageUsersSubmenu extends AbstractSubmenu implements ManagementMenuConst {
-    private static ManagementManageUsersSubmenu instance;
-    private int count;
+public enum ManagementManageUsersSubmenu implements AbstractSubmenu, ManagementMenuConst {
+    INSTANCE(Submenus.MANAGEMENT_MANAGE_USERS);
 
-    private ManagementManageUsersSubmenu() {
-        super(Submenus.MANAGEMENT_MANAGE_USERS);
+    ManagementManageUsersSubmenu(Submenus submenu) {
+        this.submenu = submenu;
     }
 
-    public static ManagementManageUsersSubmenu get() {
-        if (instance == null) {
-            instance = new ManagementManageUsersSubmenu();
-        }
-        return instance;
+    private Submenus submenu;
+    @Getter private int count;
+
+    @Override
+    public void goTo(TestGroup group, int submenuFrameIndex) {
+        browser(group).getDriver()
+                .switchTo().frame(submenuFrameIndex);
+        findElementBy(group, By.id(submenu.getSelector())).click();
     }
 
     public ManagementManageUsersSubmenu updateUser(TestGroup group, String userName) {
         setNewProps(group, userName);
         findElementBy(group, By.id(USERS_SUBMIT)).click();
-        return ManagementManageUsersSubmenu.get();
+        return this;
     }
 
     public ManagementManageUsersSubmenu searchUsersByLogin(TestGroup group, String login) {
@@ -34,14 +35,14 @@ public class ManagementManageUsersSubmenu extends AbstractSubmenu implements Man
         browser(group).waitFrame(2);
         findElementBy(group, By.id(USERS_LOGIN_FIELD_ID)).sendKeys(login);
         findElementBy(group, By.id(SEARCH_BUTTON_ID)).click();
-        return ManagementManageUsersSubmenu.get();
+        return this;
     }
 
     public ManagementManageUsersSubmenu selectLastUserToUpdate(TestGroup group) {
         count = getCountOfTargetUsers(group);
         findElementsBy(group, By.cssSelector(LIST_SELECTOR)).get(count-1).click();
         findElementBy(group, By.id(UPDATE_BUTTON_ID)).click();
-        return ManagementManageUsersSubmenu.get();
+        return this;
     }
 
     private int getCountOfTargetUsers(TestGroup group) {

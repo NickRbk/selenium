@@ -20,23 +20,23 @@ public class ClientsTest implements LoginPageConst, TestConst, AuthorizedLanding
     @Test(groups = "management")
     void updateClient() {
         String updatedClientCode = editClientAndGetNewCode(CLIENT_CODE_UPDATED, CLIENT_NAME_UPDATED);
-        ManagementManageClientsSubmenu.get().close(testGroup, DIALOG_CANCEL_ID);
+        ManagementManageClientsSubmenu.INSTANCE.close(testGroup, DIALOG_CANCEL_ID);
         Assert.assertEquals(updatedClientCode, CLIENT_CODE_UPDATED);
     }
 
     @Test(groups = "management", dependsOnMethods = "updateClient")
     void rollBackClient() {
         String updatedClientCode = editClientAndGetNewCode(CLIENT_CODE_INITIAL, CLIENT_NAME_INITIAL);
-        ManagementManageClientsSubmenu.get().close(testGroup, DIALOG_CANCEL_ID);
+        ManagementManageClientsSubmenu.INSTANCE.close(testGroup, DIALOG_CANCEL_ID);
         Assert.assertEquals(updatedClientCode, CLIENT_CODE_INITIAL);
     }
 
     private String editClientAndGetNewCode(String clientCodeInitial, String clientNameInitial) {
-        return AuthorizedLandingPage.get().openManagementMenu(testGroup)
+        return AuthorizedLandingPage.INSTANCE.openManagementMenu(testGroup)
                 .openManageClientsSubmenu(testGroup, SUBMENU_FRAME_INDEX_WITH_CASE)
                 .searchClientsByCode(testGroup, CLIENT_CODE_SEARCH)
                 .selectLastClientToUpdate(testGroup)
                 .updateClient(testGroup, clientCodeInitial, clientNameInitial)
-                .getUpdatedField(testGroup, ManagementManageClientsSubmenu.get().getCount(), LIST_SELECTOR);
+                .getUpdatedField(testGroup, ManagementManageClientsSubmenu.INSTANCE.getCount(), LIST_SELECTOR);
     }
 }

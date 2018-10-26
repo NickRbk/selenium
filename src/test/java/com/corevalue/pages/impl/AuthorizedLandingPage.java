@@ -13,34 +13,25 @@ import org.openqa.selenium.By;
 
 import static com.corevalue.constants.TagsConst.BUTTON;
 
-public class AuthorizedLandingPage implements IAuthorizedLandingPage, AuthorizedLandingPageConst {
-    private static IAuthorizedLandingPage instance;
-
-    private AuthorizedLandingPage() {}
-
-    public static IAuthorizedLandingPage get() {
-        if (instance == null) {
-            instance = new AuthorizedLandingPage();
-        }
-        return instance;
-    }
+public enum AuthorizedLandingPage implements IAuthorizedLandingPage, AuthorizedLandingPageConst {
+    INSTANCE;
 
     @Override
     public FileMenu openFileMenu(TestGroup group) {
-        Menus.getMenuPage(group, FileMenu.get()).goTo(group);
-        return FileMenu.get();
+        Menus.getMenuPage(group, FileMenu.INSTANCE).goTo(group);
+        return FileMenu.INSTANCE;
     }
 
     @Override
     public HelpMenu openHelpMenu(TestGroup group) {
-        Menus.getMenuPage(group, HelpMenu.get()).goTo(group);
-        return HelpMenu.get();
+        Menus.getMenuPage(group, HelpMenu.INSTANCE).goTo(group);
+        return HelpMenu.INSTANCE;
     }
 
     @Override
     public ManagementMenu openManagementMenu(TestGroup group) {
-        Menus.getMenuPage(group, ManagementMenu.get()).goTo(group);
-        return ManagementMenu.get();
+        Menus.getMenuPage(group, ManagementMenu.INSTANCE).goTo(group);
+        return ManagementMenu.INSTANCE;
     }
 
     @Override
@@ -62,7 +53,7 @@ public class AuthorizedLandingPage implements IAuthorizedLandingPage, Authorized
         browser(group).waitElement(By.tagName(BUTTON)).click();
     }
 
-    private static IBrowser browser(TestGroup group) {
+    private IBrowser browser(TestGroup group) {
         return BrowserMap.INSTANCE.getDrivers().get(group);
     }
 }

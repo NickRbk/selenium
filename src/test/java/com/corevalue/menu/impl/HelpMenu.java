@@ -5,30 +5,22 @@ import com.corevalue.constants.menu.MenuConst;
 import com.corevalue.driver.TestGroup;
 import com.corevalue.menu.AbstractMenu;
 import com.corevalue.menu.Menus;
+import lombok.AllArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class HelpMenu extends AbstractMenu implements MenuConst, HelpMenuConst {
-    private static HelpMenu instance;
+@AllArgsConstructor
+public enum HelpMenu implements AbstractMenu, MenuConst, HelpMenuConst {
+    INSTANCE(Menus.HELP);
 
-    private HelpMenu() {
-        super(Menus.HELP);
-    }
-
-    public static HelpMenu get() {
-        if (instance == null) {
-            instance = new HelpMenu();
-        }
-        return instance;
-    }
+    private Menus menu;
 
     public String showVersion() {
         browser(TestGroup.INIT).getDriver()
                 .switchTo().frame(6)
                 .findElement(By.id(SUBMENU_SELECTOR))
                 .click();
-
-        return HelpMenu.get().versionInfo().getText();
+        return this.versionInfo().getText();
     }
 
     public void confirmExit() {
@@ -45,5 +37,12 @@ public class HelpMenu extends AbstractMenu implements MenuConst, HelpMenuConst {
         return browser(TestGroup.INIT)
                 .waitFrame(2)
                 .findElement(By.cssSelector(VERSION_ELEMENT_SELECTOR));
+    }
+
+    @Override
+    public void goTo(TestGroup group) {
+        browser(group).getDriver()
+                .switchTo().frame(0)
+                .findElement(By.id(menu.getSelector())).click();
     }
 }
