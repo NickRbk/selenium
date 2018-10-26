@@ -6,23 +6,24 @@ import com.corevalue.menu.AbstractMenu;
 import com.corevalue.menu.Menus;
 import com.corevalue.submenu.Submenus;
 import com.corevalue.submenu.impl.FileLogoutSubmenu;
+import lombok.AllArgsConstructor;
+import org.openqa.selenium.By;
 
-public class FileMenu extends AbstractMenu implements FileMenuConst {
-    private static FileMenu instance;
+@AllArgsConstructor
+public enum  FileMenu implements AbstractMenu, FileMenuConst {
+    INSTANCE(Menus.FILE);
 
-    private FileMenu() {
-        super(Menus.FILE);
-    }
-
-    public static FileMenu get() {
-        if (instance == null) {
-            instance = new FileMenu();
-        }
-        return instance;
-    }
+    private Menus menu;
 
     public FileLogoutSubmenu openLogoutSubmenu(TestGroup group, int submenuFrameIndex) {
-        Submenus.getSubmenu(group, FileLogoutSubmenu.get()).goTo(group, submenuFrameIndex);
-        return FileLogoutSubmenu.get();
+        Submenus.getSubmenu(group, FileLogoutSubmenu.INSTANCE).goTo(group, submenuFrameIndex);
+        return FileLogoutSubmenu.INSTANCE;
+    }
+
+    @Override
+    public void goTo(TestGroup group) {
+        browser(group).getDriver()
+                .switchTo().frame(0)
+                .findElement(By.id(menu.getSelector())).click();
     }
 }

@@ -8,7 +8,6 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-@Getter
 public enum Submenus implements FileMenuConst, ManagementMenuConst {
     FILE_LOGOUT(SUBMENU_LOGOUT_ID),
     MANAGEMENT_MANAGE_GROUPS(SUBMENU_MANAGE_GROUPS_ID),
@@ -16,7 +15,7 @@ public enum Submenus implements FileMenuConst, ManagementMenuConst {
     MANAGEMENT_MANAGE_CLIENTS(SUBMENU_MANAGE_CLIENTS_ID),
     MANAGEMENT_MANAGE_OFFICES(SUBMENU_MANAGE_OFFICES_ID);
 
-    private String selector;
+    @Getter private String selector;
 
     Submenus(String selector) {
         this.selector = selector;

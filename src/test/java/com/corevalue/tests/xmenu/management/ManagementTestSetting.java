@@ -19,24 +19,24 @@ public class ManagementTestSetting implements LoginPageConst, TestConst, Authori
     @BeforeGroups(groups = "management")
     static void init() {
         driver().get(BASE_URL);
-        LoginPage.get(testGroup).login(testGroup, VALID_USERNAME,VALID_PASSWORD)
+        LoginPage.INSTANCE.login(testGroup, VALID_USERNAME,VALID_PASSWORD)
                 .openPageWithCase(testGroup);
     }
 
     @Test(groups = "management")
     void openManagementMenu() {
-        int groupsCount = AuthorizedLandingPage.get().openManagementMenu(testGroup)
+        int groupsCount = AuthorizedLandingPage.INSTANCE.openManagementMenu(testGroup)
                 .openManageGroupsSubmenu(testGroup, SUBMENU_FRAME_INDEX_WITH_CASE)
                 .searchGroups(testGroup)
                 .getCountInitial();
 
-        ManagementManageGroupsSubmenu.get().close(testGroup, DIALOG_CANCEL_ID);
+        ManagementManageGroupsSubmenu.INSTANCE.close(testGroup, DIALOG_CANCEL_ID);
         Assert.assertTrue(groupsCount > GROUPS_MIN_COUNT);
     }
 
     @AfterGroups(groups = "management")
     static void close() {
-        AuthorizedLandingPage.get().logout(testGroup, SUBMENU_FRAME_INDEX_WITH_CASE, BUTTON_LOGOUT_SUBMIT_WITH_CASE);
+        AuthorizedLandingPage.INSTANCE.logout(testGroup, SUBMENU_FRAME_INDEX_WITH_CASE, BUTTON_LOGOUT_SUBMIT_WITH_CASE);
     }
 
     private static WebDriver driver() {

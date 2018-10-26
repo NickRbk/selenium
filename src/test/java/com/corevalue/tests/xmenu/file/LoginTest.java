@@ -26,19 +26,19 @@ public class LoginTest implements LoginPageConst, TestConst {
 
     @Test
     void failedLoginTest() {
-        LoginPage.get(testGroup).login(testGroup, INVALID_USERNAME,INVALID_PASSWORD);
+        LoginPage.INSTANCE.login(testGroup, INVALID_USERNAME,INVALID_PASSWORD);
         Assert.assertNotEquals(AUTHORIZED_PAGE_TITLE, driver().getTitle());
     }
 
     @Test(priority = 1)
     void successLoginTest() {
-        LoginPage.get(testGroup).login(testGroup, VALID_USERNAME,VALID_PASSWORD);
+        LoginPage.INSTANCE.login(testGroup, VALID_USERNAME,VALID_PASSWORD);
         Assert.assertEquals(AUTHORIZED_PAGE_TITLE, driver().getTitle());
     }
 
     @Test(dependsOnMethods = "successLoginTest")
     void logoutTest() {
-        AuthorizedLandingPage.get().logout(testGroup, SUBMENU_FRAME_INDEX, BUTTON_LOGOUT_SUBMIT);
+        AuthorizedLandingPage.INSTANCE.logout(testGroup, SUBMENU_FRAME_INDEX, BUTTON_LOGOUT_SUBMIT);
         Assert.assertEquals(LOGIN_PAGE_TITLE, driver().getTitle());
     }
 

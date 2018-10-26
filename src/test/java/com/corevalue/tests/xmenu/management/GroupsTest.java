@@ -15,8 +15,8 @@ public class GroupsTest implements LoginPageConst, TestConst, AuthorizedLandingP
 
     @Test(groups = "management")
     void addGroup() {
-        ManagementManageGroupsSubmenu submenu = ManagementManageGroupsSubmenu.get();
-        AuthorizedLandingPage.get().openManagementMenu(testGroup)
+        ManagementManageGroupsSubmenu submenu = ManagementManageGroupsSubmenu.INSTANCE;
+        AuthorizedLandingPage.INSTANCE.openManagementMenu(testGroup)
                 .openManageGroupsSubmenu(testGroup, SUBMENU_FRAME_INDEX_WITH_CASE)
                 .searchGroups(testGroup)
                 .addGroup(testGroup, GROUP_NAME, GROUP_DESCRIPTION)
@@ -27,20 +27,20 @@ public class GroupsTest implements LoginPageConst, TestConst, AuthorizedLandingP
 
     @Test(groups = "management", dependsOnMethods = "addGroup")
     void updateGroup() {
-        String groupNameUpdated = AuthorizedLandingPage.get().openManagementMenu(testGroup)
+        String groupNameUpdated = AuthorizedLandingPage.INSTANCE.openManagementMenu(testGroup)
                 .openManageGroupsSubmenu(testGroup, SUBMENU_FRAME_INDEX_WITH_CASE)
                 .searchGroups(testGroup)
                 .updateGroup(testGroup, GROUP_NAME_UPDATED, GROUP_DESCRIPTION_UPDATED)
-                .getUpdatedField(testGroup, ManagementManageGroupsSubmenu.get().getCountInitial(), LIST_SELECTOR);
+                .getUpdatedField(testGroup, ManagementManageGroupsSubmenu.INSTANCE.getCountInitial(), LIST_SELECTOR);
 
-        ManagementManageGroupsSubmenu.get().close(testGroup, DIALOG_CANCEL_ID);
+        ManagementManageGroupsSubmenu.INSTANCE.close(testGroup, DIALOG_CANCEL_ID);
         Assert.assertEquals(GROUP_NAME_UPDATED, groupNameUpdated);
     }
 
     @Test(groups = "management", dependsOnMethods = "updateGroup")
     void removeGroup() {
-        ManagementManageGroupsSubmenu submenu = ManagementManageGroupsSubmenu.get();
-        AuthorizedLandingPage.get().openManagementMenu(testGroup)
+        ManagementManageGroupsSubmenu submenu = ManagementManageGroupsSubmenu.INSTANCE;
+        AuthorizedLandingPage.INSTANCE.openManagementMenu(testGroup)
                 .openManageGroupsSubmenu(testGroup, SUBMENU_FRAME_INDEX_WITH_CASE)
                 .searchGroups(testGroup)
                 .removeGroup(testGroup)

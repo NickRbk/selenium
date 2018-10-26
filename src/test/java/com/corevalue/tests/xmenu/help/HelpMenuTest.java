@@ -21,22 +21,22 @@ public class HelpMenuTest implements LoginPageConst, TestConst, HelpMenuConst {
     @BeforeClass
     static void init() {
         driver().get(BASE_URL);
-        LoginPage.get(testGroup).login(testGroup, VALID_USERNAME,VALID_PASSWORD);
+        LoginPage.INSTANCE.login(testGroup, VALID_USERNAME,VALID_PASSWORD);
     }
 
     @Test
     void openHelpMenuAndGetVersionTest() {
-        String version = AuthorizedLandingPage.get()
+        String version = AuthorizedLandingPage.INSTANCE
                 .openHelpMenu(testGroup)
                 .showVersion();
 
-        HelpMenu.get().confirmExit();
+        HelpMenu.INSTANCE.confirmExit();
         Assert.assertTrue(version.contains(VERSION));
     }
 
     @AfterClass
     static void close() {
-        AuthorizedLandingPage.get().logout(testGroup, SUBMENU_FRAME_INDEX, BUTTON_LOGOUT_SUBMIT);
+        AuthorizedLandingPage.INSTANCE.logout(testGroup, SUBMENU_FRAME_INDEX, BUTTON_LOGOUT_SUBMIT);
     }
 
     private static WebDriver driver() {

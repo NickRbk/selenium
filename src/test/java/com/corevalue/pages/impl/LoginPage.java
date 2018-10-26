@@ -9,18 +9,8 @@ import com.corevalue.pages.ILoginPage;
 import com.corevalue.constants.LoginPageConst;
 import org.openqa.selenium.By;
 
-public class LoginPage implements ILoginPage, TestConst, LoginPageConst {
-    private static ILoginPage instance;
-
-    private LoginPage() {}
-
-    public static ILoginPage get(TestGroup group) {
-        if (instance == null) {
-            instance = new LoginPage();
-        }
-        browser(group).getDriver().get(BASE_URL);
-        return instance;
-    }
+public enum LoginPage implements ILoginPage, TestConst, LoginPageConst {
+    INSTANCE;
 
     @Override
     public IAuthorizedLandingPage login(TestGroup group, String username, String password) {
@@ -29,7 +19,7 @@ public class LoginPage implements ILoginPage, TestConst, LoginPageConst {
         setPassword(group, password);
         submit(group);
 
-        return AuthorizedLandingPage.get();
+        return AuthorizedLandingPage.INSTANCE;
     }
 
     //region HELPER METHODS
@@ -49,7 +39,7 @@ public class LoginPage implements ILoginPage, TestConst, LoginPageConst {
         browser(group).getDriver().findElement(By.id(SUBMIT_ID)).click();
     }
 
-    private static IBrowser browser(TestGroup group) {
+    private IBrowser browser(TestGroup group) {
         return BrowserMap.INSTANCE.getDrivers().get(group);
     }
     //endregion

@@ -1,19 +1,21 @@
 package com.corevalue.menu.impl;
 
+import com.corevalue.driver.TestGroup;
 import com.corevalue.menu.AbstractMenu;
 import com.corevalue.menu.Menus;
+import lombok.AllArgsConstructor;
+import org.openqa.selenium.By;
 
-public class DocumentsMenu extends AbstractMenu {
-    private static DocumentsMenu instance;
+@AllArgsConstructor
+public enum DocumentsMenu implements AbstractMenu {
+    INSTANCE(Menus.DOCUMENTS);
 
-    private DocumentsMenu() {
-        super(Menus.DOCUMENTS);
-    }
+    private Menus menu;
 
-    public static DocumentsMenu get() {
-        if (instance == null) {
-            instance = new DocumentsMenu();
-        }
-        return instance;
+    @Override
+    public void goTo(TestGroup group) {
+        browser(group).getDriver()
+                .switchTo().frame(0)
+                .findElement(By.id(menu.getSelector())).click();
     }
 }
