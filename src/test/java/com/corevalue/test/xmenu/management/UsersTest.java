@@ -4,14 +4,17 @@ import com.corevalue.constant.AuthorizedLandingPageConst;
 import com.corevalue.constant.LoginPageConst;
 import com.corevalue.constant.TestConst;
 import com.corevalue.constant.menu.ManagementMenuConst;
+import com.corevalue.driver.BrowserMap;
 import com.corevalue.driver.TestGroup;
 import com.corevalue.page.impl.AuthorizedLandingPage;
 import com.corevalue.submenu.impl.ManagementManageUsersSubmenu;
+import com.corevalue.test.AbstractAfterMethod;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-public class UsersTest implements LoginPageConst, TestConst, AuthorizedLandingPageConst, ManagementMenuConst {
+public class UsersTest extends AbstractAfterMethod implements LoginPageConst, TestConst, AuthorizedLandingPageConst, ManagementMenuConst {
     private final TestGroup testGroup;
 
     @Parameters("testGroup")
@@ -26,15 +29,20 @@ public class UsersTest implements LoginPageConst, TestConst, AuthorizedLandingPa
     @Test(groups = "management")
     void updateUser() {
         String updatedUserName = editUserAndGetNewName(USER_NAME_UPDATED);
-        ManagementManageUsersSubmenu.INSTANCE.close(testGroup, DIALOG_CANCEL_ID);
+        setExitLogic(() -> ManagementManageUsersSubmenu.INSTANCE.close(testGroup, DIALOG_CANCEL_ID));
         Assert.assertEquals(updatedUserName, USER_NAME_UPDATED);
     }
 
     @Test(groups = "management", dependsOnMethods = "updateUser")
     void rollBackUser() {
         String updatedUserName = editUserAndGetNewName(USER_NAME_INITIAL);
-        ManagementManageUsersSubmenu.INSTANCE.close(testGroup, DIALOG_CANCEL_ID);
+        setExitLogic(() -> ManagementManageUsersSubmenu.INSTANCE.close(testGroup, DIALOG_CANCEL_ID));
         Assert.assertEquals(updatedUserName, USER_NAME_INITIAL);
+    }
+
+    @Override
+    protected WebDriver driver() {
+        return BrowserMap.INSTANCE.getDrivers().get(testGroup).getDriver();
     }
 
     private String editUserAndGetNewName(String userName) {

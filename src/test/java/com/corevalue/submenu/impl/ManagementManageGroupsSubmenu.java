@@ -88,7 +88,7 @@ public enum ManagementManageGroupsSubmenu implements AbstractSubmenu, Management
     private void confirmGroupRemove(TestGroup group) {
         getContext(group);
         findElementsBy(group, By.tagName(BUTTON)).get(1).click();
-        browser(group).delay(WAIT_TIMEOUT);
+        browser(group).delay(WAIT_TIMEOUT_2);
         countUpdated = getCountOfGroupsUpdated(group);
     }
 
