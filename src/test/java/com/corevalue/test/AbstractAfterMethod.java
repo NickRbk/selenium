@@ -1,6 +1,5 @@
 package com.corevalue.test;
 
-import com.corevalue.constant.ScreenShotConst;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +14,9 @@ import java.io.File;
 import java.io.IOException;
 
 @Slf4j
-public abstract class AbstractAfterMethod implements ScreenShotConst {
+public abstract class AbstractAfterMethod {
+    private final Runnable DEFAULT_EXIT_LOGIC = () -> {};
+
     @Getter @Setter
     private Runnable exitLogic = DEFAULT_EXIT_LOGIC;
 
