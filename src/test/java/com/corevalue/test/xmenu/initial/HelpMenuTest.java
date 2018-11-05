@@ -4,7 +4,7 @@ import com.corevalue.constant.TestConst;
 import com.corevalue.constant.menu.HelpMenuConst;
 import com.corevalue.driver.BrowserMap;
 import com.corevalue.driver.TestGroup;
-import com.corevalue.menu.impl.HelpMenu;
+import com.corevalue.xmenu.impl.HelpMenu;
 import com.corevalue.constant.LoginPageConst;
 import com.corevalue.page.impl.AuthorizedLandingPage;
 import com.corevalue.page.impl.LoginPage;

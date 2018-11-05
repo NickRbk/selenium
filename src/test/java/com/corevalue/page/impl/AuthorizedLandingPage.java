@@ -1,17 +1,16 @@
 package com.corevalue.page.impl;
 
 import com.corevalue.constant.AuthorizedLandingPageConst;
+import com.corevalue.constant.Tags;
 import com.corevalue.driver.BrowserMap;
 import com.corevalue.driver.IBrowser;
 import com.corevalue.driver.TestGroup;
-import com.corevalue.menu.Menus;
-import com.corevalue.menu.impl.FileMenu;
-import com.corevalue.menu.impl.HelpMenu;
-import com.corevalue.menu.impl.ManagementMenu;
+import com.corevalue.xmenu.Menus;
+import com.corevalue.xmenu.impl.FileMenu;
+import com.corevalue.xmenu.impl.HelpMenu;
+import com.corevalue.xmenu.impl.ManagementMenu;
 import com.corevalue.page.IAuthorizedLandingPage;
 import org.openqa.selenium.By;
-
-import static com.corevalue.constant.TagsConst.BUTTON;
 
 public enum AuthorizedLandingPage implements IAuthorizedLandingPage, AuthorizedLandingPageConst {
     INSTANCE;
@@ -50,7 +49,7 @@ public enum AuthorizedLandingPage implements IAuthorizedLandingPage, AuthorizedL
         browser(group).waitFrame(2);
         browser(group).waitToClickDisabledButtonByID(SUBMIT_ID);
         browser(group).getDriver().switchTo().parentFrame();
-        browser(group).waitElement(By.tagName(BUTTON)).click();
+        browser(group).waitElement(By.tagName(Tags.BUTTON.toString())).click();
     }
 
     private IBrowser browser(TestGroup group) {

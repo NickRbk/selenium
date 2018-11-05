@@ -7,7 +7,7 @@ import com.corevalue.constant.menu.ManagementMenuConst;
 import com.corevalue.driver.BrowserMap;
 import com.corevalue.driver.TestGroup;
 import com.corevalue.page.impl.AuthorizedLandingPage;
-import com.corevalue.submenu.impl.ManagementManageUsersSubmenu;
+import com.corevalue.xsubmenu.impl.ManagementManageUsersSubmenu;
 import com.corevalue.test.AbstractAfterMethod;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;

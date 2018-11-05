@@ -15,10 +15,10 @@ import java.io.IOException;
 
 @Slf4j
 public abstract class AbstractAfterMethod {
-    private final Runnable DEFAULT_EXIT_LOGIC = () -> {};
+    private final VoidConsumer DEFAULT_EXIT_LOGIC = () -> {};
 
     @Getter @Setter
-    private Runnable exitLogic = DEFAULT_EXIT_LOGIC;
+    private VoidConsumer exitLogic = DEFAULT_EXIT_LOGIC;
 
     protected abstract WebDriver driver();
 
@@ -42,5 +42,10 @@ public abstract class AbstractAfterMethod {
         } catch (IOException e) {
             log.error("Screenshot failed: " + e.getMessage());
         }
+    }
+
+    @FunctionalInterface
+    public interface VoidConsumer {
+        void run();
     }
 }
