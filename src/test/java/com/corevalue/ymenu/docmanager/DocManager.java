@@ -54,22 +54,6 @@ public class DocManager {
         }
     }
 
-//// NOTE: This one doesn't works due to org.openqa.selenium.StaleElementReferenceException
-//    public void openEachDocuments() {
-//        driver().findElements(DM.ID_DOC_TREE.getSelector())
-//                .forEach(block -> block.findElements(By.cssSelector("#browser > li"))
-//                        .forEach(menu -> {
-//                            menu.click();
-//                            menu.findElements(By.cssSelector("#browser > li > ul > li"))
-//                                    .forEach(submenu -> {
-//                                        submenu.click();
-//                                        submenu.findElements(By.cssSelector("#browser > li > ul > li > ul > li"))
-//                                                .forEach(WebElement::click);
-//                                    });
-//                        })
-//                );
-//    }
-
     //region HELPER METHODS
     private List<WebElement> getDocsTree() {
         return driver().findElements(DM.DOC_TREE_ID.getSelector());
