@@ -1,4 +1,4 @@
-package com.corevalue.submenu;
+package com.corevalue.xsubmenu;
 
 import com.corevalue.constant.menu.MenuConst;
 import com.corevalue.driver.BrowserMap;

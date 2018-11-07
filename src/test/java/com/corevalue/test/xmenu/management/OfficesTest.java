@@ -4,15 +4,18 @@ import com.corevalue.constant.AuthorizedLandingPageConst;
 import com.corevalue.constant.LoginPageConst;
 import com.corevalue.constant.TestConst;
 import com.corevalue.constant.menu.ManagementMenuConst;
+import com.corevalue.driver.BrowserMap;
 import com.corevalue.driver.TestGroup;
 import com.corevalue.page.impl.AuthorizedLandingPage;
-import com.corevalue.submenu.impl.ManagementManageOfficesSubmenu;
-import com.corevalue.submenu.impl.obj.Office;
+import com.corevalue.xsubmenu.impl.ManagementManageOfficesSubmenu;
+import com.corevalue.xsubmenu.impl.obj.Office;
+import com.corevalue.test.AbstractAfterMethod;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-public class OfficesTest implements LoginPageConst, TestConst, AuthorizedLandingPageConst, ManagementMenuConst {
+public class OfficesTest extends AbstractAfterMethod implements LoginPageConst, TestConst, AuthorizedLandingPageConst, ManagementMenuConst {
     private final TestGroup testGroup;
 
     @Parameters("testGroup")
@@ -34,7 +37,7 @@ public class OfficesTest implements LoginPageConst, TestConst, AuthorizedLanding
                 .updateOfficeGeneralInfo(testGroup, OFFICE_REASON_ADDRESS_UPDATED, expectedOffice)
                 .getUpdatedFields(testGroup);
 
-        ManagementManageOfficesSubmenu.INSTANCE.close(testGroup, DIALOG_CLOSE_ID);
+        setExitLogic(() -> ManagementManageOfficesSubmenu.INSTANCE.close(testGroup, DIALOG_CLOSE_ID));
         Assert.assertEquals(updatedOffice, expectedOffice);
     }
 
@@ -45,9 +48,9 @@ public class OfficesTest implements LoginPageConst, TestConst, AuthorizedLanding
                 .openManageOfficesSubmenu(testGroup, SUBMENU_FRAME_INDEX_WITH_CASE)
                 .searchOffices(testGroup)
                 .selectLastOfficeToUpdate(testGroup)
-                .addCoveredState(testGroup, OFFICE_COVERED_STATES_NAME)
-                .close(testGroup, DIALOG_CLOSE_ID);
+                .addCoveredState(testGroup, OFFICE_COVERED_STATES_NAME);
 
+        setExitLogic(() -> submenu.close(testGroup, DIALOG_CLOSE_ID));
         Assert.assertEquals(submenu.getCountOfCoveredStatesUpdated(), submenu.getCountOfCoveredStates()+1);
     }
 
@@ -58,9 +61,9 @@ public class OfficesTest implements LoginPageConst, TestConst, AuthorizedLanding
                 .openManageOfficesSubmenu(testGroup, SUBMENU_FRAME_INDEX_WITH_CASE)
                 .searchOffices(testGroup)
                 .selectLastOfficeToUpdate(testGroup)
-                .updateCoveredState(testGroup, OFFICE_COVERED_STATES_NAME_UPDATED)
-                .close(testGroup, DIALOG_CLOSE_ID);
+                .updateCoveredState(testGroup, OFFICE_COVERED_STATES_NAME_UPDATED);
 
+        setExitLogic(() -> submenu.close(testGroup, DIALOG_CLOSE_ID));
         Assert.assertNotEquals(submenu.getNameOfCoveredStatesUpdated(), submenu.getNameOfCoveredStates());
         Assert.assertEquals(submenu.getNameOfCoveredStatesUpdated(), OFFICE_COVERED_STATES_NAME_UPDATED);
     }
@@ -72,9 +75,9 @@ public class OfficesTest implements LoginPageConst, TestConst, AuthorizedLanding
                 .openManageOfficesSubmenu(testGroup, SUBMENU_FRAME_INDEX_WITH_CASE)
                 .searchOffices(testGroup)
                 .selectLastOfficeToUpdate(testGroup)
-                .removeCoveredState(testGroup)
-                .close(testGroup, DIALOG_CLOSE_ID);
+                .removeCoveredState(testGroup);
 
+        setExitLogic(() -> submenu.close(testGroup, DIALOG_CLOSE_ID));
         Assert.assertEquals(submenu.getCountOfCoveredStatesUpdated(), submenu.getCountOfCoveredStates()-1);
     }
 
@@ -85,9 +88,9 @@ public class OfficesTest implements LoginPageConst, TestConst, AuthorizedLanding
                 .openManageOfficesSubmenu(testGroup, SUBMENU_FRAME_INDEX_WITH_CASE)
                 .searchOffices(testGroup)
                 .selectLastOfficeToUpdate(testGroup)
-                .addPhone(testGroup, OFFICE_PHONE_NAME)
-                .close(testGroup, DIALOG_CLOSE_ID);
+                .addPhone(testGroup, OFFICE_PHONE_NAME);
 
+        setExitLogic(() -> submenu.close(testGroup, DIALOG_CLOSE_ID));
         Assert.assertEquals(submenu.getCountOfPhonesUpdated(), submenu.getCountOfPhones()+1);
     }
 
@@ -98,9 +101,9 @@ public class OfficesTest implements LoginPageConst, TestConst, AuthorizedLanding
                 .openManageOfficesSubmenu(testGroup, SUBMENU_FRAME_INDEX_WITH_CASE)
                 .searchOffices(testGroup)
                 .selectLastOfficeToUpdate(testGroup)
-                .updatePhones(testGroup, OFFICE_PHONE_NAME_UPDATED)
-                .close(testGroup, DIALOG_CLOSE_ID);
+                .updatePhones(testGroup, OFFICE_PHONE_NAME_UPDATED);
 
+        setExitLogic(() -> submenu.close(testGroup, DIALOG_CLOSE_ID));
         Assert.assertNotEquals(submenu.getNameOfPhoneUpdated(), submenu.getNameOfPhone());
         Assert.assertEquals(submenu.getNameOfPhoneUpdated(), OFFICE_PHONE_NAME_UPDATED);
     }
@@ -112,10 +115,15 @@ public class OfficesTest implements LoginPageConst, TestConst, AuthorizedLanding
                 .openManageOfficesSubmenu(testGroup, SUBMENU_FRAME_INDEX_WITH_CASE)
                 .searchOffices(testGroup)
                 .selectLastOfficeToUpdate(testGroup)
-                .removePhone(testGroup)
-                .close(testGroup, DIALOG_CLOSE_ID);
+                .removePhone(testGroup);
 
+        setExitLogic(() -> submenu.close(testGroup, DIALOG_CLOSE_ID));
         Assert.assertEquals(submenu.getCountOfPhonesUpdated(), submenu.getCountOfPhones()-1);
+    }
+
+    @Override
+    protected WebDriver driver() {
+        return BrowserMap.INSTANCE.getDrivers().get(testGroup).getDriver();
     }
 
     private Office expectedOfficeAfterUpdate() {

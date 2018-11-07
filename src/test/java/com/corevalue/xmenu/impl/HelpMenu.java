@@ -1,10 +1,10 @@
-package com.corevalue.menu.impl;
+package com.corevalue.xmenu.impl;
 
 import com.corevalue.constant.menu.HelpMenuConst;
 import com.corevalue.constant.menu.MenuConst;
 import com.corevalue.driver.TestGroup;
-import com.corevalue.menu.AbstractMenu;
-import com.corevalue.menu.Menus;
+import com.corevalue.xmenu.AbstractMenu;
+import com.corevalue.xmenu.Menus;
 import lombok.AllArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

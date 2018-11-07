@@ -1,9 +1,9 @@
-package com.corevalue.submenu.impl;
+package com.corevalue.xsubmenu.impl;
 
 import com.corevalue.constant.menu.ManagementMenuConst;
 import com.corevalue.driver.TestGroup;
-import com.corevalue.submenu.AbstractSubmenu;
-import com.corevalue.submenu.Submenus;
+import com.corevalue.xsubmenu.AbstractSubmenu;
+import com.corevalue.xsubmenu.Submenus;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;

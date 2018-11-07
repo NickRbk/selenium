@@ -1,4 +1,4 @@
-package com.corevalue.submenu.impl.obj;
+package com.corevalue.xsubmenu.impl.obj;
 
 import lombok.*;
 

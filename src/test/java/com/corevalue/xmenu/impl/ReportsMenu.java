@@ -1,14 +1,14 @@
-package com.corevalue.menu.impl;
+package com.corevalue.xmenu.impl;
 
 import com.corevalue.driver.TestGroup;
-import com.corevalue.menu.AbstractMenu;
-import com.corevalue.menu.Menus;
+import com.corevalue.xmenu.AbstractMenu;
+import com.corevalue.xmenu.Menus;
 import lombok.AllArgsConstructor;
 import org.openqa.selenium.By;
 
 @AllArgsConstructor
-public enum  WizardsMenu implements AbstractMenu {
-    INSTANCE(Menus.WIZARDS);
+public enum  ReportsMenu implements AbstractMenu {
+    INSTANCE(Menus.REPORTS);
 
     private Menus menu;
 

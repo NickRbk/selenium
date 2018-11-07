@@ -6,6 +6,7 @@ import com.corevalue.driver.TestGroup;
 import com.corevalue.page.impl.AuthorizedLandingPage;
 import com.corevalue.page.impl.LoginPage;
 import com.corevalue.constant.LoginPageConst;
+import com.corevalue.test.AbstractAfterMethod;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -16,7 +17,7 @@ import static com.corevalue.constant.AuthorizedLandingPageConst.AUTHORIZED_PAGE_
 import static com.corevalue.constant.AuthorizedLandingPageConst.BUTTON_LOGOUT_SUBMIT;
 import static com.corevalue.constant.AuthorizedLandingPageConst.SUBMENU_FRAME_INDEX;
 
-public class LoginTest implements LoginPageConst, TestConst {
+public class LoginTest extends AbstractAfterMethod implements LoginPageConst, TestConst {
     private static TestGroup testGroup;
 
     @Parameters("testGroup")
@@ -26,7 +27,7 @@ public class LoginTest implements LoginPageConst, TestConst {
 
     @BeforeClass
     static void init() {
-        driver().get(BASE_URL);
+        BrowserMap.INSTANCE.getDrivers().get(testGroup).getDriver().get(BASE_URL);
     }
 
     @Test
@@ -47,7 +48,8 @@ public class LoginTest implements LoginPageConst, TestConst {
         Assert.assertEquals(LOGIN_PAGE_TITLE, driver().getTitle());
     }
 
-    private static WebDriver driver() {
+    @Override
+    protected WebDriver driver() {
         return BrowserMap.INSTANCE.getDrivers().get(testGroup).getDriver();
     }
 }

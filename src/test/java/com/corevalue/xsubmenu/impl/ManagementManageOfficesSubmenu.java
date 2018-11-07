@@ -1,15 +1,14 @@
-package com.corevalue.submenu.impl;
+package com.corevalue.xsubmenu.impl;
 
+import com.corevalue.constant.Tags;
 import com.corevalue.constant.menu.ManagementMenuConst;
 import com.corevalue.driver.TestGroup;
-import com.corevalue.submenu.AbstractSubmenu;
-import com.corevalue.submenu.Submenus;
-import com.corevalue.submenu.impl.obj.Office;
+import com.corevalue.xsubmenu.AbstractSubmenu;
+import com.corevalue.xsubmenu.Submenus;
+import com.corevalue.xsubmenu.impl.obj.Office;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
-
-import static com.corevalue.constant.TagsConst.BUTTON;
 
 @Getter
 public enum ManagementManageOfficesSubmenu implements AbstractSubmenu, ManagementMenuConst {
@@ -252,7 +251,7 @@ public enum ManagementManageOfficesSubmenu implements AbstractSubmenu, Managemen
         findElementBy(group, By.id(OFFICE_PHONE_REMOVE_ID)).click();
 
         browser(group).getDriver().switchTo().parentFrame();
-        findElementsBy(group, By.tagName(BUTTON)).get(3).click();
+        findElementsBy(group, By.tagName(Tags.BUTTON.toString())).get(3).click();
 //        findElementsBy(By.tagName(BUTTON)).get(1).click();
         setReasonToUpdate(group, OFFICE_REASON_REMOVE);
 

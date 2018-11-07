@@ -1,4 +1,4 @@
-package com.corevalue.menu;
+package com.corevalue.xmenu;
 
 import com.corevalue.driver.BrowserMap;
 import com.corevalue.driver.IBrowser;

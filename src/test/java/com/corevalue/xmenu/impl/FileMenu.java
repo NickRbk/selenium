@@ -1,11 +1,11 @@
-package com.corevalue.menu.impl;
+package com.corevalue.xmenu.impl;
 
 import com.corevalue.constant.menu.FileMenuConst;
 import com.corevalue.driver.TestGroup;
-import com.corevalue.menu.AbstractMenu;
-import com.corevalue.menu.Menus;
-import com.corevalue.submenu.Submenus;
-import com.corevalue.submenu.impl.FileLogoutSubmenu;
+import com.corevalue.xmenu.AbstractMenu;
+import com.corevalue.xmenu.Menus;
+import com.corevalue.xsubmenu.Submenus;
+import com.corevalue.xsubmenu.impl.FileLogoutSubmenu;
 import lombok.AllArgsConstructor;
 import org.openqa.selenium.By;
 

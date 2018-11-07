@@ -1,13 +1,13 @@
-package com.corevalue.submenu.impl;
+package com.corevalue.xsubmenu.impl;
 
+import com.corevalue.constant.Tags;
 import com.corevalue.constant.menu.ManagementMenuConst;
 import com.corevalue.driver.TestGroup;
-import com.corevalue.submenu.AbstractSubmenu;
-import com.corevalue.submenu.Submenus;
+import com.corevalue.xsubmenu.AbstractSubmenu;
+import com.corevalue.xsubmenu.Submenus;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
-import static com.corevalue.constant.TagsConst.BUTTON;
 import static com.corevalue.constant.TestConst.DELAY_INPUT;
 
 public enum ManagementManageGroupsSubmenu implements AbstractSubmenu, ManagementMenuConst {
@@ -87,8 +87,8 @@ public enum ManagementManageGroupsSubmenu implements AbstractSubmenu, Management
 
     private void confirmGroupRemove(TestGroup group) {
         getContext(group);
-        findElementsBy(group, By.tagName(BUTTON)).get(1).click();
-        browser(group).delay(WAIT_TIMEOUT);
+        findElementsBy(group, By.tagName(Tags.BUTTON.toString())).get(1).click();
+        browser(group).delay(WAIT_TIMEOUT_2);
         countUpdated = getCountOfGroupsUpdated(group);
     }
 

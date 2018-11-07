@@ -1,9 +1,9 @@
 package com.corevalue.page;
 
 import com.corevalue.driver.TestGroup;
-import com.corevalue.menu.impl.FileMenu;
-import com.corevalue.menu.impl.HelpMenu;
-import com.corevalue.menu.impl.ManagementMenu;
+import com.corevalue.xmenu.impl.FileMenu;
+import com.corevalue.xmenu.impl.HelpMenu;
+import com.corevalue.xmenu.impl.ManagementMenu;
 
 public interface IAuthorizedLandingPage {
     FileMenu openFileMenu(TestGroup group);
