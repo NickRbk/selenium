@@ -28,7 +28,7 @@ public class DocManagerTestSetting {
         LoginPage.INSTANCE.login(testGroup, VALID_USERNAME,VALID_PASSWORD)
                 .openPageWithCase(testGroup);
 
-        driver().switchTo().frame(0).findElement(YMenus.DOC_MANAGER.getSelector()).click();
+        browser().waitFrame(0).findElement(YMenus.DOC_MANAGER.getSelector()).click();
         String currentWindow = driver().getWindowHandle();
         driver().getWindowHandles().forEach(w -> {
             if(!w.equalsIgnoreCase(currentWindow)) {
@@ -39,9 +39,7 @@ public class DocManagerTestSetting {
 
     @AfterTest
     static void close() {
-        driver().getWindowHandles().forEach(w -> {
-            driver().switchTo().window(w).close();
-        });
+        driver().getWindowHandles().forEach(w -> driver().switchTo().window(w).close());
     }
 
     private static WebDriver driver() {

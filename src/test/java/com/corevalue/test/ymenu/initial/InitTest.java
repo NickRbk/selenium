@@ -27,39 +27,8 @@ public class InitTest extends AbstractAfterMethod {
     }
 
     @Test(dependsOnMethods = "openDocManager")
-    void openDocument() {
-        DocManager.INSTANCE.openDocument(driver());
-
-        String CREATED_BY = driver().findElement(DM.CSS_DOC_INFO.getSelector()).getText();
-        boolean isFileOpened = CREATED_BY.contains("Created by");
-        Assert.assertTrue(isFileOpened);
-    }
-
-    @Test(dependsOnMethods = "openDocument")
-    void deselectDocumentAndTryToDownload() {
-        driver().findElement(DM.LINK_DOWNLOAD.getSelector()).click();
-        DocManager.INSTANCE.deselectDocument(driver());
-
-        driver().findElement(DM.LINK_DOWNLOAD_SELECTED.getSelector()).click();
-        String ALERT_MSG = driver().switchTo().alert().getText();
-        driver().switchTo().alert().accept();
-
-        boolean isDownloaded = !ALERT_MSG.contains("Please select a document for download.");
-
-        setExitLogic(() -> driver().findElement(DM.LINK_CANCEL_DOWNLOAD.getSelector()).click());
-        Assert.assertFalse(isDownloaded);
-    }
-
-    @Test(dependsOnMethods = "openDocument")
-    void openSenEmailMenu() {
-        driver().findElement(DM.LINK_SEND_EMAIL.getSelector()).click();
-        browser().delay(5000);
-        String emailFormTitle = browser().waitElement(DM.ID_EMAIL_FORM.getSelector()).getText();
-
-        boolean isMenuOpen = emailFormTitle.contains("Send Document by Email");
-
-        setExitLogic(() -> driver().findElement(DM.ID_QUIT_EMAIL_FORM.getSelector()).click());
-        Assert.assertTrue(isMenuOpen);
+    void openEachDocuments() {
+        new DocManager(testGroup).openEachDocuments();
     }
 
     protected WebDriver driver() {

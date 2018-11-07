@@ -4,16 +4,13 @@ import lombok.Getter;
 import org.openqa.selenium.By;
 
 public enum DM {
-    ID_DOC_TREE(By.id("browser")),
-    CSS_DOC_INFO(By.cssSelector("#mainContainer > div > div > span")),
+    DOC_TREE_ID(By.id("browser")),
+    MENU_SELECTOR(By.cssSelector("#browser > li")),
+    SUBMENU_SELECTOR(By.cssSelector("#browser > li > ul > li")),
+    DOC_SELECTOR(By.cssSelector("#browser > li > ul > li > ul > li")),
+
     DISPLAY(By.linkText("Display All Case File Documents")),
-    HIDE(By.linkText("Hide All Case File Documents")),
-    ID_EMAIL_FORM(By.id("emailFormTitle")),
-    ID_QUIT_EMAIL_FORM(By.cssSelector("#emailDocumentFormDlg button")),
-    LINK_SEND_EMAIL(By.linkText("Send Email")),
-    LINK_DOWNLOAD(By.linkText("Download")),
-    LINK_DOWNLOAD_SELECTED(By.linkText("Download Selected")),
-    LINK_CANCEL_DOWNLOAD(By.linkText("Cancel Download"));
+    HIDE(By.linkText("Hide All Case File Documents"));
 
     @Getter private By selector;
 

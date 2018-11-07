@@ -1,7 +1,7 @@
 package com.corevalue.constant;
 
 public enum Tags {
-    BUTTON, UL, LI, A, DIV;
+    BUTTON;
 
     @Override
     public String toString() {
