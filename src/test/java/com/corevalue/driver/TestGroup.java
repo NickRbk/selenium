@@ -1,5 +1,6 @@
 package com.corevalue.driver;
 
 public enum TestGroup {
-    INITIAL, MANAGEMENT
+    DOC_MANAGER
+//    INITIAL, MANAGEMENT, DOC_MANAGER
 }
