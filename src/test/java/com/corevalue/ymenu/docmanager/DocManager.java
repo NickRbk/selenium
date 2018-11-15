@@ -34,15 +34,15 @@ public class DocManager {
      */
     public void openEachDocuments() {
         int docsTreeSize = getDocsTree().size();
-        for (int treeIndex = 0; treeIndex < docsTreeSize; treeIndex++) {
+        for (int treeIndex = 0; treeIndex < docsTreeSize; treeIndex += 4) {
             int menusSize = getMenus(treeIndex).size();
-            for (int menuIndex = 0; menuIndex < menusSize; menuIndex++) {
+            for (int menuIndex = 0; menuIndex < menusSize; menuIndex += 2) {
                 getMenus(treeIndex).get(menuIndex).click();
                 int submenusSize = getSubmenus(treeIndex, menuIndex).size();
-                for (int submenuIndex = 0; submenuIndex < submenusSize; submenuIndex++) {
+                for (int submenuIndex = 0; submenuIndex < submenusSize; submenuIndex += 2) {
                     getSubmenus(treeIndex, menuIndex).get(submenuIndex).click();
                     int docsSize = getDocs(treeIndex, menuIndex, submenuIndex).size();
-                    for(int docIndex = 0; docIndex < docsSize; docIndex++ ) {
+                    for(int docIndex = 0; docIndex < docsSize; docIndex += 2 ) {
                         try {
                             getDocs(treeIndex, menuIndex, submenuIndex).get(docIndex).click();
                         } catch (Exception e) {
