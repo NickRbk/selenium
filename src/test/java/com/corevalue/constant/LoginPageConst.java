@@ -7,9 +7,6 @@ public interface LoginPageConst {
     String PASSWORD_FIELD_ID = "Password";
     String SUBMIT_ID = "Ok";
 
-    String VALID_USERNAME = ;
-    String VALID_PASSWORD = ;
-
     String INVALID_USERNAME = "invalid";
     String INVALID_PASSWORD = "invalid";
 }

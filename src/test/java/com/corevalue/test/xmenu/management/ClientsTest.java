@@ -16,7 +16,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class ClientsTest extends AbstractAfterMethod implements LoginPageConst, TestConst, AuthorizedLandingPageConst, ManagementMenuConst {
-    private final TestGroup testGroup;
+    private TestGroup testGroup;
 
     @Parameters("testGroup")
     public ClientsTest(String param) {

@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="DocManager: parallel users" verbose="1" parallel="tests">
+    <test name="doc manager: single user" >
+        <parameter name="testGroup" value="DOC_MANAGER_USER" />
+        <parameter name="username" value= />
+        <parameter name="password" value= />
+        <classes>
+            <class name="com.corevalue.test.ymenu.initial.DocManagerTestSetting" />
+            <class name="com.corevalue.test.ymenu.initial.InitTest" />
+        </classes>
+    </test>
+</suite>

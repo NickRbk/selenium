@@ -12,7 +12,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class InitTest extends AbstractAfterMethod {
-    private static TestGroup testGroup;
+    private TestGroup testGroup;
 
     @Parameters("testGroup")
     public InitTest(String param) {

@@ -5,7 +5,6 @@ import com.corevalue.constant.menu.HelpMenuConst;
 import com.corevalue.driver.BrowserMap;
 import com.corevalue.driver.TestGroup;
 import com.corevalue.xmenu.impl.HelpMenu;
-import com.corevalue.constant.LoginPageConst;
 import com.corevalue.page.impl.AuthorizedLandingPage;
 import com.corevalue.page.impl.LoginPage;
 import com.corevalue.test.AbstractAfterMethod;
@@ -16,18 +15,22 @@ import org.testng.annotations.*;
 import static com.corevalue.constant.AuthorizedLandingPageConst.BUTTON_LOGOUT_SUBMIT;
 import static com.corevalue.constant.AuthorizedLandingPageConst.SUBMENU_FRAME_INDEX;
 
-public class HelpMenuTest extends AbstractAfterMethod implements LoginPageConst, TestConst, HelpMenuConst {
-    private static TestGroup testGroup;
+public class HelpMenuTest extends AbstractAfterMethod implements TestConst, HelpMenuConst {
+    private TestGroup testGroup;
+    private String validUsername;
+    private String validPassword;
 
-    @Parameters("testGroup")
-    public HelpMenuTest(String param) {
+    @Parameters({"testGroup", "username", "password"})
+    public HelpMenuTest(String param, String username, String password) {
         testGroup = TestGroup.valueOf(param);
+        validUsername = username;
+        validPassword = password;
     }
 
     @Test
     void openHelpMenuAndGetVersionTest() {
         driver().get(BASE_URL);
-        LoginPage.INSTANCE.login(testGroup, VALID_USERNAME,VALID_PASSWORD);
+        LoginPage.INSTANCE.login(testGroup, validUsername, validPassword);
 
         String version = AuthorizedLandingPage.INSTANCE
                 .openHelpMenu(testGroup)
@@ -38,8 +41,9 @@ public class HelpMenuTest extends AbstractAfterMethod implements LoginPageConst,
     }
 
     @AfterClass
-    static void close() {
-        AuthorizedLandingPage.INSTANCE.logout(testGroup, SUBMENU_FRAME_INDEX, BUTTON_LOGOUT_SUBMIT);
+    @Parameters("testGroup")
+    static void close(String testGroup) {
+        AuthorizedLandingPage.INSTANCE.logout(TestGroup.valueOf(testGroup), SUBMENU_FRAME_INDEX, BUTTON_LOGOUT_SUBMIT);
     }
 
     @Override
