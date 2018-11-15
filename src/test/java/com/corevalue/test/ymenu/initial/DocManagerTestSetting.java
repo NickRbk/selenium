@@ -10,22 +10,24 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 
-import static com.corevalue.constant.LoginPageConst.VALID_PASSWORD;
-import static com.corevalue.constant.LoginPageConst.VALID_USERNAME;
 import static com.corevalue.constant.TestConst.BASE_URL;
 
 public class DocManagerTestSetting {
-    private static TestGroup testGroup;
+    private TestGroup testGroup;
+    private String validUsername;
+    private String validPassword;
 
-    @Parameters("testGroup")
-    public DocManagerTestSetting(String param) {
+    @Parameters({"testGroup", "username", "password"})
+    public DocManagerTestSetting(String param, String username, String password) {
         testGroup = TestGroup.valueOf(param);
+        validUsername = username;
+        validPassword = password;
     }
 
     @BeforeTest
     void init() {
         driver().get(BASE_URL);
-        LoginPage.INSTANCE.login(testGroup, VALID_USERNAME,VALID_PASSWORD)
+        LoginPage.INSTANCE.login(testGroup, validUsername, validPassword)
                 .openPageWithCase(testGroup);
 
         browser().waitFrame(0).findElement(YMenus.DOC_MANAGER.getSelector()).click();
@@ -38,15 +40,15 @@ public class DocManagerTestSetting {
     }
 
     @AfterTest
-    static void close() {
+    void close() {
         driver().getWindowHandles().forEach(w -> driver().switchTo().window(w).close());
     }
 
-    private static WebDriver driver() {
+    private WebDriver driver() {
         return browser().getDriver();
     }
 
-    private static IBrowser browser() {
+    private IBrowser browser() {
         return BrowserMap.INSTANCE.getDrivers().get(testGroup);
     }
 }

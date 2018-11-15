@@ -18,16 +18,23 @@ import static com.corevalue.constant.AuthorizedLandingPageConst.BUTTON_LOGOUT_SU
 import static com.corevalue.constant.AuthorizedLandingPageConst.SUBMENU_FRAME_INDEX;
 
 public class LoginTest extends AbstractAfterMethod implements LoginPageConst, TestConst {
-    private static TestGroup testGroup;
+    private TestGroup testGroup;
+    private String validUsername;
+    private String validPassword;
 
-    @Parameters("testGroup")
-    public LoginTest(String param) {
+    @Parameters({"testGroup", "username", "password"})
+    public LoginTest(String param, String username, String password) {
         testGroup = TestGroup.valueOf(param);
+        validUsername = username;
+        validPassword = password;
     }
 
     @BeforeClass
-    static void init() {
-        BrowserMap.INSTANCE.getDrivers().get(testGroup).getDriver().get(BASE_URL);
+    @Parameters("testGroup")
+    static void init(String testGroup) {
+        BrowserMap.INSTANCE.getDrivers()
+                .get(TestGroup.valueOf(testGroup))
+                .getDriver().get(BASE_URL);
     }
 
     @Test
@@ -38,7 +45,7 @@ public class LoginTest extends AbstractAfterMethod implements LoginPageConst, Te
 
     @Test(dependsOnMethods = "failedLoginTest")
     void successLoginTest() {
-        LoginPage.INSTANCE.login(testGroup, VALID_USERNAME,VALID_PASSWORD);
+        LoginPage.INSTANCE.login(testGroup, validUsername, validPassword);
         Assert.assertEquals(AUTHORIZED_PAGE_TITLE, driver().getTitle());
     }
 

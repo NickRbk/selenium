@@ -16,7 +16,7 @@ _**There are some useful links**_:
 
 ## Prerequisites
 - start base project
-- change `VALID_USERNAME` and `VALID_PASSWORD`  in  `constant/LogingPageConst` with actual data.
+- change `username` and `password` properties in `resources` with actual data.
 
 ## How to start app?
 1) download project `git clone https://github.com/NickRbk/selenium.git`
