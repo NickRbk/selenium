@@ -6,8 +6,8 @@
         <parameter name="username" value= />
         <parameter name="password" value= />
         <classes>
-            <class name="com.corevalue.test.ymenu.initial.DocManagerTestSetting" />
-            <class name="com.corevalue.test.ymenu.initial.InitTest" />
+            <class name="com.corevalue.test.docmanager.DocManagerTestSetting" />
+            <class name="com.corevalue.test.docmanager.InitTest" />
         </classes>
     </test>
     <test name="doc manager: user 2" >
@@ -15,8 +15,8 @@
         <parameter name="username" value= />
         <parameter name="password" value= />
         <classes>
-            <class name="com.corevalue.test.ymenu.initial.DocManagerTestSetting" />
-            <class name="com.corevalue.test.ymenu.initial.InitTest" />
+            <class name="com.corevalue.test.docmanager.DocManagerTestSetting" />
+            <class name="com.corevalue.test.docmanager.InitTest" />
         </classes>
     </test>
     <test name="doc manager: user 3" >
@@ -24,8 +24,8 @@
         <parameter name="username" value= />
         <parameter name="password" value= />
         <classes>
-            <class name="com.corevalue.test.ymenu.initial.DocManagerTestSetting" />
-            <class name="com.corevalue.test.ymenu.initial.InitTest" />
+            <class name="com.corevalue.test.docmanager.DocManagerTestSetting" />
+            <class name="com.corevalue.test.docmanager.InitTest" />
         </classes>
     </test>
 </suite>

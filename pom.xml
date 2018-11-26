@@ -67,9 +67,9 @@
                            + make sure you are using appropriate option for browser sessions (check driver/TestGroup)-->
 
                         <!--<suiteXmlFile>src/test/resources/testng_all.xml</suiteXmlFile>-->
-                        <!--<suiteXmlFile>src/test/resources/testng_caseware.xml</suiteXmlFile>-->
+                        <suiteXmlFile>src/test/resources/testng_caseware.xml</suiteXmlFile>
                         <!--<suiteXmlFile>src/test/resources/testng_dm.xml</suiteXmlFile>-->
-                        <suiteXmlFile>src/test/resources/testng_dm_multi_user.xml</suiteXmlFile>
+                        <!--<suiteXmlFile>src/test/resources/testng_dm_multi_user.xml</suiteXmlFile>-->
                     </suiteXmlFiles>
                 </configuration>
             </plugin>

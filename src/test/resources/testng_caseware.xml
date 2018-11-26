@@ -12,8 +12,8 @@
         </classes>
     </test>
 
-    <test name="menus: Management test">
-        <parameter name="testGroup" value="MANAGEMENT" />
+    <test name="X menu: Management test">
+        <parameter name="testGroup" value="X_MANAGEMENT" />
         <parameter name="username" value= />
         <parameter name="password" value= />
         <groups>
@@ -24,5 +24,15 @@
         <packages>
             <package name="com.corevalue.test.xmenu.management" />
         </packages>
+    </test>
+
+    <test name="Y menu: Bill" >
+        <parameter name="testGroup" value="Y_BILL" />
+        <parameter name="username" value= />
+        <parameter name="password" value= />
+        <classes>
+            <class name="com.corevalue.test.ymenu.initial.YMenuTestSetting" />
+            <class name="com.corevalue.test.ymenu.initial.BillTest"/>
+        </classes>
     </test>
 </suite>

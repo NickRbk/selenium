@@ -1,4 +1,4 @@
-package com.corevalue.test.ymenu.initial;
+package com.corevalue.test.docmanager;
 
 import com.corevalue.constant.docmanager.DM;
 import com.corevalue.driver.BrowserMap;
