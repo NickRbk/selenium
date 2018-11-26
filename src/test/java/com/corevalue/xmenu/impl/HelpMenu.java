@@ -20,6 +20,7 @@ public enum HelpMenu implements AbstractMenu, MenuConst, HelpMenuConst {
                 .switchTo().frame(6)
                 .findElement(By.id(SUBMENU_SELECTOR))
                 .click();
+
         return versionInfo(testGroup).getText();
     }
 
